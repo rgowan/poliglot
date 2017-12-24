@@ -1,0 +1,50 @@
+{
+  "name": "flip-chat",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:rgowan/flip-chat.git",
+  "author": "rgowan <ranegowan@gmail.com>",
+  "license": "MIT",
+  "engines": {
+    "node": "8.x.x"
+  },
+  "scripts": {
+    "start:client": "webpack-dev-server",
+    "start:server": "nodemon",
+    "start": "yarn build && node index",
+    "build": "webpack -p",
+    "seed": "node db/seeds"
+  },
+  "dependencies": {
+    "axios": "^0.16.2",
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.1",
+    "express": "^4.15.4",
+    "font-awesome": "^4.7.0",
+    "jsonwebtoken": "^8.1.0",
+    "mongoose": "^4.11.12",
+    "mongoose-unique-validator": "^1.0.6",
+    "morgan": "^1.8.2",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-router-dom": "^4.2.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "copy-webpack-plugin": "^4.0.1",
+    "css-loader": "^0.28.4",
+    "file-loader": "^0.11.2",
+    "html-webpack-plugin": "^2.29.0",
+    "node-sass": "^4.5.3",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.18.2",
+    "url-loader": "^0.5.9",
+    "webpack": "^3.3.0",
+    "webpack-dev-server": "^2.5.1"
+  }
+}
