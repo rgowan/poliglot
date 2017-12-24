@@ -2,23 +2,27 @@ const mongoose   = require('mongoose');
 mongoose.Promise = require('bluebird');
 const rp         = require('request-promise');
 
-const { dbURI } = require('../config/environment');
-const User      = require('../models/user');
+const { dbURI }  = require('../config/environment');
+const User       = require('../models/user');
 
 mongoose.connect(dbURI, { useMongoClient: true });
 
 User.collection.drop();
+
+function capitalize(name) {
+  return name.charAt(0).toUpperCase() + name.slice(1);
+}
 
 rp('https://randomuser.me/api/?results=10&nat=gb')
   .then(data => {
     const { results } = JSON.parse(data);
 
     results.forEach(result => {
-      User.create({ 
-        username: result.name.first,
+      const user = new User({
+        username: capitalize(result.name.first),
         name: {
-          first: result.name.first,
-          last: result.name.last
+          first: capitalize(result.name.first),
+          last: capitalize(result.name.last)
         },
         image: result.picture.large,
         email: `${result.name.first}@${result.name.first}.com`,
@@ -26,7 +30,9 @@ rp('https://randomuser.me/api/?results=10&nat=gb')
         passwordConfirmation: 'password'
       });
 
-      console.log('User was created');
-    });
+      User.create(user);
+
+      console.log(`${user.name.first} was created`);
+    })
   })
   .catch(err => console.log(err));

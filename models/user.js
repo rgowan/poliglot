@@ -13,6 +13,12 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema
+  .virtual('fullname')
+  .get(function() {
+    return `${this.name.first} ${this.name.last}`;
+  })
+
+userSchema
   .virtual('passwordConfirmation')
   .set(function setPasswordConfirmation(passwordConfirmation) {
     this._passwordConfirmation = passwordConfirmation;
