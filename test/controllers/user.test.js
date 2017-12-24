@@ -1,0 +1,176 @@
+/* globals api, expect, describe, beforeEach, afterEach, it */
+require('../spec_helper');
+
+const User = require('../../models/user');
+
+describe('RESTFUL Users', () => {
+  beforeEach(done => {
+    User.collection.remove();
+    done();
+  });
+
+  afterEach(done => {
+    User.collection.remove();
+    done();
+  });
+
+  describe('GET /api/users', () => {
+    beforeEach(done => {
+      api
+        .post('/api/register')
+        .set('Accept', 'application/json')
+        .send({
+          name: {
+            first: 'test',
+            last: 'test'
+          },
+          image: 'http://www.fillmurray.com/300/300',
+          email: 'test@test.com',
+          password: 'password',
+          passwordConfirmation: 'password'
+        })
+        .end(done);
+    });
+
+    it('should return a 200 response', done => {
+      api
+        .get('/api/users')
+        .set('Accept', 'application/json')
+        .expect(200, done);
+    });
+
+    it('should return an array', done => {
+      api
+        .get('/api/users')
+        .set('Accept', 'application/json')
+        .end((err, res) => {
+          expect(res.body).to.be.an('array');
+          done();
+        });
+    });
+
+    it('should return an array of users objects', done => {
+      api
+        .get('/api/users')
+        .set('Accept', 'application/json')
+        .end((err, res) => {
+          expect(res.body)
+            .to.be.an('array')
+            .and.have.property(0)
+            .and.have.all.keys([
+              'id',
+              'name',
+              'fullname',
+              'image',
+              'email',
+              'createdAt',
+              'updatedAt'
+            ]);
+          done();
+        });
+    });
+
+    it('should have properties: id, name, fullname, image, email', done => {
+      api
+        .get('/api/users')
+        .set('Accept', 'application/json')
+        .end((err, res) => {
+          const user = res.body[0];
+          expect(user)
+            .to.have.property('id')
+            .and.to.be.a('string');
+          expect(user)
+            .to.have.property('name')
+            .and.to.be.a('object');
+          expect(user)
+            .to.have.property('fullname')
+            .and.to.be.a('string');
+          expect(user)
+            .to.have.property('image')
+            .and.to.be.a('string');
+          expect(user)
+            .to.have.property('email')
+            .and.to.be.a('string');
+          done();
+        });
+    });
+  });
+
+  describe('GET /api/users/:id', () => {
+    let testUser = null;
+
+    beforeEach(done => {
+      api
+        .post('/api/register')
+        .set('Accept', 'application/json')
+        .send({
+          name: {
+            first: 'test',
+            last: 'test'
+          },
+          image: 'http://www.fillmurray.com/300/300',
+          email: 'test@test.com',
+          password: 'password',
+          passwordConfirmation: 'password'
+        })
+        .end((err, res) => {
+          testUser = res.body.user;
+          done();
+        });
+    });
+
+    it('should return a 200 response', done => {
+      api
+        .get(`/api/users/${testUser.id}`)
+        .set('Accept', 'application/json')
+        .expect(200, done);
+    });
+
+    it('should return an object', done => {
+      api
+        .get(`/api/users/${testUser.id}`)
+        .set('Accept', 'application/json')
+        .end((err, res) => {
+          expect(res.body).to.be.an('object');
+          done();
+        });
+    }); 
+    
+    it('should return a JSON object', done => {
+      api
+        .get(`/api/users/${testUser.id}`)
+        .set('Accept', 'application/json')
+        .end((err, res) => {
+          expect(res.header['content-type'])
+            .to.be.eq('application/json; charset=utf-8');
+          done();
+        });
+    });
+
+    it('should return an object with user properties', done => {
+      api
+        .get(`/api/users/${testUser.id}`)
+        .set('Accept', 'application/json')
+        .end((err, res) => {
+          expect(res.body)
+            .and.have.all.keys([
+              'id',
+              'name',
+              'fullname',
+              'image',
+              'email',
+              'createdAt',
+              'updatedAt'
+            ]);
+          done();
+        });
+    });
+
+    it('should return a 500 with incorrect id param', done => {
+      api
+        .get(`/api/users/testing123`)
+        .set('Accept', 'application/json')
+        .expect(500, done);        
+    })
+  })
+});
