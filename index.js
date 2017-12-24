@@ -7,14 +7,20 @@ const app             = express();
 
 const { port, dbURI } = require('./config/environment');
 const routes          = require('./config/routes');
+const customResponses = require('./lib/customResponses');
+const errorHandler    = require('./lib/errorHandler');
 
 mongoose.Promise      = bluebird;
+mongoose.plugin(require('./lib/globalToJSON'));
+mongoose.plugin(require('mongoose-unique-validator'));
 mongoose.connect(dbURI, { useMongoClient: true });
 
 app.use(morgan('dev'));
 app.use(express.static(`${__dirname}/public`));
 app.use(bodyParser.json());
 
+app.use(customResponses);
 app.use('/api', routes);
+app.use(errorHandler);
 
-app.listen(port, () => console.log(`Express is listening on port ${port}`));
+app.listen(port, () => console.log(`Express is alive and listening on port ${port}`));
