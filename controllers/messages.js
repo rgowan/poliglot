@@ -8,7 +8,7 @@ function create(req, res, next) {
     .then(chat => {
       if (!chat) return res.notFound();
       chat.messages.push(req.body);
-      return res.save();
+      return chat.save();
     })
     .then(chat => {
       const message = chat.messages[chat.messages.length -1];
@@ -23,9 +23,13 @@ function remove(req, res, next) {
     .exec()
     .then(chat => {
       const message = chat.messages.id(req.params.messageId);
-      if (message.createdBy !== req.currentUser.id) return res.unauthorized();
-      message.remove();
-      return chat.save();
+
+      if (req.currentUser.id == message.createdBy) {
+        message.remove();
+        return chat.save();
+      }
+
+      return res.unauthorized(); 
     })
     .then(() => res.status(204).end())
     .catch(next);

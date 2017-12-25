@@ -11,6 +11,7 @@ function find(req, res, next) {
 function show(req, res, next) {
   Chat
     .findById(req.params.id)
+    .populate('participants messages.createdBy')
     .then(chat => {
       if (!chat) return res.notFound();
       return res.status(200).json(chat);
@@ -30,7 +31,7 @@ function create(req, res, next) {
 function remove(req, res, next) {
   Chat
     .findByIdAndRemove(req.params.id)
-    .then(() => res.sendStatus(200))
+    .then(() => res.status(204).end())
     .catch(next);
 }
 
