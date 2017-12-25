@@ -11,7 +11,7 @@ mongoose.Promise      = bluebird;
 mongoose.plugin(require('./lib/globalToJSON'));
 mongoose.plugin(require('mongoose-unique-validator'));
 
-const { port, db } = require('./config/environment');
+const { port, db }    = require('./config/environment');
 const routes          = require('./config/routes');
 const customResponses = require('./lib/customResponses');
 const errorHandler    = require('./lib/errorHandler');
