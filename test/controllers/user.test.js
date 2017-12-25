@@ -15,6 +15,8 @@ describe('RESTFUL Users', () => {
   });
 
   describe('GET /api/users', () => {
+    let token = null;
+
     beforeEach(done => {
       api
         .post('/api/register')
@@ -29,13 +31,17 @@ describe('RESTFUL Users', () => {
           password: 'password',
           passwordConfirmation: 'password'
         })
-        .end(done);
+        .end((err, res) => {
+          token = res.body.token;
+          done();
+        });
     });
 
     it('should return a 200 response', done => {
       api
         .get('/api/users')
         .set('Accept', 'application/json')
+        .set('Authorization', `Bearer ${token}`)
         .expect(200, done);
     });
 
@@ -43,6 +49,7 @@ describe('RESTFUL Users', () => {
       api
         .get('/api/users')
         .set('Accept', 'application/json')
+        .set('Authorization', `Bearer ${token}`)
         .end((err, res) => {
           expect(res.body).to.be.an('array');
           done();
@@ -53,6 +60,7 @@ describe('RESTFUL Users', () => {
       api
         .get('/api/users')
         .set('Accept', 'application/json')
+        .set('Authorization', `Bearer ${token}`)
         .end((err, res) => {
           expect(res.body)
             .to.be.an('array')
@@ -74,6 +82,7 @@ describe('RESTFUL Users', () => {
       api
         .get('/api/users')
         .set('Accept', 'application/json')
+        .set('Authorization', `Bearer ${token}`)
         .end((err, res) => {
           const user = res.body[0];
           expect(user)
@@ -98,6 +107,7 @@ describe('RESTFUL Users', () => {
 
   describe('GET /api/users/:id', () => {
     let testUser = null;
+    let token    = null;
 
     beforeEach(done => {
       api
@@ -115,6 +125,7 @@ describe('RESTFUL Users', () => {
         })
         .end((err, res) => {
           testUser = res.body.user;
+          token    = res.body.token;
           done();
         });
     });
@@ -123,6 +134,7 @@ describe('RESTFUL Users', () => {
       api
         .get(`/api/users/${testUser.id}`)
         .set('Accept', 'application/json')
+        .set('Authorization', `Bearer ${token}`)
         .expect(200, done);
     });
 
@@ -130,6 +142,7 @@ describe('RESTFUL Users', () => {
       api
         .get(`/api/users/${testUser.id}`)
         .set('Accept', 'application/json')
+        .set('Authorization', `Bearer ${token}`)
         .end((err, res) => {
           expect(res.body).to.be.an('object');
           done();
@@ -140,6 +153,7 @@ describe('RESTFUL Users', () => {
       api
         .get(`/api/users/${testUser.id}`)
         .set('Accept', 'application/json')
+        .set('Authorization', `Bearer ${token}`)
         .end((err, res) => {
           expect(res.header['content-type'])
             .to.be.eq('application/json; charset=utf-8');
@@ -151,6 +165,7 @@ describe('RESTFUL Users', () => {
       api
         .get(`/api/users/${testUser.id}`)
         .set('Accept', 'application/json')
+        .set('Authorization', `Bearer ${token}`)
         .end((err, res) => {
           expect(res.body)
             .and.have.all.keys([
@@ -170,7 +185,8 @@ describe('RESTFUL Users', () => {
       api
         .get(`/api/users/testing123`)
         .set('Accept', 'application/json')
+        .set('Authorization', `Bearer ${token}`)
         .expect(500, done);        
-    })
-  })
+    });
+  });
 });
