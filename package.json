@@ -14,7 +14,7 @@
     "start": "yarn build && node index",
     "build": "webpack -p",
     "seed": "node db/seeds",
-    "test": "nyc mocha"
+    "test": "nyc --reporter=html mocha"
   },
   "dependencies": {
     "axios": "^0.16.2",
