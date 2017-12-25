@@ -12,10 +12,7 @@ function show(req, res, next) {
   Chat
     .findById(req.params.id)
     .populate('participants messages.createdBy')
-    .then(chat => {
-      if (!chat) return res.notFound();
-      return res.status(200).json(chat);
-    })
+    .then(chat => res.status(200).json(chat))
     .catch(next);
 }
 

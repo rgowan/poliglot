@@ -5,21 +5,18 @@ const messageSchema = new mongoose.Schema({
   createdBy: { type: mongoose.Schema.ObjectId, ref: 'User', required: true }
 }, {
   timestamps: true
-})
+});
 
 const chatSchema = new mongoose.Schema({
-  participants: [{
-    type: mongoose.Schema.ObjectId, ref: 'User',
-    required: true,
-    validate: [mustHaveTwoParticipants, 'A chat must contain two participants.']
-  }],
+  participants: [{ type: mongoose.Schema.ObjectId, ref: 'User', required: true }],
   messages: [messageSchema]
 }, {
   timestamps: true
 });
 
-function mustHaveTwoParticipants() {
-  return this.participants.length === 2;
-}
+chatSchema.path('participants').validate(participants => {
+  if (participants.length < 2) return false;
+  return true;
+}, 'A chat must have two participants');
 
 module.exports = mongoose.model('Chat', chatSchema);
