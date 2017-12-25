@@ -4,14 +4,14 @@ const rp           = require('request-promise');
 
 const { db, env }  = require('../config/environment');
 const User         = require('../models/user');
+const Chat         = require('../models/chat');
 
 mongoose.connect(db[env], { useMongoClient: true });
 
+Chat.collection.drop();
 User.collection.drop();
 
-function capitalize(name) {
-  return name.charAt(0).toUpperCase() + name.slice(1);
-}
+const globalUsers = [];
 
 rp('https://randomuser.me/api/?results=10&nat=gb')
   .then(data => {
@@ -28,10 +28,38 @@ rp('https://randomuser.me/api/?results=10&nat=gb')
         password: 'password',
         passwordConfirmation: 'password'
       });
-
+      
+      // console.log(user);
+      globalUsers.push(user);
       User.create(user);
-
-      console.log(`${user.name.first} was created`);
     })
   })
-  .catch(err => console.log(err));
+  .then(() => {
+    console.log(`${globalUsers.length} users were created!`);
+
+    return Chat.create([
+      {
+        participants: [globalUsers[0]._id, globalUsers[1]._id],
+        messages: [
+          {
+            content: 'Hello!',
+            createdBy: globalUsers[0]._id
+          },
+          {
+            content: 'How are you?',
+            createdBy: globalUsers[1]._id
+          }
+        ]
+      }
+    ])
+  })
+  .then(chats => {
+    console.log(`${chats.length} chats were created!`);
+  })
+  .catch(err => console.log(err))
+  .finally(() => mongoose.connection.close());
+
+
+function capitalize(name) {
+  return name.charAt(0).toUpperCase() + name.slice(1);
+}

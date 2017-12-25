@@ -21,3 +21,5 @@ const chatSchema = new mongoose.Schema({
 function mustHaveTwoParticipants() {
   return this.participants.length === 2;
 }
+
+module.exports = mongoose.model('Chat', chatSchema);
