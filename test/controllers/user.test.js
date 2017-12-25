@@ -45,6 +45,18 @@ describe('Users Controller Functions', () => {
         .expect(200, done);
     });
 
+    it('should return a JSON object', done => {
+      api
+        .get('/api/users')
+        .set('Accept', 'application/json')
+        .set('Authorization', `Bearer ${token}`)
+        .end((err, res) => {
+          expect(res.header['content-type'])
+            .to.be.eq('application/json; charset=utf-8');
+          done();
+        });
+    });
+
     it('should return an array', done => {
       api
         .get('/api/users')
