@@ -3,7 +3,7 @@ require('../spec_helper');
 
 const User = require('../../models/user');
 
-describe('Users Controller Functions', () => {
+describe('User Controller', () => {
   beforeEach(done => {
     User.collection.remove();
     done();

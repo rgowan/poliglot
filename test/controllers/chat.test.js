@@ -4,7 +4,7 @@ require('../spec_helper');
 const User = require('../../models/user');
 const Chat = require('../../models/chat');
 
-describe('Chat Controller Functions', () => {
+describe('Chat Controller', () => {
   beforeEach(done => {
     User.collection.remove();
     Chat.collection.remove();

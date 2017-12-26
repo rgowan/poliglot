@@ -50,7 +50,24 @@ rp('https://randomuser.me/api/?results=10&nat=gb')
             createdBy: globalUsers[1]._id
           }
         ]
-      }
+      },
+      {
+        participants: [globalUsers[2]._id, globalUsers[3]._id],
+        messages: [
+          {
+            content: 'Hey!',
+            createdBy: globalUsers[2]._id
+          },
+          {
+            content: 'How are you?',
+            createdBy: globalUsers[3]._id
+          },
+          {
+            content: 'Good thanks!',
+            createdBy: globalUsers[2]._id
+          }
+        ]
+      }, 
     ])
   })
   .then(chats => {
