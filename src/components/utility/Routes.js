@@ -6,6 +6,7 @@ import Login    from '../authentication/Login';
 import Register from '../authentication/Register';
 import ChatsIndex from '../chat/ChatsIndex';
 import UsersShow from '../users/UsersShow';
+import ChatsShow from '../chat/ChatsShow';
 
 const Routes = () => {
   return (
@@ -13,6 +14,7 @@ const Routes = () => {
       <Route exact path="/" component={ Homepage } />
       <Route path="/login" component={ Login }/>
       <Route path="/register" component={ Register }/>
+      <Route path="/chats/:id" component={ ChatsShow }/>
       <Route path="/chats" component={ ChatsIndex }/>
       <Route path="/users/:id" component={ UsersShow }/>
     </Switch>
