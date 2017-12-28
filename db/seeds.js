@@ -50,7 +50,7 @@ rp('https://randomuser.me/api/?results=10&nat=gb')
         ]
       },
       {
-        participants: [globalUsers[0]._id, globalUsers[3]._id],
+        participants: [globalUsers[0]._id, globalUsers[2]._id],
         messages: [
           {
             content: 'Hey!',
@@ -59,23 +59,6 @@ rp('https://randomuser.me/api/?results=10&nat=gb')
           {
             content: 'How are you?',
             createdBy: globalUsers[2]._id
-          },
-          {
-            content: 'Good thanks!',
-            createdBy: globalUsers[0]._id
-          }
-        ]
-      },
-      {
-        participants: [globalUsers[0]._id, globalUsers[3]._id],
-        messages: [
-          {
-            content: 'Hey!',
-            createdBy: globalUsers[0]._id
-          },
-          {
-            content: 'How are you?',
-            createdBy: globalUsers[3]._id
           },
           {
             content: 'Good thanks!',

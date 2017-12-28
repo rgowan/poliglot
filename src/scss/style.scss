@@ -195,3 +195,50 @@ header {
     font-weight: 600;
   }
 }
+
+ul {
+
+}
+
+.chat-index-container {
+  margin: 20px 0;
+
+
+  .chat-tile {
+    margin: 6px 0;
+    background: #fafafa;
+    height: 118px;
+    border-radius: 5px;
+  
+    .chat-picture {
+      float: left;
+      padding: 8px;
+      
+      img {
+        border-radius: 5px;
+        width: 100px;
+        border: 2px solid #eee;
+      }
+    }
+
+    .chat-info {
+      height: 118px;
+      
+      h2 {
+        font-size: 26px;
+        font-weight: 600;
+        padding-top: 5px;
+      }
+
+      p {
+        margin: 0;
+        padding: 0;
+        font-weight: 400;
+        font-size: 16px;
+        width: 85%;
+      }
+    }
+  
+    clear:both;
+  }
+}
