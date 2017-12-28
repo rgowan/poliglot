@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 import Auth from '../../lib/Auth';
 
@@ -9,21 +9,27 @@ const Navbar = ({ history, title }) => {
     history.push('/');
   }
 
-
   return(
     <header>
       <nav>
         <ul>
           <li>
-            <i className="fa fa-user-circle" aria-hidden="true"></i>
+            <Link to={`/users/${Auth.getPayload().id}`}>
+              <i className="fa fa-user-circle" aria-hidden="true"></i>
+            </Link>
           </li>
           <li onClick={ logout }>
             <i className="fa fa-sign-out" aria-hidden="true"></i>
           </li>
         </ul>
       </nav>
-      <h1>{ title }</h1>
-      <hr />
+      <div className="banner">
+        { history.location.pathname !== '/chats' && <div className="back" onClick={ () => history.goBack() }> 
+          <i className="fa fa-angle-left" aria-hidden="true"></i>
+        </div> }
+        <h1>{ title }</h1>
+        <hr />
+      </div>
     </header>
   );
 };

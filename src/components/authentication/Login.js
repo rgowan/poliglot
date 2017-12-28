@@ -25,8 +25,7 @@ class Login extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.history.push('/chats');
-
+    
     axios
       .post('/api/login', this.state.user)
       .then(res => {

@@ -6,7 +6,7 @@ function register(req, res, next) {
   User
     .create(req.body)
     .then(user => {
-      const token = jwt.sign({ id: user.id }, secret, { expiresIn: '1hr' });
+      const token = jwt.sign({ id: user.id }, secret, { expiresIn: '24hrs' });
       
       return res.json({ message: `Welcome`, token, user });
     })
@@ -15,11 +15,11 @@ function register(req, res, next) {
 
 function login(req, res, next) {
   User
-    .findOne({ email: req.body.email })
+    .findOne({ email: req.body.email.toLowerCase() })
     .then((user) => {
       if(!user || !user.validatePassword(req.body.password)) return res.status(401).json({ message: 'Unauthorized' });
 
-      const token = jwt.sign({ id: user.id }, secret, { expiresIn: '1hr' });
+      const token = jwt.sign({ id: user.id }, secret, { expiresIn: '24hrs' });
       return res.json({ message: `Welcome back`, token, user });
     })
     .catch(next);
