@@ -2,10 +2,8 @@ const mongoose = require('mongoose');
 const bcrypt   = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
-  name: {
-    first: { type: String, required: true },
-    last: { type: String, required: true }
-  },
+  first: { type: String, required: true },
+  last: { type: String, required: true },
   image: { type: String },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true }
@@ -17,7 +15,7 @@ const userSchema = new mongoose.Schema({
 userSchema
   .virtual('fullname')
   .get(function() {
-    return `${this.name.first} ${this.name.last}`;
+    return `${this.first} ${this.last}`;
   })
 
 userSchema

@@ -12,7 +12,7 @@ router.route('/login')
   .post(auth.login);
 
 router.route('/users')
-  .get(users.index);
+  .get(secureRoute, users.index);
 router.route('/users/:id')
   .get(secureRoute, users.show);
 

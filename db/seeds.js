@@ -19,10 +19,8 @@ rp('https://randomuser.me/api/?results=10&nat=gb')
 
     results.forEach(result => {
       const user = new User({
-        name: {
-          first: capitalize(result.name.first),
-          last: capitalize(result.name.last)
-        },
+        first: capitalize(result.name.first),
+        last: capitalize(result.name.last),
         image: result.picture.large,
         email: `${result.name.first}@${result.name.first}.com`,
         password: 'password',

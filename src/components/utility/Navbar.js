@@ -1,8 +1,11 @@
 import React from 'react';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+
+import Auth from '../../lib/Auth';
 
 const Navbar = ({ history, title }) => {
   function logout(e) {
+    Auth.removeToken();
     history.push('/');
   }
 

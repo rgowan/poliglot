@@ -1,4 +1,7 @@
 import React from 'react';
+import axios from 'axios';
+
+import Auth from '../../lib/Auth';
 
 class Register extends React.Component {
   constructor() {
@@ -6,10 +9,8 @@ class Register extends React.Component {
 
     this.state = {
       user: {
-        name: {
-          first: '',
-          last: '',
-        },
+        first: '',
+        last: '',
         email: '',
         image: '',
         password: '',
@@ -17,12 +18,24 @@ class Register extends React.Component {
       }
     };
 
-    this.handleClick = this.handleClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleClick = e => {
+  handleChange = ({ target: { name, value } }) => {
+    const user = Object.assign({}, this.state.user, { [name]: value });
+    this.setState({ user });
+  }
+
+  handleSubmit = e => {
     e.preventDefault();
-    this.props.history.push('/chats');
+
+    axios
+      .post('/api/register', this.state.user)
+      .then(res => {
+        Auth.setToken(res.data.token);
+        this.props.history.push('/chats');
+      });
   }
 
   render() {
@@ -30,33 +43,63 @@ class Register extends React.Component {
       <div className="authentication">
         <div className="centered">
           <h1>Signup</h1>
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <div>
               <label htmlFor="first">First Name *</label>
-              <input type="text" name="first" id="first" />
+              <input 
+                onChange={this.handleChange}
+                type="text" 
+                name="first" 
+                id="first" 
+              />
             </div>
             <div>
               <label htmlFor="last">Last Name *</label>
-              <input type="text" name="last" id="last" />
+              <input 
+                onChange={this.handleChange}
+                type="text" 
+                name="last" 
+                id="last" 
+              />
             </div>
             <div>
               <label htmlFor="email">Email *</label>
-              <input type="text" name="email" id="email" />
+              <input 
+                onChange={this.handleChange}
+                type="text" 
+                name="email" 
+                id="email"
+              />
             </div>
             <div>
               <label htmlFor="image">Profile Picture</label>
-              <input type="text" name="image" id="image" />
+              <input 
+                onChange={this.handleChange}
+                type="text" 
+                name="image" 
+                id="image"
+              />
             </div>
             <div>
               <label htmlFor="password">Password *</label>
-              <input type="password" name="password" id="password" />
+              <input 
+                onChange={this.handleChange}
+                type="password" 
+                name="password" 
+                id="password"
+              />
             </div>
             <div>
               <label htmlFor="passwordConfirmation">Password Confirmation *</label>
-              <input type="password" name="passwordConfirmation" id="passwordConfirmation" />
+              <input
+                onChange={this.handleChange} 
+                type="password" 
+                name="passwordConfirmation" 
+                id="passwordConfirmation"
+              />
             </div>
             <div>
-              <button className="button submit" onClick={this.handleClick}>Signup</button>
+              <button className="button submit">Signup</button>
             </div>
           </form>
         </div>
