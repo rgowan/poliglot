@@ -11,7 +11,17 @@ body {
   -webkit-text-stroke: 0.45px rgba(0, 0, 0, 0.1);
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
+  color: #333;
   
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+
+  li {
+    list-style-type: none;
+  }
 }
 
 .button {
@@ -37,6 +47,7 @@ body {
   width: 98%;
   height: 35px;
   line-height: 30px;
+  margin: 30px 0;
 }
 
 .centered {
@@ -62,8 +73,9 @@ h1 {
 hr {
   border: 0;
   height: 1.5px;
+  width: 90%;
   background: rgba(0, 0, 0, 0.05);
-  margin: 15px 0;
+  margin: 5px auto;
 }
 
 
@@ -109,5 +121,32 @@ form {
     font-size: 20px;
     padding: 5px;
     border-radius: 3px;
+  }
+}
+
+header {
+  nav {
+    width: 100%;
+    height: 60px;
+  
+    ul {
+      li {
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+        text-align: center;
+        font-size: 30px;
+        color: #333;
+  
+       &:first-child { float: left; } 
+       &:last-child { float: right; }
+      }
+    }
+  }
+
+  h1 {
+    font-size: 45px;
+    padding-left: 15px;
+    font-weight: 600;
   }
 }
