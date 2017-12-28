@@ -8,11 +8,8 @@ const Homepage = () => {
         <h1>Flip Chat</h1>
         <h2>Break the language barrier</h2>
 
-        {/* <button>Login</button>
-        <button>Signup</button> */}
-
+        <Link className="button" to="/register">Signup</Link>
         <Link className="button" to="/login">Login</Link>
-        <Link className="button" to="/register">Register</Link>
       </div>
     </div>
   );
