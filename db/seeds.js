@@ -52,11 +52,28 @@ rp('https://randomuser.me/api/?results=10&nat=gb')
         ]
       },
       {
-        participants: [globalUsers[2]._id, globalUsers[3]._id],
+        participants: [globalUsers[0]._id, globalUsers[3]._id],
         messages: [
           {
             content: 'Hey!',
+            createdBy: globalUsers[0]._id
+          },
+          {
+            content: 'How are you?',
             createdBy: globalUsers[2]._id
+          },
+          {
+            content: 'Good thanks!',
+            createdBy: globalUsers[0]._id
+          }
+        ]
+      },
+      {
+        participants: [globalUsers[0]._id, globalUsers[3]._id],
+        messages: [
+          {
+            content: 'Hey!',
+            createdBy: globalUsers[0]._id
           },
           {
             content: 'How are you?',
@@ -64,10 +81,10 @@ rp('https://randomuser.me/api/?results=10&nat=gb')
           },
           {
             content: 'Good thanks!',
-            createdBy: globalUsers[2]._id
+            createdBy: globalUsers[0]._id
           }
         ]
-      }, 
+      }
     ])
   })
   .then(chats => {

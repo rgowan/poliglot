@@ -4,7 +4,18 @@ class Register extends React.Component {
   constructor() {
     super();
 
-    this.state = {};
+    this.state = {
+      user: {
+        name: {
+          first: '',
+          last: '',
+        },
+        email: '',
+        image: '',
+        password: '',
+        passwordConfirmation: ''
+      }
+    };
 
     this.handleClick = this.handleClick.bind(this);
   }
