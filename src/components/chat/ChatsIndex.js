@@ -26,6 +26,9 @@ class ChatsIndex extends React.Component {
       <div>
         <Navbar title='Chats' />
         { this.state.chats[0] && <div className="container">
+          <div className="new-chat">
+
+          </div>
           <ul className="chat-index-container">
             { this.state.chats.map(chat => 
               <li key={chat.id} className="chat-tile">

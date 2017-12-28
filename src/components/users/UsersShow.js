@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import Auth from '../../lib/Auth';
 import Navbar from '../utility/Navbar';
+
 class UsersShow extends React.Component {
   constructor() {
     super();
@@ -24,7 +25,7 @@ class UsersShow extends React.Component {
   render() {
     return(
       <div>
-        <Navbar title="Account" /> 
+        <Navbar title="Profile" /> 
         
         <div className="container">
           <div className="profile">
