@@ -20,10 +20,6 @@ class ChatsShow extends React.Component {
     this.websocket = socketIOClient('/message-stream');
   }
 
-  componentWillUnmount() {
-    this.websocket.disconnect(true);
-  }
-
   componentDidMount() {
     this.websocket.on('connect', () => {
       this.websocket.on('newMessage', newMessage => {
@@ -41,6 +37,8 @@ class ChatsShow extends React.Component {
   }
 
   componentWillUnmount() {
+    this.websocket.disconnect(true);
+    
     if(this.state.chat.messages.length === 0) {
       axios
         .delete(`/api/chats/${this.state.chat.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`} });
