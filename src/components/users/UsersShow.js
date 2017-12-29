@@ -28,9 +28,11 @@ class UsersShow extends React.Component {
         <Navbar title="Profile" /> 
         
         <div className="container">
-          <div className="profile">
-            <img src={ this.state.user.image } />
+          <div className="profile-container">
+            <img className={ this.state.user.online ? 'online' : '' } src={ this.state.user.image } />
             <h2>{ this.state.user.fullname }</h2>
+            <h3>{ this.state.user.email }</h3>
+            <p>Status: <span>{ this.state.user.online ? 'Online' : 'Offline' }</span></p>
           </div>
         </div>
       </div>

@@ -55,7 +55,7 @@ class ChatsShow extends React.Component {
   render() {
     return (
       <div>
-       { this.state.chat.id && <Navbar title={this.getCollocutor().first} /> }
+       { this.state.chat.id && <Navbar title={this.getCollocutor().first} colloctor={this.getCollocutor()} /> }
 
        <div className="container">
           <form className="language-selector">
@@ -84,8 +84,9 @@ class ChatsShow extends React.Component {
                 <textarea 
                   onChange={this.handleChange}
                   value={this.state.message.content}
+                  placeholder="Aa"
                 />
-                <input type="submit" value="Send" />
+                <input type="submit" value="Send"/>
               </form>
             </div>
           </section>

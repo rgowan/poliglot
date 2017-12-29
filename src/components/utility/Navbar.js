@@ -4,7 +4,7 @@ import { withRouter, Link } from 'react-router-dom';
 
 import Auth from '../../lib/Auth';
 
-const Navbar = ({ history, title }) => {
+const Navbar = ({ history, title, colloctor }) => {
   function logout(e) {
     axios
       .put('/api/logout', {}, { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
@@ -32,7 +32,10 @@ const Navbar = ({ history, title }) => {
         { history.location.pathname !== '/chats' && <div className="back" onClick={ () => history.goBack() }> 
           <i className="fa fa-angle-left" aria-hidden="true"></i>
         </div> }
-        <h1>{ title }</h1>
+          <span>
+            <h1>{ title }</h1>
+            { colloctor && <Link to={`/users/${colloctor.id}`}>View {colloctor.first}'s profile</Link> }
+          </span>
         <hr />
       </div>
     </header>

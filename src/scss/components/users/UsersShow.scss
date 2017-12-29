@@ -1,0 +1,27 @@
+.profile-container {
+  margin: 15px auto;
+  text-align: center;
+  max-width: 600px;
+
+  img {
+    width: 60%;
+    border: 3px solid #eee;
+    border-radius: 3px;
+  }
+
+  h2 {
+    font-size: 25px;
+    margin: 5px;
+    font-weight: 600;
+  }
+
+  h3 {
+    font-weight: 500;
+  }
+
+  p {
+    margin: 5px;
+  }
+}
+
+

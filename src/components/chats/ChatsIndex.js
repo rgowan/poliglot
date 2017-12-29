@@ -86,7 +86,7 @@ class ChatsIndex extends React.Component {
   
   render() {
     const inputProps = {
-      placeholder: "Who do you want to chat to?",
+      placeholder: "💬 Who do you want to chat to?",
       value: this.state.inputValue,
       onChange: this.handleChange
     };

@@ -25,6 +25,10 @@
   margin-top: 5px;
   height: calc(100vh - 295px);
 
+  h2 {
+    margin: 15px 0;
+  }
+
   .messages-box {
     height: 88%;
     overflow: auto;
