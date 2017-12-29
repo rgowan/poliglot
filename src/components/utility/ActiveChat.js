@@ -1,5 +1,6 @@
-import React from 'react';
+import React    from 'react';
 import { Link } from 'react-router-dom';
+import moment   from 'moment';
 
 import Auth from '../../lib/Auth';
 
@@ -16,7 +17,7 @@ const ActiveChat = ({ data, users }) => {
         <div className="info">
           <h2>{ collocutor.fullname }</h2>
           <p>{ data.messages[data.messages.length -1].content }</p>
-          <p>{ data.messages[data.messages.length -1].createdAt }</p>
+          <p>{ moment(data.updatedAt).format('llll') }</p>
         </div>
       </Link>
     </div>
