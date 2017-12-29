@@ -26,7 +26,7 @@ function remove(req, res, next) {
     .exec()
     .then(chat => {
       const message = chat.messages.id(req.params.messageId);
-      
+
       if (req.currentUser.id == message.createdBy) {
         message.remove();
         return chat.save();
@@ -36,10 +36,10 @@ function remove(req, res, next) {
     .catch(next);
 }
 
-function convert(res,res,next) {
-  const phrase = decodeURI(req.params.phrase);
+function convert(req, res, next) {
+  const phrase = decodeURIComponent(req.params.phrase);
 
-  translate(phrase, {from: req.params.from, to: req.params.to})
+  translate(phrase, {from: 'en', to: req.params.to})
     .then(data => res.status(200).json(data.text))
     .catch(err => console.log(err));
 }

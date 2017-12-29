@@ -94,7 +94,8 @@ class ChatsShow extends React.Component {
               { this.state.chat.id && this.state.chat.messages.map(message => 
                 <Message
                   key={message.id} 
-                  data={message} 
+                  data={message}
+                  language={this.state.chat.language} 
                 />
               )}
             </div>
