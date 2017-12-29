@@ -59,7 +59,7 @@ class ChatsShow extends React.Component {
 
        <div className="container">
           <form className="language-selector">
-            <label>Language</label>
+            <label>Interpreter</label>
             <select>
               <option disabled='true' defaultValue=''>Please select a language</option>
               <option>English</option>
@@ -70,6 +70,7 @@ class ChatsShow extends React.Component {
           </form>
           
           <section className="chat-container">
+            <h2>Messages</h2>
             <div className="messages-box">
               { this.state.chat.id && this.state.chat.messages.map( message => 
                 <Message

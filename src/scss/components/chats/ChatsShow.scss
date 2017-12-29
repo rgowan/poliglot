@@ -23,12 +23,11 @@
 
 .chat-container {
   margin-top: 5px;
-  height: calc(100vh - 233.5px);
+  height: calc(100vh - 295px);
 
   .messages-box {
     height: 88%;
     overflow: auto;
-    background: rgba(0, 0, 0, 0.01);
     border-radius: 3px;
 
     .message {
