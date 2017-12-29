@@ -1,3 +1,6 @@
+@import './components/users/UsersShow';
+
+
 @import url('https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900');
 
 * {
@@ -239,93 +242,6 @@ header {
     clear:both;
   }
 }
-
-.chat-show {
-  margin-top: 15px;
-  height: calc(100vh - 150px);
-  border-radius: 5px;
-  background: #fafafa;
-
-  hr {
-    width: 90%;
-  }
-
-  .messages-container {
-    height: 85%;
-    overflow: auto;
-    border-radius: 5px 5px 0 0;
-
-    ul {
-      padding: 5px;
-    }
-  }
-  
-  .new-message-container {
-    height: 15%;
-    border-radius: 0 0 5px 5px;
-
-    form {
-      width: 90%;
-      height: 70px;
-
-      input, button {
-        display: inline-block
-      }
-
-      textarea {
-        width: 75%;
-        border-radius: 5px 0 0 5px;
-        border: none;
-        font-size: 20px;
-        height: 50px;
-        resize: none;
-        outline: none;
-        padding: 5px;
-      }
-
-      button {
-        position: relative;
-        top: -20px;
-        width: 25%;
-        background: rgba(45, 136, 45, 0.75);
-        border-radius:  0 5px 5px 0;
-        height: 50px;
-        color: #fff;
-        font-size: 16px;
-        font-weight: 600;
-        outline: none;
-      }
-    }
-  }
-}
-
-.message-container {
-  background: green;
-  width: 50%;
-  border-radius: 5px;
-  margin: 5px;
-
-  p {
-    position: relative;
-    z-index: 1;
-    font-size: 16px;
-    color: #333;
-    width: 80%;
-    margin: 10px;
-    font-weight: 400;
-  }
-}
-
-.left {
-  float: left;
-  background: rgba(62, 49, 117, 0.15);
-}
-
-.right {
-  float: right;
-  background: rgba(34, 102, 102, 0.15);
-}
-
 
 .new-chat {
   margin-top: 15px;

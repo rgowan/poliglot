@@ -1,5 +1,4 @@
 class Auth {
-
   static setToken(token) {
     return localStorage.setItem('token', token);
   }
@@ -21,7 +20,6 @@ class Auth {
     if (!token) return null;
     return JSON.parse(atob(token.split('.')[1]));
   }
-
 }
 
 export default Auth;
