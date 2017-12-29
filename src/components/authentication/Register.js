@@ -17,9 +17,6 @@ class Register extends React.Component {
         passwordConfirmation: ''
       }
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange = ({ target: { name, value } }) => {

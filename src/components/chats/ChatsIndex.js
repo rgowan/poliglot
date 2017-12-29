@@ -7,15 +7,6 @@ import { Link }       from 'react-router-dom';
 import Navbar from '../utility/Navbar';
 import Auth   from '../../lib/Auth';
 
-const Suggestion = user => {
-  return(
-    <div>
-      <img className={ user.online ? 'online' : ''} src={ user.image }/>
-      <p>{ user.fullname }</p>
-    </div>
-  );
-}
-
 class ChatsIndex extends React.Component {
   constructor() {
     super();
@@ -31,20 +22,20 @@ class ChatsIndex extends React.Component {
   }
 
   componentDidMount() {
-    this.websocket.on('connect', () => {
-      this.websocket.on('login', user => this.updateUsersOnAuth(true, user));
-      this.websocket.on('logout', user => this.updateUsersOnAuth(false, user));
-    });
+    const headers = { Authorization: `Bearer ${Auth.getToken()}`};
 
     axios
-      .get('/api/chats', { headers: { Authorization: `Bearer ${Auth.getToken()}`} })
-      .then(res => this.setState({ chats: res.data }))
+      .all([
+        axios.get('/api/chats', { headers }),
+        axios.get('/api/users', { headers })
+      ])
+      .then(axios.spread((chats, users) => this.setState({ chats: chats.data, users: users.data })))
       .catch(err => console.log(err));
-    
-    axios
-      .get('/api/users', { headers: { Authorization: `Bearer ${Auth.getToken()}`} })
-      .then(res => this.setState({ users: res.data }))
-      .catch(err => console.log(err));
+
+    this.websocket.on('connect', () => {
+      this.websocket.on('login',  user => this.updateUsersOnAuth(true, user));
+      this.websocket.on('logout', user => this.updateUsersOnAuth(false, user));
+    });
   }
 
   componentWillUnmount() {
@@ -60,16 +51,11 @@ class ChatsIndex extends React.Component {
       return person;
     });
 
-    this.setState({ users });
+    return this.setState({ users });
   }
 
-  onSuggestionsClearRequested = () => this.setState({ filteredUsers: [] });
-  onSuggestionsFetchRequested = ({ value }) => this.setState({ filteredUsers: this.getSuggestions(value) });
-  getSuggestionValue = value => value.fullname;
-  handleChange = ( event, { newValue }) => this.setState({ inputValue: newValue });
-
-  handleClick = (e, data) => {
-    const user   = this.state.users.filter(user => user.fullname === data.suggestionValue);
+  handleClick = (e, target) => {
+    const user   = this.state.users.filter(user => user.fullname === target.suggestionValue);
     const userId = user[0].id;
 
     axios
@@ -78,6 +64,11 @@ class ChatsIndex extends React.Component {
       .catch(err => console.log(err));
   }
 
+  handleChange                = ( event, { newValue }) => this.setState({ inputValue: newValue });
+  onSuggestionsClearRequested = () => this.setState({ filteredUsers: [] });
+  onSuggestionsFetchRequested = ({ value }) => this.setState({ filteredUsers: this.getSuggestions(value) });
+  getSuggestionValue          = value => value.fullname;
+  
   getSuggestions = value => { 
     const inputValue    = value.trim().toLowerCase();
     const filteredUsers = [];
@@ -116,7 +107,8 @@ class ChatsIndex extends React.Component {
           </div>
 
           <h2>Active Chats</h2>
-          { this.state.chats.length !== 0 ? 
+
+          { this.state.chats ? 
             <ul className="chat-index-container">
               { this.state.chats.map(chat => {
                 let collocutor = chat.participants.find(collocutor => collocutor.id !== Auth.getPayload().id)
@@ -145,6 +137,15 @@ class ChatsIndex extends React.Component {
       </div>
     );
   } 
+}
+
+const Suggestion = user => {
+  return(
+    <div>
+      <img className={ user.online ? 'online' : ''} src={ user.image }/>
+      <p>{ user.fullname }</p>
+    </div>
+  );
 }
 
 export default ChatsIndex;

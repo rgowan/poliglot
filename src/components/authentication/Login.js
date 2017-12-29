@@ -13,9 +13,6 @@ class Login extends React.Component {
         password: ''
       }
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange = ({ target: { name, value } }) => {
@@ -29,13 +26,11 @@ class Login extends React.Component {
     axios
       .post('/api/login', this.state.user)
       .then(res => {
-        console.log('logged in', res);
         Auth.setToken(res.data.token);
         this.props.history.push('/chats');
       });
   }
-
-
+  
   render() {
     return (
       <div className="authentication">
