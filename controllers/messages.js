@@ -1,4 +1,6 @@
-const Chat = require('../models/chat');
+const Chat    = require('../models/chat');
+const sockets = require('../lib/sockets');
+const io      = sockets.getConnection();
 
 function create(req, res, next) {
   req.body.createdBy = req.currentUser;
@@ -11,7 +13,8 @@ function create(req, res, next) {
     })
     .then(chat => {
       const message = chat.messages[chat.messages.length -1];
-      return res.status(201).json(message);
+      io.emit('newMessage', message);
+      return res.status(201).end();
     })
     .catch(next);
 }

@@ -1,13 +1,18 @@
-const express         = require('express');
-const morgan          = require('morgan');
-const bodyParser      = require('body-parser');
-const mongoose        = require('mongoose');
-const bluebird        = require('bluebird');
+const express     = require('express');
+const http        = require('http');
+const morgan      = require('morgan');
+const bodyParser  = require('body-parser');
+const mongoose    = require('mongoose');
+const bluebird    = require('bluebird');
+const sockets     = require('./lib/sockets');
 
-const app             = express();
-const environment     = app.get('env');
+const app         = express();
+const environment = app.get('env');
 
-mongoose.Promise      = bluebird;
+const server      = http.createServer(app);
+const io          = sockets.connect(server);
+
+mongoose.Promise  = bluebird;
 mongoose.plugin(require('./lib/globalToJSON'));
 mongoose.plugin(require('mongoose-unique-validator'));
 
@@ -26,6 +31,6 @@ app.use(customResponses);
 app.use('/api', routes);
 app.use(errorHandler);
 
-if (environment !== 'test') app.listen(port, () => console.log(`Express is alive and running on port: ${port}`));
+if (environment !== 'test') server.listen(port, () => console.log(`Server is up and running on port: ${port}`));
 
 module.exports = app;

@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import socketIOClient from 'socket.io-client';
 
 import Auth from '../../lib/Auth';
 import Navbar from '../utility/Navbar';
@@ -15,9 +16,22 @@ class ChatsShow extends React.Component {
         content: ''
       }
     }
+
+    this.websocket = socketIOClient('/message-stream');
+  }
+
+  componentWillUnmount() {
+    this.websocket.disconnect(true);
   }
 
   componentDidMount() {
+    this.websocket.on('connect', () => {
+      this.websocket.on('newMessage', newMessage => {
+        const chat = Object.assign({}, this.state.chat, { messages: this.state.chat.messages.concat(newMessage)});
+        this.setState({ chat, message: { content: ''} });
+      });
+    });
+
     axios
       .get(`/api/chats/${this.props.match.params.id}`, {
         headers: { Authorization: `Bearer ${Auth.getToken()}`}
@@ -41,11 +55,7 @@ class ChatsShow extends React.Component {
     e.preventDefault();
 
     axios
-      .post(`/api/chats/${this.state.chat.id}/messages`, this.state.message, { headers: { Authorization: `Bearer ${Auth.getToken()}`} })
-      .then(res => {
-        const chat = Object.assign({}, this.state.chat, { messages: this.state.chat.messages.concat(res.data)});
-        this.setState({ chat, message: { content: ''} });
-      });
+      .post(`/api/chats/${this.state.chat.id}/messages`, this.state.message, { headers: { Authorization: `Bearer ${Auth.getToken()}`} });
   }
 
   render() {
