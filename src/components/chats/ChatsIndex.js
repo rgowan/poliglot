@@ -4,8 +4,9 @@ import axios          from 'axios';
 import socketIOClient from 'socket.io-client';
 import { Link }       from 'react-router-dom';
 
-import Navbar from '../utility/Navbar';
-import Auth   from '../../lib/Auth';
+import Navbar     from '../utility/Navbar';
+import Auth       from '../../lib/Auth';
+import ActiveChat from '../utility/ActiveChat';
 
 class ChatsIndex extends React.Component {
   constructor() {
@@ -94,7 +95,9 @@ class ChatsIndex extends React.Component {
       <div>
         <Navbar title='Chats' />
         <div className="container">
-          <div className="new-chat">
+
+          <form className="auto-suggest-container">
+            <label>New Chat</label>
             <Autosuggest 
               suggestions={this.state.filteredUsers}
               onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -104,35 +107,21 @@ class ChatsIndex extends React.Component {
               inputProps={inputProps}
               onSuggestionSelected={this.handleClick}
             />
-          </div>
-
-          <h2>Active Chats</h2>
-
-          { this.state.chats ? 
-            <ul className="chat-index-container">
-              { this.state.chats.map(chat => {
-                let collocutor = chat.participants.find(collocutor => collocutor.id !== Auth.getPayload().id)
-
-                return (
-                  <li key={chat.id} className="chat-tile">
-                  <Link to={`/chats/${chat.id}`}>
-                    <div className="chat-picture">
-                      <img 
-                      className={ this.state.users.find(user => user.fullname === collocutor.fullname).online ? 'online' : '' } 
-                      src={collocutor.image }/>
-                    </div>
-                    <div className="chat-info">
-                      <h2>{collocutor.fullname}</h2>
-                      <p>{ chat.messages[chat.messages.length -1].content }</p>
-                    </div>
-                  </Link>
-                </li>
-                )
-              })}
-            </ul> 
-            : 
-            <p>You have no active chats at the moment.</p>
-          }
+          </form>
+          <div className="chats-container">
+            <h2>Active Chats</h2>
+            { this.state.chats !== [] ? 
+              this.state.chats.map(chat => 
+                <ActiveChat 
+                  key={chat.id} 
+                  data={chat} 
+                  users={this.state.users}
+                  />
+              )
+            :
+              <p>You have no active chats at this time.</p>
+            }
+          </div> 
         </div>
       </div>
     );
