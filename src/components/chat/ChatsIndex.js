@@ -1,11 +1,11 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Autosuggest from 'react-autosuggest';
-import axios from 'axios';
+import React          from 'react';
+import Autosuggest    from 'react-autosuggest';
+import axios          from 'axios';
 import socketIOClient from 'socket.io-client';
+import { Link }       from 'react-router-dom';
 
 import Navbar from '../utility/Navbar';
-import Auth from '../../lib/Auth';
+import Auth   from '../../lib/Auth';
 
 const Suggestion = user => {
   return(
@@ -32,33 +32,8 @@ class ChatsIndex extends React.Component {
 
   componentDidMount() {
     this.websocket.on('connect', () => {
-      this.websocket.on('login', user => {
-        console.log('user logged in');
-  
-        const users = this.state.users.map(person => {
-          if(person.id === user.id) {
-            person.online = true;
-            return person;
-          } 
-          return person;
-        });
-
-        this.setState({ users });
-      });
-  
-      this.websocket.on('logout', user => {
-        console.log('user logged out');
-  
-        const users = this.state.users.map(person => {
-          if(person.id === user.id) {
-            person.online = false;
-            return person;
-          } 
-          return person;
-        });
-  
-        this.setState({ users });
-      })
+      this.websocket.on('login', user => this.updateUsersOnAuth(true, user));
+      this.websocket.on('logout', user => this.updateUsersOnAuth(false, user));
     });
 
     axios
@@ -74,6 +49,18 @@ class ChatsIndex extends React.Component {
 
   componentWillUnmount() {
     this.websocket.disconnect(true);
+  }
+
+  updateUsersOnAuth(boolean, user) {
+    const users = this.state.users.map(person => {
+      if(person.id === user.id) {
+        person.online = boolean;
+        return person;
+      } 
+      return person;
+    });
+
+    this.setState({ users });
   }
 
   onSuggestionsClearRequested = () => this.setState({ filteredUsers: [] });
@@ -93,9 +80,8 @@ class ChatsIndex extends React.Component {
 
   getSuggestions = value => { 
     const inputValue    = value.trim().toLowerCase();
-    const inputLength   = inputValue.length;
     const filteredUsers = [];
-    const usersInChats = this.state.chats.map(chat => chat.participants.find(user => user.id !== Auth.getPayload().id).id);
+    const usersInChats  = this.state.chats.map(chat => chat.participants.find(user => user.id !== Auth.getPayload().id).id);
 
     if(value === '') return this.setState({ filteredUsers: []});
 
