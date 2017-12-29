@@ -10,7 +10,7 @@ import Auth from '../../lib/Auth';
 const Suggestion = user => {
   return(
     <div>
-      <img src={ user.image }/>
+      <img className={ user.online ? 'online' : ''} src={ user.image }/>
       <p>{ user.fullname }</p>
     </div>
   );
@@ -43,10 +43,6 @@ class ChatsIndex extends React.Component {
           return person;
         });
 
-        const chats = this.state.chats.map(chat => {
-          
-        })
-  
         this.setState({ users });
       });
   
@@ -109,7 +105,7 @@ class ChatsIndex extends React.Component {
 
     return filteredUsers;
   }
-
+  
   render() {
     const inputProps = {
       placeholder: "Who do you want to chat to?",
@@ -136,34 +132,19 @@ class ChatsIndex extends React.Component {
           <h2>Active Chats</h2>
           { this.state.chats.length !== 0 ? 
             <ul className="chat-index-container">
-              {/* { this.state.chats.map(chat =>
-                <li key={chat.id} className="chat-tile">
-                  <Link to={`/chats/${chat.id}`}>
-                    <div className="chat-picture">
-                      <img className={this.state.users.find(user => user.fullname === chat.participants.find(chatter => chatter.id !== Auth.getPayload().id)).online ? 'online' : ''} src={chat.participants.find(user => user.id !== Auth.getPayload().id).image }/>
-                    </div>
-                    <div className="chat-info">
-                      <h2>{chat.participants.find(user => user.id !== Auth.getPayload().id).fullname}</h2>
-                      <p>{ chat.messages[chat.messages.length -1].content }</p>
-                    </div>
-                  </Link>
-                </li>
-              )} */}
-
-
               { this.state.chats.map(chat => {
-                let chatter = chat.participants.find(chatter => chatter.id !== Auth.getPayload().id)
+                let collocutor = chat.participants.find(collocutor => collocutor.id !== Auth.getPayload().id)
 
                 return (
                   <li key={chat.id} className="chat-tile">
                   <Link to={`/chats/${chat.id}`}>
                     <div className="chat-picture">
                       <img 
-                      className={ this.state.users.find(user => user.fullname === chatter.fullname).online ? 'online' : '' } 
-                      src={chat.participants.find(user => user.id !== Auth.getPayload().id).image }/>
+                      className={ this.state.users.find(user => user.fullname === collocutor.fullname).online ? 'online' : '' } 
+                      src={collocutor.image }/>
                     </div>
                     <div className="chat-info">
-                      <h2>{chat.participants.find(user => user.id !== Auth.getPayload().id).fullname}</h2>
+                      <h2>{collocutor.fullname}</h2>
                       <p>{ chat.messages[chat.messages.length -1].content }</p>
                     </div>
                   </Link>

@@ -45,6 +45,10 @@ class ChatsShow extends React.Component {
     };
   }
 
+  getCollocutor() {
+    return this.state.chat.participants.find(chattingWith => chattingWith.id !== Auth.getPayload().id);
+  }
+
   handleChange = ({ target: { value }}) => {
     this.setState({ message: { content: value } });
   }
@@ -57,9 +61,11 @@ class ChatsShow extends React.Component {
   }
 
   render() {
+
+
     return (
       <div>
-       { this.state.chat.id && <Navbar title={this.state.chat.participants[1].first} /> }
+       { this.state.chat.id && <Navbar title={this.getCollocutor().first} /> }
        <div className="container">
         <div className="chat-show">
           <div className="messages-container">
