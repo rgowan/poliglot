@@ -34,6 +34,7 @@
     "react-autosuggest": "^9.3.2",
     "react-dom": "^15.6.1",
     "react-router-dom": "^4.2.2",
+    "react-truncate": "^2.3.0",
     "request-promise": "^4.2.2",
     "socket.io": "^2.0.4",
     "socket.io-client": "^2.0.4"
