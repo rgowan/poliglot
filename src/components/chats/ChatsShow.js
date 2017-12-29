@@ -62,10 +62,10 @@ class ChatsShow extends React.Component {
             <label>Interpreter</label>
             <select>
               <option disabled='true' defaultValue=''>Please select a language</option>
-              <option>English</option>
-              <option>Italian</option>
-              <option>Spanish</option>
-              <option>Serbian</option>
+              <option>🇬🇧 English</option>
+              <option>🇮🇹 Italian</option>
+              <option>🇪🇸 Spanish</option>
+              <option>🇷🇸 Serbian</option>
             </select>
           </form>
           

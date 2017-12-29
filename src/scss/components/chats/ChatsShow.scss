@@ -40,15 +40,26 @@
       clear: both;
       color: #333;
 
-      span {
+      p {
+        margin: 0;
         position: relative;
         z-index: 1;
+
+        span {
+          font-weight: 300;
+        }
+
+        &:first-child {
+          font-size: 12px;
+          font-weight: 300;
+          color: rgba(0,0,0,0.4);
+        }
       }
     }
 
     .left {
       float: left;
-      background: rgba(228, 62, 11, 0.2);
+      background: rgba(152, 196, 231, 0.2);
     }
     
     .right {

@@ -17,6 +17,7 @@
     "test": "nyc --reporter=html mocha"
   },
   "dependencies": {
+    "animate.css": "^3.5.2",
     "axios": "^0.17.1",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.1",
