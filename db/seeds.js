@@ -4,11 +4,12 @@ const rp           = require('request-promise');
 
 const { db, env }  = require('../config/environment');
 const User         = require('../models/user');
-const Chat         = require('../models/chat');
+const Language     = require('../models/language');
 
 mongoose.connect(db[env], { useMongoClient: true });
 
 User.collection.drop();
+Language.collection.drop();
 
 const globalUsers = [];
 
@@ -45,6 +46,36 @@ rp('https://randomuser.me/api/?results=5&nat=gb')
   .then(user => {
     globalUsers.push(user);
     console.log(`${globalUsers.length} users were created!`);
+
+    return Language.create([
+      {name: 'Albanian', code: 'sq'},
+      {name: 'Italian',	code: 'it'},
+      {name: 'Arabic', code: 'ar'},
+      {name: 'Japanese', code: 'ja'},
+      {name: 'Korean', code: 'ko'},
+      {name: 'Bengali',	code: 'bn'},
+      {name: 'Chinese Simplified', code: 'zh-CN'},
+      {name: 'Chinese Traditional',	code: 'zh-TW'},
+      {name: 'Croatian', code: 'hr'},
+      {name: 'Czech',	code: 'cs'},
+      {name: 'Polish', code: 'pl'},
+      {name: 'Dutch',	code: 'nl'},
+      {name: 'Portuguese', code: 'pt'},
+      {name: 'Russian', code: 'ru'},
+      {name: 'Serbian', code: 'sr'},
+      {name: 'French'	, code: 'fr'},
+      {name: 'Spanish' , code: 'es'},
+      {name: 'Swedish' , code: 'sv'},
+      {name: 'German' , code: 'de'},
+      {name: 'Greek' , code: 'el'},
+      {name: 'Thai'	, code: 'th'},
+      {name: 'Turkish' , code: 'tr'},
+      {name: 'Hindi' , code: 'hi'},
+      {name: 'Urdu'	, code: 'ur'},
+    ])
+  })
+  .then(languages => {
+    console.log(`${languages.length} languages were created!`);
   })
   .catch(err => console.log(err))
   .finally(() => mongoose.connection.close());

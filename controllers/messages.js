@@ -1,6 +1,7 @@
-const Chat    = require('../models/chat');
-const sockets = require('../lib/sockets');
-const io      = sockets.getConnection();
+const Chat      = require('../models/chat');
+const translate = require('google-translate-api');
+const sockets   = require('../lib/sockets');
+const io        = sockets.getConnection();
 
 function create(req, res, next) {
   req.body.createdBy = req.currentUser;
@@ -35,7 +36,16 @@ function remove(req, res, next) {
     .catch(next);
 }
 
+function convert(res,res,next) {
+  const phrase = decodeURI(req.params.phrase);
+
+  translate(phrase, {from: req.params.from, to: req.params.to})
+    .then(data => res.status(200).json(data.text))
+    .catch(err => console.log(err));
+}
+
 module.exports = {
   create,
-  remove
+  remove,
+  convert
 }

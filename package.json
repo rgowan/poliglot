@@ -23,6 +23,7 @@
     "body-parser": "^1.18.1",
     "express": "^4.15.4",
     "font-awesome": "^4.7.0",
+    "google-translate-api": "^2.3.0",
     "http": "^0.0.0",
     "jsonwebtoken": "^8.1.0",
     "moment": "^2.20.1",

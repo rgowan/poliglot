@@ -18,10 +18,18 @@ function show(req, res, next) {
 
 function create(req, res, next) {
   req.body.participants = [req.currentUser.id, req.params.id];
+  req.body.language     = '';
 
   Chat
     .create(req.body)
     .then(chat => res.status(201).json(chat))
+    .catch(next);
+}
+
+function put(req, res, next) {
+  Chat
+    .findByIdAndUpdate(req.params.id, { $set: { language: req.body.language } }, { new: true })
+    .then(chat => res.status(200).json(chat))
     .catch(next);
 }
 
@@ -36,5 +44,6 @@ module.exports = {
   find,
   show,
   create,
+  put,
   remove
 }
