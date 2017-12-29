@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Autosuggest from 'react-autosuggest';
 import axios from 'axios';
+import socketIOClient from 'socket.io-client';
 
 import Navbar from '../utility/Navbar';
 import Auth from '../../lib/Auth';
@@ -25,9 +26,45 @@ class ChatsIndex extends React.Component {
       filteredUsers: [],
       inputValue: ''
     };
+
+    this.websocket = socketIOClient('/sockets');
   }
 
   componentDidMount() {
+    this.websocket.on('connect', () => {
+      this.websocket.on('login', user => {
+        console.log('user logged in');
+  
+        const users = this.state.users.map(person => {
+          if(person.id === user.id) {
+            person.online = true;
+            return person;
+          } 
+          return person;
+        });
+
+        const chats = this.state.chats.map(chat => {
+          
+        })
+  
+        this.setState({ users });
+      });
+  
+      this.websocket.on('logout', user => {
+        console.log('user logged out');
+  
+        const users = this.state.users.map(person => {
+          if(person.id === user.id) {
+            person.online = false;
+            return person;
+          } 
+          return person;
+        });
+  
+        this.setState({ users });
+      })
+    });
+
     axios
       .get('/api/chats', { headers: { Authorization: `Bearer ${Auth.getToken()}`} })
       .then(res => this.setState({ chats: res.data }))
@@ -37,6 +74,10 @@ class ChatsIndex extends React.Component {
       .get('/api/users', { headers: { Authorization: `Bearer ${Auth.getToken()}`} })
       .then(res => this.setState({ users: res.data }))
       .catch(err => console.log(err));
+  }
+
+  componentWillUnmount() {
+    this.websocket.disconnect(true);
   }
 
   onSuggestionsClearRequested = () => this.setState({ filteredUsers: [] });
@@ -95,11 +136,11 @@ class ChatsIndex extends React.Component {
           <h2>Active Chats</h2>
           { this.state.chats.length !== 0 ? 
             <ul className="chat-index-container">
-              { this.state.chats.map(chat => 
+              {/* { this.state.chats.map(chat =>
                 <li key={chat.id} className="chat-tile">
                   <Link to={`/chats/${chat.id}`}>
                     <div className="chat-picture">
-                      <img src={chat.participants.find(user => user.id !== Auth.getPayload().id).image }/>
+                      <img className={this.state.users.find(user => user.fullname === chat.participants.find(chatter => chatter.id !== Auth.getPayload().id)).online ? 'online' : ''} src={chat.participants.find(user => user.id !== Auth.getPayload().id).image }/>
                     </div>
                     <div className="chat-info">
                       <h2>{chat.participants.find(user => user.id !== Auth.getPayload().id).fullname}</h2>
@@ -107,7 +148,28 @@ class ChatsIndex extends React.Component {
                     </div>
                   </Link>
                 </li>
-              )}
+              )} */}
+
+
+              { this.state.chats.map(chat => {
+                let chatter = chat.participants.find(chatter => chatter.id !== Auth.getPayload().id)
+
+                return (
+                  <li key={chat.id} className="chat-tile">
+                  <Link to={`/chats/${chat.id}`}>
+                    <div className="chat-picture">
+                      <img 
+                      className={ this.state.users.find(user => user.fullname === chatter.fullname).online ? 'online' : '' } 
+                      src={chat.participants.find(user => user.id !== Auth.getPayload().id).image }/>
+                    </div>
+                    <div className="chat-info">
+                      <h2>{chat.participants.find(user => user.id !== Auth.getPayload().id).fullname}</h2>
+                      <p>{ chat.messages[chat.messages.length -1].content }</p>
+                    </div>
+                  </Link>
+                </li>
+                )
+              })}
             </ul> 
             : 
             <p>You have no active chats at the moment.</p>

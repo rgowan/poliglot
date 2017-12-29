@@ -17,7 +17,7 @@ class ChatsShow extends React.Component {
       }
     }
 
-    this.websocket = socketIOClient('/message-stream');
+    this.websocket = socketIOClient('/sockets');
   }
 
   componentDidMount() {

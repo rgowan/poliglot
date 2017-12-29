@@ -12,7 +12,7 @@ User.collection.drop();
 
 const globalUsers = [];
 
-rp('https://randomuser.me/api/?results=100&nat=gb')
+rp('https://randomuser.me/api/?results=5&nat=gb')
   .then(data => {
     const { results } = JSON.parse(data);
 
@@ -23,7 +23,8 @@ rp('https://randomuser.me/api/?results=100&nat=gb')
         image: result.picture.large,
         email: `${result.name.first}@${result.name.last}.com`,
         password: 'password',
-        passwordConfirmation: 'password'
+        passwordConfirmation: 'password',
+        online: false
       });
 
       globalUsers.push(user);
@@ -37,7 +38,8 @@ rp('https://randomuser.me/api/?results=100&nat=gb')
       image: 'https://avatars0.githubusercontent.com/u/11501555?s=460&v=4',
       email: 'rane@gowan.com',
       password: 'password',
-      passwordConfirmation: 'password'
+      passwordConfirmation: 'password',
+      online: false
     })
   })
   .then(user => {

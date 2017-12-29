@@ -10,6 +10,8 @@ router.route('/register')
   .post(auth.register);
 router.route('/login')
   .post(auth.login);
+router.route('/logout')
+  .put(secureRoute, auth.logout);
 
 router.route('/users')
   .get(users.index);
