@@ -6,9 +6,12 @@ import axios from 'axios';
 import Navbar from '../utility/Navbar';
 import Auth from '../../lib/Auth';
 
-const renderSuggestion = user => {
+const Suggestion = user => {
   return(
-    <div>{ user.fullname }</div>
+    <div>
+      <img src={ user.image }/>
+      <p>{ user.fullname }</p>
+    </div>
   );
 }
 
@@ -20,13 +23,8 @@ class ChatsIndex extends React.Component {
       chats: [],
       users: [],
       filteredUsers: [],
-      user: ''
+      inputValue: ''
     };
-
-    this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
-    this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this);
-    this.getSuggestions              = this.getSuggestions.bind(this);
-    this.getSuggestionValue          = this.getSuggestionValue.bind(this);
   }
 
   componentDidMount() {
@@ -41,73 +39,80 @@ class ChatsIndex extends React.Component {
       .catch(err => console.log(err));
   }
 
-  onSuggestionsClearRequested = () => {
-    this.setState({ filteredUsers: [] });
-  };
+  onSuggestionsClearRequested = () => this.setState({ filteredUsers: [] });
+  onSuggestionsFetchRequested = ({ value }) => this.setState({ filteredUsers: this.getSuggestions(value) });
+  getSuggestionValue = value => value.fullname;
+  handleChange = ( event, { newValue }) => this.setState({ inputValue: newValue });
 
-  onSuggestionsFetchRequested = ({ value }) => {
-    this.setState({ filteredUsers: this.getSuggestions(value) }, () => console.log(this.state));
-  };
+  handleClick = (e, data) => {
+    const user   = this.state.users.filter(user => user.fullname === data.suggestionValue);
+    const userId = user[0].id;
 
-
-  getSuggestionValue = user => user.fullname;
-
-  onChange = ( { target: { value }}) => {
-    this.setState({ user: value });
+    axios
+      .post(`/api/chats/create/${userId}`, {}, { headers: { Authorization: `Bearer ${Auth.getToken()}`} })
+      .then(res => this.props.history.push(`/chats/${res.data.id}`))
+      .catch(err => console.log(err));
   }
 
-  getSuggestions = value => {  
+  getSuggestions = value => { 
     const inputValue    = value.trim().toLowerCase();
     const inputLength   = inputValue.length;
     const filteredUsers = [];
+    const usersInChats = this.state.chats.map(chat => chat.participants.find(user => user.id !== Auth.getPayload().id).id);
+
+    if(value === '') return this.setState({ filteredUsers: []});
 
     this.state.users.map(user => {
-      if (user.fullname.toLowerCase().indexOf(inputValue) !== -1) filteredUsers.push(user);
+      if (user.fullname.toLowerCase().indexOf(inputValue) !== -1 && user.id !== Auth.getPayload().id && usersInChats.indexOf(user.id) === -1) filteredUsers.push(user);
     });
 
     return filteredUsers;
   }
 
-
-
   render() {
     const inputProps = {
-      placeholder: 'Who do you want to chat with?',
-      value: this.state.user,
-      onChange: this.onChange
+      placeholder: "Who do you want to chat to?",
+      value: this.state.inputValue,
+      onChange: this.handleChange
     };
-
 
     return(
       <div>
         <Navbar title='Chats' />
-        { this.state.chats[0] && <div className="container">
+        <div className="container">
           <div className="new-chat">
-          <Autosuggest 
-            suggestions={this.state.filteredUsers}
-            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-            getSuggestionValue={this.getSuggestionValue}
-            renderSuggestion={renderSuggestion}
-            inputProps={inputProps}
-          />
+            <Autosuggest 
+              suggestions={this.state.filteredUsers}
+              onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+              onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+              getSuggestionValue={this.getSuggestionValue}
+              renderSuggestion={Suggestion}
+              inputProps={inputProps}
+              onSuggestionSelected={this.handleClick}
+            />
           </div>
-          <ul className="chat-index-container">
-            { this.state.chats.map(chat => 
-              <li key={chat.id} className="chat-tile">
-                <Link to={`/chats/${chat.id}`}>
-                  <div className="chat-picture">
-                    <img src={chat.participants[1].image }/>
-                  </div>
-                  <div className="chat-info">
-                    <h2>{chat.participants[1].fullname}</h2>
-                    <p>{ chat.messages[chat.messages.length -1].content }</p>
-                  </div>
-                </Link>
-              </li>
-            )}
-          </ul>
-          </div> }
+
+          <h2>Active Chats</h2>
+          { this.state.chats.length !== 0 ? 
+            <ul className="chat-index-container">
+              { this.state.chats.map(chat => 
+                <li key={chat.id} className="chat-tile">
+                  <Link to={`/chats/${chat.id}`}>
+                    <div className="chat-picture">
+                      <img src={chat.participants.find(user => user.id !== Auth.getPayload().id).image }/>
+                    </div>
+                    <div className="chat-info">
+                      <h2>{chat.participants.find(user => user.id !== Auth.getPayload().id).fullname}</h2>
+                      <p>{ chat.messages[chat.messages.length -1].content }</p>
+                    </div>
+                  </Link>
+                </li>
+              )}
+            </ul> 
+            : 
+            <p>You have no active chats at the moment.</p>
+          }
+        </div>
       </div>
     );
   } 

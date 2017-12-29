@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import Auth from '../../lib/Auth';
 import Navbar from '../utility/Navbar';
+import { log } from 'util';
 
 class ChatsShow extends React.Component {
   constructor() {
@@ -25,6 +26,28 @@ class ChatsShow extends React.Component {
       .catch(err => console.log(err));
   }
 
+  componentWillUnmount() {
+    if(this.state.chat.messages.length === 0) {
+      axios
+        .delete(`/api/chats/${this.state.chat.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`} });
+    };
+  }
+
+  handleChange = ({ target: { value }}) => {
+    this.setState({ message: { content: value } });
+  }
+
+  handleSubmit = e => {
+    e.preventDefault();
+
+    axios
+      .post(`/api/chats/${this.state.chat.id}/messages`, this.state.message, { headers: { Authorization: `Bearer ${Auth.getToken()}`} })
+      .then(res => {
+        const chat = Object.assign({}, this.state.chat, { messages: this.state.chat.messages.concat(res.data)});
+        this.setState({ chat, message: { content: ''} });
+      });
+  }
+
   render() {
     return (
       <div>
@@ -42,8 +65,8 @@ class ChatsShow extends React.Component {
           </div>
           <hr />
           <div className="new-message-container">
-              <form>
-                <textarea></textarea>
+              <form onSubmit={this.handleSubmit}>
+                <textarea onChange={this.handleChange} value={ this.state.message.content } />
                 <button className="submit">Send</button>
               </form>
           </div>
