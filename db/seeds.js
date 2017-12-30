@@ -13,7 +13,7 @@ Language.collection.drop();
 
 const globalUsers = [];
 
-rp('https://randomuser.me/api/?results=5&nat=gb')
+rp('https://randomuser.me/api/?results=25&nat=gb')
   .then(data => {
     const { results } = JSON.parse(data);
 
