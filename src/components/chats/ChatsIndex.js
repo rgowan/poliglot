@@ -4,9 +4,10 @@ import axios          from 'axios';
 import socketIOClient from 'socket.io-client';
 import { Link }       from 'react-router-dom';
 
-import Navbar     from '../utility/Navbar';
-import Auth       from '../../lib/Auth';
-import ActiveChat from '../utility/ActiveChat';
+import Navbar       from '../utility/Navbar';
+import Auth         from '../../lib/Auth';
+import ActiveChat   from '../utility/ActiveChat';
+import NewChatInput from '../utility/NewChatInput';
 
 class ChatsIndex extends React.Component {
   constructor() {
@@ -85,36 +86,23 @@ class ChatsIndex extends React.Component {
   }
   
   render() {
-    const inputProps = {
-      placeholder: "💬 Who do you want to chat to?",
-      value: this.state.inputValue,
-      onChange: this.handleChange
-    };
-
     return(
       <div>
         <Navbar title='Chats' />
         <div className="container">
+          <NewChatInput 
+            chats={this.state.chats}
+            users={this.state.users}
+            history={this.props.history}
+          />
 
-          <form className="auto-suggest-container">
-            <label>New Chat</label>
-            <Autosuggest 
-              suggestions={this.state.filteredUsers}
-              onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-              onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-              getSuggestionValue={this.getSuggestionValue}
-              renderSuggestion={Suggestion}
-              inputProps={inputProps}
-              onSuggestionSelected={this.handleClick}
-            />
-          </form>
           <div className="chats-container">
             <h2>Active Chats</h2>
             { this.state.chats !== [] ? 
               this.state.chats.map(chat => 
                 <ActiveChat 
                   key={chat.id} 
-                  data={chat} 
+                  chat={chat} 
                   users={this.state.users}
                   />
               )
@@ -126,15 +114,6 @@ class ChatsIndex extends React.Component {
       </div>
     );
   } 
-}
-
-const Suggestion = user => {
-  return(
-    <div>
-      <img className={ user.online ? 'online' : ''} src={ user.image }/>
-      <p>{ user.fullname }</p>
-    </div>
-  );
 }
 
 export default ChatsIndex;

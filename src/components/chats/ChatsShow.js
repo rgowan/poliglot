@@ -23,24 +23,20 @@ class ChatsShow extends React.Component {
   }
 
   componentDidMount() {
-    axios
-      .get(`/api/chats/${this.props.match.params.id}`, {
-        headers: { Authorization: `Bearer ${Auth.getToken()}`}
-      })
-      .then(res => this.setState({ chat: res.data }))
-      .catch(err => console.log(err));
+    const headers = { Authorization: `Bearer ${Auth.getToken()}`};
 
     axios
-      .get('/api/languages', {
-        headers: { Authorization: `Bearer ${Auth.getToken()}`}
-      })
-      .then(res => this.setState({ languages: res.data }))
+      .all([
+        axios.get(`/api/chats/${this.props.match.params.id}`, { headers }),
+        axios.get('/api/languages', { headers })
+      ])
+      .then(axios.spread((chat, languages) => this.setState({ chat: chat.data, languages: languages.data })))
       .catch(err => console.log(err));
     
     this.websocket.on('connect', () => {
       this.websocket.on('newMessage', newMessage => {
         const chat = Object.assign({}, this.state.chat, { messages: this.state.chat.messages.concat(newMessage)});
-        this.setState({ chat, message: { content: ''} });
+        this.setState({ chat, message: { content: '' } });
       });
     });
   }
@@ -50,9 +46,11 @@ class ChatsShow extends React.Component {
     if(this.state.chat.messages.length === 0) axios.delete(`/api/chats/${this.state.chat.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`} });
   }
 
-  handleChange = ({ target: { value }}) => this.setState({ message: { content: value } });
+  handleChange = ({ target: { value } }) => {
+    this.setState({ message: { content: value } });
+  }
 
-  handleLanguageChange = (e) => {
+  handleLanguageChange = e => {
     const language = this.state.languages.find(language => language.code === e.target.value);
     delete language.id;
 

@@ -1,6 +1,7 @@
 @import './components/chats/ChatsShow';
 @import './components/chats/ChatsIndex';
 @import './components/users/UsersShow';
+
 @import url('https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900');
 
 * {
@@ -242,5 +243,5 @@ header {
 }
 
 .online { 
-  border: 3px solid rgba(79, 156, 16, 0.9) !important; 
+  border: 3px solid rgba(155, 202, 115, 0.9) !important; 
 }
