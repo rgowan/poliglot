@@ -21,6 +21,7 @@
     "axios": "^0.17.1",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.1",
+    "emoji-dictionary": "^1.0.9",
     "express": "^4.15.4",
     "font-awesome": "^4.7.0",
     "google-translate-api": "^2.3.0",

@@ -18,7 +18,6 @@ function show(req, res, next) {
 
 function create(req, res, next) {
   req.body.participants = [req.currentUser.id, req.params.id];
-  req.body.language     = '';
 
   Chat
     .create(req.body)
