@@ -34,7 +34,7 @@ const Navbar = ({ history, title, colloctor }) => {
         </div> }
           <span>
             <h1>{ title }</h1>
-            { colloctor && <Link to={`/users/${colloctor.id}`}>View {colloctor.first}'s profile</Link> }
+            { colloctor && <Link to={`/users/${colloctor.id}`}>View profile</Link> }
           </span>
         <hr />
       </div>
