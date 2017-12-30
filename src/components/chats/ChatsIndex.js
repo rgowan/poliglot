@@ -4,9 +4,9 @@ import axios          from 'axios';
 import socketIOClient from 'socket.io-client';
 import { Link }       from 'react-router-dom';
 
-import Navbar       from '../utility/Navbar';
-import Auth         from '../../lib/Auth';
-import ActiveChat   from '../utility/ActiveChat';
+import Navbar               from '../utility/Navbar';
+import Auth                 from '../../lib/Auth';
+import ActiveChat           from '../utility/ActiveChat';
 import AutosuggestContainer from '../utility/AutosuggestContainer';
 
 class ChatsIndex extends React.Component {
@@ -79,7 +79,7 @@ class ChatsIndex extends React.Component {
 
           <section className="chats-container">
             <h2>Active Chats</h2>
-            { this.state.chats !== [] ?
+            { this.state.chats.length !== 0 ?
               this.state.chats.map(chat => 
                 <ActiveChat 
                   key={chat.id} 

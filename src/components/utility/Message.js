@@ -10,8 +10,14 @@ const Message = ({ data, language }) => {
     let id        = parseInt(element.id);
     const phrase  = encodeURIComponent(data.content);
 
-    (id % 2 === 0) ? translate(element, phrase) : element.innerHTML = data.content;
-    element.id = (id+=1).toString();
+    if (language.code !== ' ') {
+      (id % 2 === 0) ? translate(element, phrase) : element.innerHTML = data.content;
+      element.id = (id+=1).toString();
+    } else {
+      console.log('please select a language');
+    }
+
+    
   }
 
   function translate(element, phrase) {

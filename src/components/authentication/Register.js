@@ -27,8 +27,11 @@ class Register extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
 
+    let user = null;
+    if (this.state.user.image === '') user = Object.assign({}, this.state.user, { image: '/assets/images/default-user-image.png' });
+
     axios
-      .post('/api/register', this.state.user)
+      .post('/api/register', user || this.state.user)
       .then(res => {
         Auth.setToken(res.data.token);
         this.props.history.push('/chats');
