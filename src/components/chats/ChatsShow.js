@@ -65,7 +65,10 @@ class ChatsShow extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    axios.post(`/api/chats/${this.state.chat.id}/messages`, this.state.message, { headers: { Authorization: `Bearer ${Auth.getToken()}`} });
+
+    if (this.state.message.content !== '') {
+      axios.post(`/api/chats/${this.state.chat.id}/messages`, this.state.message, { headers: { Authorization: `Bearer ${Auth.getToken()}`} });
+    }
   }
 
   getCollocutor() {
@@ -99,18 +102,18 @@ class ChatsShow extends React.Component {
                 />
               )}
             </div>
-            <div className="new-message-box">
-              <form onSubmit={this.handleSubmit}>
-                <textarea 
-                  onChange={this.handleChange}
-                  value={this.state.message.content}
-                  placeholder="Aa"
-                />
-                <input type="submit" value="Send"/>
-              </form>
-            </div>
           </section>
-       </div>
+        </div>
+        <div className="new-message-box">
+          <form onSubmit={this.handleSubmit}>
+            <textarea 
+              onChange={this.handleChange}
+              value={this.state.message.content}
+              placeholder="Aa"
+             />
+            <button type="submit"><i className="fa fa-paper-plane" aria-hidden="true"></i></button>
+          </form>
+        </div>
       </React.Fragment>
     );
   }

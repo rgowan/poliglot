@@ -23,9 +23,11 @@
 }
 
 .react-autosuggest__suggestions-container {
+  margin-top: -10px;
   background: #fafafa;
   border-radius: 0 0 5px 5px;
   width: 100%;
   z-index: 1;
   position: relative;
+  overflow: auto;
 }
