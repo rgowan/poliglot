@@ -10,8 +10,6 @@ const ActiveChat = ({ data, users }) => {
   const collocutor = data.participants.find(user => user.id !== Auth.getPayload().id);
   const lastMessage = data.messages[data.messages.length -1];
 
-  console.log(data);
-
   return (
     <div className="chat">
       <Link to={`/chats/${data.id}`} >

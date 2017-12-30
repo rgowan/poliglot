@@ -27,7 +27,7 @@ class ChatsShow extends React.Component {
       .get(`/api/chats/${this.props.match.params.id}`, {
         headers: { Authorization: `Bearer ${Auth.getToken()}`}
       })
-      .then(res => this.setState({ chat: res.data }, () => console.log(this.state)))
+      .then(res => this.setState({ chat: res.data }))
       .catch(err => console.log(err));
 
     axios
@@ -60,7 +60,7 @@ class ChatsShow extends React.Component {
       .put(`/api/chats/${this.props.match.params.id}`, { language }, { headers: { Authorization: `Bearer ${Auth.getToken()}`} })
       .then(res => {
         const chat = Object.assign({}, this.state.chat, { language })
-        this.setState({ chat }, () => console.log(this.state));
+        this.setState({ chat });
       })
       .catch(err => console.log(err));
   }
