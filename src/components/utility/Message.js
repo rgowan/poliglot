@@ -16,15 +16,13 @@ const Message = ({ data, language }) => {
     } else {
       console.log('please select a language');
     }
-
-    
   }
 
   function translate(element, phrase) {
     axios
       .get(`/api/translate/${phrase}/${language.code}`, { 
         headers: { Authorization: `Bearer ${Auth.getToken()}`}, 
-        timeout: 1000
+        timeout: 5000
       })
       .then(res => element.innerHTML = res.data)
       .catch(err => console.log(err));

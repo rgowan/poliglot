@@ -69,7 +69,7 @@ class ChatsIndex extends React.Component {
   render() {
     return(
       <React.Fragment>
-        <Navbar title='Chats' />
+        <Navbar title='Chats'/>
         <div className="container">
           <AutosuggestContainer 
             chats={this.state.chats}

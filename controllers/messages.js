@@ -39,11 +39,9 @@ function remove(req, res, next) {
 function convert(req, res, next) {
   const phrase = decodeURIComponent(req.params.phrase);
 
-  console.log(phrase);
-
-  // translate(phrase, {from: 'en', to: req.params.to})
-  //   .then(data => res.status(200).json(data.text))
-  //   .catch(err => console.log(err));
+  translate(phrase, {from: 'en', to: req.params.to})
+    .then(data => res.status(200).json(data.text))
+    .catch(err => console.log(err));
 }
 
 module.exports = {

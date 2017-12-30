@@ -38,12 +38,33 @@ class ChatsShow extends React.Component {
         const chat = Object.assign({}, this.state.chat, { messages: this.state.chat.messages.concat(newMessage)});
         this.setState({ chat, message: { content: '' } });
       });
+
+      this.websocket.on('login',  user => this.updateUserOnAuth(true, user));
+      this.websocket.on('logout', user => this.updateUserOnAuth(false, user));
     });
   }
 
   componentWillUnmount() {
     this.websocket.disconnect(true);
     if(this.state.chat.messages.length === 0) axios.delete(`/api/chats/${this.state.chat.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`} });
+  }
+
+  updateUserOnAuth(boolean, user) {
+    const participant = this.state.chat.participants.find(participant => participant.id === user.id );
+
+    if (participant) {
+      const participants = this.state.chat.participants.map(user => {
+        if (user.id === participant.id) {
+          user.online = boolean;
+          return user;
+        }
+
+        return user;
+      });
+
+      const chat = Object.assign({}, this.state.chat, { participants });
+      this.setState({ chat }, () => console.log(this.state.chat));
+    }
   }
 
   handleChange = ({ target: { value } }) => {
