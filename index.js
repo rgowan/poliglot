@@ -29,6 +29,7 @@ app.use(bodyParser.json());
 
 app.use(customResponses);
 app.use('/api', routes);
+app.get('/*', (req, res) => res.sendFile(`${__dirname}/public/index.html`));
 app.use(errorHandler);
 
 if (environment !== 'test') server.listen(port, () => console.log(`Server is up and running on port: ${port}`));
