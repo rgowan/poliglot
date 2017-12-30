@@ -18,7 +18,7 @@ class UsersShow extends React.Component {
       .get(`/api/users/${this.props.match.params.id}`, {
         headers: { Authorization: `Bearer ${Auth.getToken()}`}
       })
-      .then(res => this.setState({ user: res.data }, () => console.log(this.state)))
+      .then(res => this.setState({ user: res.data }))
       .catch(err => console.log(err));
   }
   

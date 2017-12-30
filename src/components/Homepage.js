@@ -5,7 +5,7 @@ const Homepage = () => {
   return (
     <div className="homepage">
       <div className="centered">
-        <h1 className="animated flipInX">Flip Chat</h1>
+        <h1 className="animated bounceInDown">Polyglot</h1>
         <h2>Break the language barrier</h2>
 
         <Link className="button" to="/register">Signup</Link>
