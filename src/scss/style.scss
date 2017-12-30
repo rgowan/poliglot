@@ -1,3 +1,4 @@
+@import './components/utility/AutosuggestContainer';
 @import './components/utility/Navbar';
 @import './components/chats/ChatsShow';
 @import './components/chats/ChatsIndex';
@@ -19,42 +20,15 @@ body {
   margin: 0;
   color: #333;
   overflow: hidden;
-  
-}
 
-ul {
-  margin: 0;
-  padding: 0;
+  ul {
+    margin: 0;
+    padding: 0;
 
-  li {
-    list-style-type: none;
+    li {
+      list-style-type: none;
+    }
   }
-}
-
-.button {
-  margin: 5px auto;
-  display: block;
-
-  border: none;
-  cursor: pointer;
-
-  width: 200px;
-  height: 50px;
-  background: rgba(0, 0, 0, 0.1);
-  font-family: 'Lato', sans-serif;
-  font-weight: 600;
-  font-size: 16px;
-  color: #fff;
-  line-height: 50px;
-  border-radius: 3px;
-}
-
-.submit {
-  background: rgba(45, 136, 45, 0.75);
-  width: 98%;
-  height: 35px;
-  line-height: 30px;
-  margin: 30px 0;
 }
 
 .centered {
@@ -65,6 +39,13 @@ ul {
   top: 50%;
   transform: translate(-50%,-50%);
 }
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+// Typography
 
 h1, h2, h3, h4 {
   margin: 0;
@@ -93,16 +74,35 @@ i {
   cursor: pointer;
 }
 
-.authentication {
-  h1 {
-    margin-bottom: 10px;
-  }
+// Buttons
+
+.button {
+  margin: 5px auto;
+  display: block;
+
+  border: none;
+  cursor: pointer;
+
+  width: 200px;
+  height: 50px;
+  background: rgba(0, 0, 0, 0.1);
+  font-family: 'Lato', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: #fff;
+  line-height: 50px;
+  border-radius: 3px;
 }
 
-.container {
-  width: 90%;
-  margin: 0 auto;
+.submit {
+  background: rgba(45, 136, 45, 0.75);
+  width: 98%;
+  height: 35px;
+  line-height: 30px;
+  margin: 30px 0;
 }
+
+// Forms
 
 form {
   width: 80%;
@@ -128,38 +128,6 @@ form {
     padding: 5px;
     border-radius: 3px;
   }
-}
-
-.react-autosuggest__suggestion {
-  cursor: pointer;
-  height: 80px;
-
-  img, p {
-    display: inline-block;
-  }
-
-  img {
-    width: 60px;
-    margin: 10px;
-    border-radius: 5px;
-    border: 3px solid #eee;
-  }
-
-  p {
-    line-height: 80px;
-    font-size: 22px;
-    font-weight: 400;
-    position: relative;
-    top: -30px;
-  }
-}
-
-.react-autosuggest__suggestions-container {
-  background: #fafafa;
-  border-radius: 0 0 5px 5px;
-  width: 100%;
-  z-index: 1;
-  position: relative;
 }
 
 .online { 

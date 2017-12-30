@@ -24,7 +24,7 @@ class UsersShow extends React.Component {
   
   render() {
     return(
-      <div>
+      <React.Fragment>
         <Navbar title="Profile" /> 
         
         <div className="container">
@@ -35,7 +35,7 @@ class UsersShow extends React.Component {
             <p>Status: <span>{ this.state.user.online ? 'Online' : 'Offline' }</span></p>
           </div>
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }

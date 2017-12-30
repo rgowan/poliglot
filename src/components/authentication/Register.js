@@ -37,7 +37,7 @@ class Register extends React.Component {
 
   render() {
     return (
-      <div className="authentication">
+      <React.Fragment>
         <div className="centered">
           <h1>Signup</h1>
           <form onSubmit={this.handleSubmit}>
@@ -100,7 +100,7 @@ class Register extends React.Component {
             </div>
           </form>
         </div>
-      </div>
+      </React.Fragment>
     );
   } 
 }

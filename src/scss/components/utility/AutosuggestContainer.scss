@@ -1,0 +1,31 @@
+.react-autosuggest__suggestion {
+  cursor: pointer;
+  height: 80px;
+
+  img, p {
+    display: inline-block;
+  }
+
+  img {
+    width: 60px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 3px solid #eee;
+  }
+
+  p {
+    line-height: 80px;
+    font-size: 22px;
+    font-weight: 400;
+    position: relative;
+    top: -30px;
+  }
+}
+
+.react-autosuggest__suggestions-container {
+  background: #fafafa;
+  border-radius: 0 0 5px 5px;
+  width: 100%;
+  z-index: 1;
+  position: relative;
+}

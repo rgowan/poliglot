@@ -74,7 +74,7 @@ class ChatsShow extends React.Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
        { this.state.chat.id && <Navbar title={this.getCollocutor().first} colloctor={this.getCollocutor()} /> }
 
        <div className="container">
@@ -111,7 +111,7 @@ class ChatsShow extends React.Component {
             </div>
           </section>
        </div>
-      </div>
+      </React.Fragment>
     );
   }
 }

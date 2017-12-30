@@ -4,7 +4,7 @@ import axios          from 'axios';
 
 import Auth from '../../lib/Auth';
 
-class NewChatInput extends React.Component {
+class AutosuggestContainer extends React.Component {
   constructor() {
     super();
 
@@ -74,7 +74,7 @@ class NewChatInput extends React.Component {
           inputProps={inputProps}
           onSuggestionSelected={this.handleClick}
         />
-    </form>
+      </form>
     );
   }
 }
@@ -88,4 +88,4 @@ const Suggestion = user => {
   );
 }
 
-export default NewChatInput;
+export default AutosuggestContainer;

@@ -33,7 +33,7 @@ class Login extends React.Component {
   
   render() {
     return (
-      <div className="authentication">
+      <React.Fragment>
         <div className="centered">
           <h1>Login</h1>
 
@@ -61,7 +61,7 @@ class Login extends React.Component {
             </div>
           </form>
         </div>
-      </div>
+      </React.Fragment>
     );
   } 
 }

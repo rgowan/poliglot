@@ -7,7 +7,7 @@ import { Link }       from 'react-router-dom';
 import Navbar       from '../utility/Navbar';
 import Auth         from '../../lib/Auth';
 import ActiveChat   from '../utility/ActiveChat';
-import NewChatInput from '../utility/NewChatInput';
+import AutosuggestContainer from '../utility/AutosuggestContainer';
 
 class ChatsIndex extends React.Component {
   constructor() {
@@ -65,40 +65,21 @@ class ChatsIndex extends React.Component {
       .then(res => this.props.history.push(`/chats/${res.data.id}`))
       .catch(err => console.log(err));
   }
-
-  handleChange                = ( event, { newValue }) => this.setState({ inputValue: newValue });
-  onSuggestionsClearRequested = () => this.setState({ filteredUsers: [] });
-  onSuggestionsFetchRequested = ({ value }) => this.setState({ filteredUsers: this.getSuggestions(value) });
-  getSuggestionValue          = value => value.fullname;
-  
-  getSuggestions = value => { 
-    const inputValue    = value.trim().toLowerCase();
-    const filteredUsers = [];
-    const usersInChats  = this.state.chats.map(chat => chat.participants.find(user => user.id !== Auth.getPayload().id).id);
-
-    if(value === '') return this.setState({ filteredUsers: []});
-
-    this.state.users.map(user => {
-      if (user.fullname.toLowerCase().indexOf(inputValue) !== -1 && user.id !== Auth.getPayload().id && usersInChats.indexOf(user.id) === -1) filteredUsers.push(user);
-    });
-
-    return filteredUsers;
-  }
   
   render() {
     return(
-      <div>
+      <React.Fragment>
         <Navbar title='Chats' />
         <div className="container">
-          <NewChatInput 
+          <AutosuggestContainer 
             chats={this.state.chats}
             users={this.state.users}
             history={this.props.history}
           />
 
-          <div className="chats-container">
+          <section className="chats-container">
             <h2>Active Chats</h2>
-            { this.state.chats !== [] ? 
+            { this.state.chats !== [] ?
               this.state.chats.map(chat => 
                 <ActiveChat 
                   key={chat.id} 
@@ -109,9 +90,9 @@ class ChatsIndex extends React.Component {
             :
               <p>You have no active chats at this time.</p>
             }
-          </div> 
+          </section> 
         </div>
-      </div>
+      </React.Fragment>
     );
   } 
 }
