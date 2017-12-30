@@ -12,6 +12,7 @@
 }
 
 body {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
   font-family: 'Lato', sans-serif;
   -webkit-font-smoothing: antialiased;
   -webkit-text-stroke: 0.45px;
@@ -20,6 +21,7 @@ body {
   margin: 0;
   color: #333;
   overflow: hidden;
+  height: 100vh;
 
   ul {
     margin: 0;

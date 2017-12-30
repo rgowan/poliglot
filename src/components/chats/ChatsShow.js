@@ -111,7 +111,7 @@ class ChatsShow extends React.Component {
               value={this.state.message.content}
               placeholder="Aa"
              />
-            <button type="submit"><i className="fa fa-paper-plane" aria-hidden="true"></i></button>
+            <button className={this.state.message.content ? 'sendable-message' : ''}><i className="fa fa-paper-plane" aria-hidden="true"></i></button>
           </form>
         </div>
       </React.Fragment>

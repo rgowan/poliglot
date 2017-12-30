@@ -34,6 +34,7 @@
     height: 92%;
     overflow: auto;
     border-radius: 3px;
+    padding: 10px 0;
 
     .message {
       width: 50%;
@@ -65,48 +66,19 @@
     .left {
       float: left;
       background: rgba(152, 196, 231, 0.2);
+      border: 1px solid rgba(152, 196, 231, 0.3);
     }
     
     .right {
       float: right;
       background: rgba(11, 44, 230, 0.2);
+      border: 1px solid rgba(11, 44, 230, 0.3);
     }
   }
+}
 
-  // .new-message-box {
-  //   height: 14%;
-
-  //   form {
-  //     height: 80%;
-  //     width: 100%;
-  //     line-height: 114px;
-
-  //     textarea {
-  //       border-radius: 5px 0 0 5px;
-  //       border: none;
-  //       outline: none;
-  //       width: 85%;
-  //       resize: none;
-  //       background: #fafafa;
-  //       font-size: 18px;
-  //       height: 50px;
-  //       padding: 5px;
-  //       font-family: 'Lato', sans-serif;
-  //     }
-
-  //     input {
-  //       background: rgba(79, 156, 16, 0.9);
-  //       border-radius: 0 5px 5px 0;
-  //       border: none;
-  //       width: 15%;
-  //       height: 50px;
-  //       color: #fff;
-  //       font-size: 15px;
-  //       position: relative;
-  //       top: -20px;
-  //     }
-  //   }
-  // }
+select {
+  -webkit-appearance: none;
 }
 
 .new-message-box {
@@ -130,9 +102,11 @@
       border: 2px solid #eee;
       resize: none;
       outline: none;
+      -webkit-appearance: none;
     }
 
     button {
+      -webkit-appearance: none;
       border: none;
       background: none;
       outline: none;
@@ -141,8 +115,10 @@
       margin: 0 auto;
       font-size: 30px;
       position: relative;
+      padding: 0;
+      margin: 0;
       top: -15px;
-      -webkit-appearance: none;
+      color: rgba(0, 0, 0, 0.1);
     }
   }
 
@@ -159,4 +135,8 @@
   //   padding: 5px;
   //   font-family: 'Lato', sans-serif;
   // }
+}
+
+.sendable-message {
+  color: rgba(80, 209, 86, 0.8) !important;
 }
