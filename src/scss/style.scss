@@ -11,6 +11,15 @@
   box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+  width: 0px;  /* remove scrollbar space */
+  background: transparent;  /* optional: just make scrollbar invisible */
+}
+/* optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+  background: #FF0000;
+}
+
 body {
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   font-family: 'Lato', sans-serif;

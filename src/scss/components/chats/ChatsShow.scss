@@ -22,7 +22,6 @@
 }
 
 .chat-container {
-  // background: blue;
   height: calc(100vh - 310px);
 
   h2 {
@@ -30,12 +29,10 @@
   }
 
   .messages-box {
-    // background: red;
     height: 92%;
     overflow: auto;
     border-radius: 3px;
     padding-bottom: 20px;
-    padding-right: 5px;
 
     .message {
       width: 50%;

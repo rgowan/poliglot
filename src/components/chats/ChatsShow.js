@@ -44,6 +44,10 @@ class ChatsShow extends React.Component {
     });
   }
 
+  componentDidUpdate() {
+    this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
+  }
+
   componentWillUnmount() {
     this.websocket.disconnect(true);
     if(this.state.chat.messages.length === 0) axios.delete(`/api/chats/${this.state.chat.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`} });
@@ -63,7 +67,7 @@ class ChatsShow extends React.Component {
       });
 
       const chat = Object.assign({}, this.state.chat, { participants });
-      this.setState({ chat }, () => console.log(this.state.chat));
+      this.setState({ chat });
     }
   }
 
@@ -97,6 +101,7 @@ class ChatsShow extends React.Component {
   }
 
   render() {
+
     return (
       <React.Fragment>
        { this.state.chat.id && <Navbar title={this.getCollocutor().first} colloctor={this.getCollocutor()} /> }
@@ -114,7 +119,7 @@ class ChatsShow extends React.Component {
           
           <section className="chat-container">
             <h2>Messages</h2>
-            <div className="messages-box">
+            <div className="messages-box" ref={(messagesContainer => this.messagesContainer = messagesContainer)}>
               { this.state.chat.id && this.state.chat.messages.map(message => 
                 <Message
                   key={message.id} 
@@ -125,6 +130,7 @@ class ChatsShow extends React.Component {
             </div>
           </section>
         </div>
+
         <div className="new-message-box">
           <form onSubmit={this.handleSubmit}>
             <textarea 
