@@ -27,7 +27,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
   color: #3d5265;
-  overflow: hidden;
 
   ul {
     margin: 0;
@@ -76,13 +75,6 @@ i {
   cursor: pointer;
 }
 
-// .submit {
-//   background: rgba(45, 136, 45, 0.75);
-//   width: 98%;
-//   height: 35px;
-//   line-height: 30px;
-//   margin: 30px 0;
-// }
 
 // Forms
 
@@ -134,5 +126,8 @@ form {
 
 .online { 
   border: 2px solid rgba(155, 202, 115, 0.9) !important;
+}
+
+.online-dot {
   color: rgba(155, 202, 115, 0.9) !important
 }
