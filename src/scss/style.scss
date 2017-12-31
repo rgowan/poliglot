@@ -28,7 +28,6 @@ body {
   margin: 0;
   color: #3d5265;
   overflow: hidden;
-  max-height: 100vh;
 
   ul {
     margin: 0;
@@ -104,6 +103,7 @@ form {
   }
 
   input {
+    -webkit-appearance: none;
     margin: 5px 0;
     padding: 0;
     width: 98%;
@@ -117,6 +117,7 @@ form {
   }
 
   .submit {
+    -webkit-appearance: none;
     background: rgba(155, 202, 115, 0.8);
     margin-top: 20px;
     padding: 0;
