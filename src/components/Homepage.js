@@ -5,11 +5,12 @@ const Homepage = () => {
   return (
     <div className="homepage">
       <div className="centered">
-        <h1 className="animated bounceInDown">Polyglot</h1>
+        <img src="/assets/images/logo.png" />
+        <h1 className="animated pulse">Polyglot</h1>
         <h2>Break the language barrier</h2>
 
-        <Link className="button" to="/register">Signup</Link>
-        <Link className="button" to="/login">Login</Link>
+        <Link className="button register" to="/register">Create an account</Link>
+        <Link className="button login" to="/login">Login</Link>
       </div>
     </div>
   );

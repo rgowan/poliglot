@@ -14,7 +14,7 @@ header {
         list-style-type: none;
         text-align: center;
         font-size: 30px;
-        color: #333;
+        color: #3d5265;
   
        &:first-child { float: left; } 
        &:last-child { float: right; }
@@ -28,6 +28,8 @@ header {
 
     h1 {
       padding-left: 15px;
+      font-weight: 700;
+      letter-spacing: -1px;
 
       span {
         position: relative;
@@ -75,6 +77,6 @@ header {
 
   h1 {
     font-size: 45px;
-    font-weight: 600;
+    font-weight: 700;
   }
 }

@@ -1,3 +1,8 @@
+// left message - rgba(222, 239, 253, 0.3)
+// right message - rgba(151, 203, 252, 0.3)
+// border - rgba(70, 136, 199, 0.3)
+
+
 .language-selector {
   width: 100%;
   margin-top: 15px;
@@ -13,8 +18,8 @@
     height: 50px;
     font-size: 20px;
     font-weight: 300;
-    background: #fafafa;
-    border: none;
+    background: rgba(222, 239, 253, 0.1);
+    border: 2px solid rgba(222, 239, 253, 0.6);
     border-radius: 3px;
     padding: 5px;
     outline: none;
@@ -37,12 +42,12 @@
     .message {
       width: 50%;
       border-radius: 3px;
-      margin: 5px;
-      font-size: 18px;
+      margin: 5px 0;
+      font-size: 16px;
       font-weight: 400;
       padding: 5px;
       clear: both;
-      color: #333;
+      color: #3d5265;
 
       p {
         margin: 0;
@@ -63,14 +68,17 @@
 
     .left {
       float: left;
-      background: rgba(152, 196, 231, 0.2);
-      border: 1px solid rgba(152, 196, 231, 0.3);
+      background: rgba(222, 239, 253, 0.3);
+      border: 2px solid rgba(70, 136, 199, 0.3);
+
+      // #deeffd
+      // #97cbfc
     }
     
     .right {
       float: right;
-      background: rgba(11, 44, 230, 0.2);
-      border: 1px solid rgba(11, 44, 230, 0.3);
+      background: rgba(151, 203, 252, 0.3);
+      border: 2px solid rgba(70, 136, 199, 0.3);
     }
   }
 }
@@ -122,5 +130,5 @@ select {
 }
 
 .sendable-message {
-  color: rgba(80, 209, 86, 0.8) !important;
+  color: rgba(70, 136, 199, 1) !important;
 }

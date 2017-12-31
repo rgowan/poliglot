@@ -1,11 +1,45 @@
 .homepage {
   width: 100%;
   height: 100vh;
-  color: #333;
+  color: #3d5265;
+
+  h1 {
+    font-size: 66px;
+    font-weight: 700;
+    letter-spacing: -3px;
+  }
 
   h2 {
     font-size: 20px;
-    font-weight: 300;
-    margin-bottom: 50px;
+    font-weight: 400;
+    margin-bottom: 40px;
+    color: #3d5265;
   }
+
+  img {
+    width: 150px;
+  }
+
+  a {
+    margin: 10px auto;
+    display: block;
+
+    border: none;
+    cursor: pointer;
+
+    width: 200px;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.1);
+    font-family: "Avenir Next" !important;
+    font-weight: 600;
+    font-size: 16px;
+    color: #3d5265;
+    border: 2px solid rgba(70, 136, 199, 0.4);
+    line-height: 50px;
+    border-radius: 3px;
+    opacity: 0.9;
+  }
+
+  .login { background: rgba(222, 239, 253, 1); }
+  .register { background: rgba(151, 203, 252, 1); }
 }

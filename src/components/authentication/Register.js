@@ -42,8 +42,9 @@ class Register extends React.Component {
     return (
       <React.Fragment>
         <div className="centered">
-          <h1>Signup</h1>
           <form onSubmit={this.handleSubmit}>
+            <h1>Signup</h1>
+            
             <div>
               <label htmlFor="first">First Name *</label>
               <input 

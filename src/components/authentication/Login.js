@@ -35,9 +35,9 @@ class Login extends React.Component {
     return (
       <React.Fragment>
         <div className="centered">
-          <h1>Login</h1>
-
           <form onSubmit={this.handleSubmit}>
+            <h1>Login</h1>
+            
             <div>
              <label htmlFor="email">Email</label>
              <input 
