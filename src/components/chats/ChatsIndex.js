@@ -34,10 +34,10 @@ class ChatsIndex extends React.Component {
       .then(axios.spread((chats, users) => this.setState({ chats: chats.data, users: users.data })))
       .catch(err => console.log(err));
 
-    this.websocket.on('connect', () => {
+    // this.websocket.on('connect', () => {
       this.websocket.on('login',  user => this.updateUsersOnAuth(true, user));
       this.websocket.on('logout', user => this.updateUsersOnAuth(false, user));
-    });
+    // });
   }
 
   componentWillUnmount() {

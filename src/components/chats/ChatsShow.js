@@ -23,6 +23,7 @@ class ChatsShow extends React.Component {
   }
 
   componentDidMount() {
+
     const headers = { Authorization: `Bearer ${Auth.getToken()}`};
 
     axios
@@ -33,15 +34,13 @@ class ChatsShow extends React.Component {
       .then(axios.spread((chat, languages) => this.setState({ chat: chat.data, languages: languages.data })))
       .catch(err => console.log(err));
     
-    this.websocket.on('connect', () => {
-      this.websocket.on('newMessage', newMessage => {
-        const chat = Object.assign({}, this.state.chat, { messages: this.state.chat.messages.concat(newMessage)});
-        this.setState({ chat, message: { content: '' } });
-      });
-
-      this.websocket.on('login',  user => this.updateUserOnAuth(true, user));
-      this.websocket.on('logout', user => this.updateUserOnAuth(false, user));
+    this.websocket.on('newMessage', newMessage => {
+      const chat = Object.assign({}, this.state.chat, { messages: this.state.chat.messages.concat(newMessage)});
+      this.setState({ chat });
     });
+  
+    this.websocket.on('login',  user => this.updateUserOnAuth(true, user));
+    this.websocket.on('logout', user => this.updateUserOnAuth(false, user));
   }
 
   componentDidUpdate() {
@@ -92,7 +91,11 @@ class ChatsShow extends React.Component {
     e.preventDefault();
 
     if (this.state.message.content !== '') {
-      axios.post(`/api/chats/${this.state.chat.id}/messages`, this.state.message, { headers: { Authorization: `Bearer ${Auth.getToken()}`} });
+      axios
+        .post(`/api/chats/${this.state.chat.id}/messages`, this.state.message, { headers: { Authorization: `Bearer ${Auth.getToken()}`} })
+        .then(() => {
+          this.setState({ message: { content: '' }})
+        })
     }
   }
 
