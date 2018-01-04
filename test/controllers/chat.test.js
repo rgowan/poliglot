@@ -24,20 +24,16 @@ describe('Chat Controller', () => {
       User
         .create([
           {
-            name: {
-              first: 'test1',
-              last: 'test1'
-            },
+            first: 'test1',
+            last: 'test1',
             image: 'http://www.fillmurray.com/300/300',
             email: 'test1@test1.com',
             password: 'password',
             passwordConfirmation: 'password'
           }, 
           {
-            name: {
-              first: 'test2',
-              last: 'test2'
-            },
+            first: 'test2',
+            last: 'test2',
             image: 'http://www.fillmurray.com/300/300',
             email: 'test2@test2.com',
             password: 'password',
@@ -92,6 +88,7 @@ describe('Chat Controller', () => {
               'id',
               'messages',
               'participants',
+              'language',
               'createdAt',
               'updatedAt'
             ]);
@@ -107,8 +104,8 @@ describe('Chat Controller', () => {
         .end((err, res) => {
           expect(res.body[0].participants.length).to.eq(2);
           done();
-        })
-    })
+        });
+    });
   });
 
   describe('GET /api/chats/:id', () => {
@@ -119,20 +116,16 @@ describe('Chat Controller', () => {
       User
         .create([
           {
-            name: {
-              first: 'test1',
-              last: 'test1'
-            },
+            first: 'test1',
+            last: 'test1',
             image: 'http://www.fillmurray.com/300/300',
             email: 'test1@test1.com',
             password: 'password',
             passwordConfirmation: 'password'
           }, 
           {
-            name: {
-              first: 'test2',
-              last: 'test2'
-            },
+            first: 'test2',
+            last: 'test2',
             image: 'http://www.fillmurray.com/300/300',
             email: 'test2@test2.com',
             password: 'password',
@@ -200,6 +193,7 @@ describe('Chat Controller', () => {
               'id',
               'messages',
               'participants',
+              'language',
               'createdAt',
               'updatedAt'
             ]);
@@ -224,20 +218,16 @@ describe('Chat Controller', () => {
       User
         .create([
           {
-            name: {
-              first: 'test1',
-              last: 'test1'
-            },
+            first: 'test1',
+            last: 'test1',
             image: 'http://www.fillmurray.com/300/300',
             email: 'test1@test1.com',
             password: 'password',
             passwordConfirmation: 'password'
           }, 
           {
-            name: {
-              first: 'test2',
-              last: 'test2'
-            },
+            first: 'test2',
+            last: 'test2',
             image: 'http://www.fillmurray.com/300/300',
             email: 'test2@test2.com',
             password: 'password',
@@ -280,6 +270,7 @@ describe('Chat Controller', () => {
             'id',
             'messages',
             'participants',
+            'language',
             'createdAt',
             'updatedAt'
           ]);
@@ -296,20 +287,16 @@ describe('Chat Controller', () => {
       User
         .create([
           {
-            name: {
-              first: 'test1',
-              last: 'test1'
-            },
+            first: 'test1',
+            last: 'test1',
             image: 'http://www.fillmurray.com/300/300',
             email: 'test1@test1.com',
             password: 'password',
             passwordConfirmation: 'password'
           }, 
           {
-            name: {
-              first: 'test2',
-              last: 'test2'
-            },
+            first: 'test2',
+            last: 'test2',
             image: 'http://www.fillmurray.com/300/300',
             email: 'test2@test2.com',
             password: 'password',

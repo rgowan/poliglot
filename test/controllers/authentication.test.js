@@ -20,10 +20,8 @@ describe('Authentication Controller', () => {
         .post('/api/register')
         .set('Accept', 'application/json')
         .send({
-          name: {
-            first: 'test',
-            last: 'test'
-          },
+          first: 'test',
+          last: 'test',
           image: 'http://www.fillmurray.com/300/300',
           email: 'test@test.com',
           password: 'password',
@@ -91,10 +89,8 @@ describe('Authentication Controller', () => {
         .post('/api/register')
         .set('Accept', 'application/json')
         .send({
-          name: {
-            first: 'test',
-            last: 'test'
-          },
+          first: 'test',
+          last: 'test',
           image: 'http://www.fillmurray.com/300/300',
           email: 'test@test.com',
           password: 'password',
@@ -115,10 +111,8 @@ describe('Authentication Controller', () => {
           .post('/api/register')
           .set('Accept', 'application/json')
           .send({
-            name: {
-              first: 'test',
-              last: 'test'
-            },
+            first: 'test',
+            last: 'test',
             image: 'http://www.fillmurray.com/300/300',
             password: 'password',
             passwordConfirmation: 'password'
@@ -139,9 +133,7 @@ describe('Authentication Controller', () => {
           .post('/api/register')
           .set('Accept', 'application/json')
           .send({
-            name: {
-              last: 'test'
-            },
+            last: 'test',
             image: 'http://www.fillmurray.com/300/300',
             email: 'test@test.com',
             password: 'password',
@@ -152,8 +144,8 @@ describe('Authentication Controller', () => {
             expect(res.body).to.be.a('object');
             expect(res.body.message).to.eq('Unprocessable Entity');
             expect(res.body.errors).to.be.a('object');
-            expect(Object.keys(res.body.errors)).to.include('name.first');
-            expect(res.body.errors['name.first']).to.eq('Path `name.first` is required.');
+            expect(Object.keys(res.body.errors)).to.include('first');
+            expect(res.body.errors['first']).to.eq('Path `first` is required.');
             done();
           });
       });
@@ -163,9 +155,7 @@ describe('Authentication Controller', () => {
           .post('/api/register')
           .set('Accept', 'application/json')
           .send({
-            name: {
-              first: 'test'
-            },
+            first: 'test',
             image: 'http://www.fillmurray.com/300/300',
             email: 'test@test.com',
             password: 'password',
@@ -176,8 +166,8 @@ describe('Authentication Controller', () => {
             expect(res.body).to.be.a('object');
             expect(res.body.message).to.eq('Unprocessable Entity');
             expect(res.body.errors).to.be.a('object');
-            expect(Object.keys(res.body.errors)).to.include('name.last');
-            expect(res.body.errors['name.last']).to.eq('Path `name.last` is required.');
+            expect(Object.keys(res.body.errors)).to.include('last');
+            expect(res.body.errors['last']).to.eq('Path `last` is required.');
             done();
           });
       });
@@ -187,10 +177,8 @@ describe('Authentication Controller', () => {
           .post('/api/register')
           .set('Accept', 'application/json')
           .send({
-            name: {
-              first: 'test',
-              last: 'test'
-            },
+            first: 'test',
+            last: 'test',
             image: 'http://www.fillmurray.com/300/300',
             email: 'test@test.com'
           })
@@ -199,11 +187,9 @@ describe('Authentication Controller', () => {
             expect(res.body).to.be.a('object');
             expect(res.body.message).to.eq('Unprocessable Entity');
             expect(res.body.errors).to.be.a('object');
-            expect(Object.keys(res.body.errors).length).to.eq(2);
+            expect(Object.keys(res.body.errors).length).to.eq(1);
             expect(Object.keys(res.body.errors)).to.include('password');
-            expect(Object.keys(res.body.errors)).to.include('passwordConfirmation');
             expect(res.body.errors.password).to.eq('Path `password` is required.');
-            expect(res.body.errors.passwordConfirmation).to.eq('Passwords do not match');
             done();
           });
       });
@@ -213,10 +199,8 @@ describe('Authentication Controller', () => {
           .post('/api/register')
           .set('Accept', 'application/json')
           .send({
-            name: {
-              first: 'test',
-              last: 'test'
-            },
+            first: 'test',
+            last: 'test',
             image: 'http://www.fillmurray.com/300/300',
             email: 'test@test.com',
             password: 'password',
@@ -240,10 +224,8 @@ describe('Authentication Controller', () => {
           .post('/api/register')
           .set('Accept', 'application/json')
           .send({
-            name: {
-              first: 'test',
-              last: 'test'
-            },
+            first: 'test',
+            last: 'test',
             image: 'http://www.fillmurray.com/300/300',
             email: 'test@test.com',
             password: 'password',
@@ -258,10 +240,8 @@ describe('Authentication Controller', () => {
           .post('/api/register')
           .set('Accept', 'application/json')
           .send({
-            name: {
-              first: 'test',
-              last: 'test'
-            },
+            first: 'test',
+            last: 'test',
             image: 'http://www.fillmurray.com/300/300',
             email: 'test@test.com',
             password: 'password',
@@ -276,7 +256,7 @@ describe('Authentication Controller', () => {
             expect(res.body.errors.email).to.eq('Error, expected `email` to be unique. Value: `test@test.com`');
             done();
           });
-      })
+      });
     });
   });
 });

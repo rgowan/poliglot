@@ -1,9 +1,20 @@
 /* globals api, expect, describe, it */
 require('../spec_helper');
 
-const globalToJSON    = require('../../lib/globalToJSON');
+const globalToJSON  = require('../../lib/globalToJSON');
+const User          = require('../../models/user');
 
 describe('globalToJSON', () => {
+  beforeEach(done => {
+    User.collection.remove();
+    done();
+  });
+
+  afterEach(done => {
+    User.collection.remove();
+    done();
+  });
+
   it('should be function', done => {
     expect(globalToJSON).to.be.a('function');
     done();
@@ -18,10 +29,8 @@ describe('globalToJSON', () => {
         .post('/api/register')
         .set('Accept', 'application/json')
         .send({
-          name: {
-            first: 'test',
-            last: 'test'
-          },
+          first: 'test',
+          last: 'test',
           image: 'http://www.fillmurray.com/300/300',
           email: 'test@test.com',
           password: 'password',
@@ -43,8 +52,10 @@ describe('globalToJSON', () => {
           expect(res.body)
             .and.have.all.keys([
               'id',
-              'name',
+              'first',
+              'last',
               'fullname',
+              'online',
               'image',
               'email',
               'createdAt',

@@ -15,7 +15,7 @@ function create(req, res, next) {
     .then(chat => {
       const message = chat.messages[chat.messages.length -1];
       io.emit('newMessage', message);
-      return res.status(201).end();
+      return res.status(201).json(message);
     })
     .catch(next);
 }

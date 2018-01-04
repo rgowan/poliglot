@@ -4,20 +4,20 @@ require('../spec_helper');
 const User = require('../../models/user');
 
 describe('User model tests', () => {
-  it('should be invalid if name.first is empty', done => {
+  it('should be invalid if first is empty', done => {
     const user = new User();
     
     user.validate(err => {
-      expect(err.errors['name.first']).to.exist;
+      expect(err.errors['first']).to.exist;
       done();
     });
   });
 
-  it('should be invalid if name.last is empty', done => {
+  it('should be invalid if last is empty', done => {
     const user = new User();
 
     user.validate(err => {
-      expect(err.errors['name.last']).to.exist;
+      expect(err.errors['last']).to.exist;
       done();
     });
   });

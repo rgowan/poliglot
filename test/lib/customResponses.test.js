@@ -19,7 +19,7 @@ describe('customResponses', () => {
         expect(Object.keys(res.body)).to.include('message');
         expect(res.body.message).to.eq('Not Found');
         done();
-      })
+      });
   });
 
   it('should return 401 and message if unauthorized', done => {

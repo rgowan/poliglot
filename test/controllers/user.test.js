@@ -22,10 +22,8 @@ describe('User Controller', () => {
         .post('/api/register')
         .set('Accept', 'application/json')
         .send({
-          name: {
-            first: 'test',
-            last: 'test'
-          },
+          first: 'test',
+          last: 'test',
           image: 'http://www.fillmurray.com/300/300',
           email: 'test@test.com',
           password: 'password',
@@ -79,9 +77,11 @@ describe('User Controller', () => {
             .and.have.property(0)
             .and.have.all.keys([
               'id',
-              'name',
+              'first',
+              'last',
               'fullname',
               'image',
+              'online',
               'email',
               'createdAt',
               'updatedAt'
@@ -90,7 +90,7 @@ describe('User Controller', () => {
         });
     });
 
-    it('should have properties: id, name, fullname, image, email', done => {
+    it('should have properties: id, first, last, fullname, image, email', done => {
       api
         .get('/api/users')
         .set('Accept', 'application/json')
@@ -101,8 +101,11 @@ describe('User Controller', () => {
             .to.have.property('id')
             .and.to.be.a('string');
           expect(user)
-            .to.have.property('name')
-            .and.to.be.a('object');
+            .to.have.property('first')
+            .and.to.be.a('string');
+          expect(user)
+            .to.have.property('last')
+            .and.to.be.a('string');
           expect(user)
             .to.have.property('fullname')
             .and.to.be.a('string');
@@ -126,10 +129,8 @@ describe('User Controller', () => {
         .post('/api/register')
         .set('Accept', 'application/json')
         .send({
-          name: {
-            first: 'test',
-            last: 'test'
-          },
+          first: 'test',
+          last: 'test',
           image: 'http://www.fillmurray.com/300/300',
           email: 'test@test.com',
           password: 'password',
@@ -182,9 +183,11 @@ describe('User Controller', () => {
           expect(res.body)
             .and.have.all.keys([
               'id',
-              'name',
+              'first',
+              'last',
               'fullname',
               'image',
+              'online',
               'email',
               'createdAt',
               'updatedAt'

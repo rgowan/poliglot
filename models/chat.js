@@ -11,9 +11,9 @@ const chatSchema = new mongoose.Schema({
   participants: [{ type: mongoose.Schema.ObjectId, ref: 'User', required: true }],
   messages: [messageSchema],
   language: {
-    name: { type: String, default: ' ' },
-    code: { type: String, default: ' ' },
-    emoji: { type: String, default: ' ' }
+    name: { type: String, default: '' },
+    code: { type: String, default: '' },
+    emoji: { type: String, default: '' }
   }
 }, {
   timestamps: true
