@@ -259,4 +259,42 @@ describe('Authentication Controller', () => {
       });
     });
   });
+
+  describe('PUT /api/logout', () => {
+    let token = null;
+
+    beforeEach(done => {
+      api
+        .post('/api/register')
+        .set('Accept', 'application/json')
+        .send({
+          first: 'test',
+          last: 'test',
+          image: 'http://www.fillmurray.com/300/300',
+          email: 'test@test.com',
+          password: 'password',
+          passwordConfirmation: 'password'
+        })
+        .end((err, res) => {
+          token = res.body.token;
+          done();
+        });
+    });
+
+    afterEach(done => {
+      User.collection.drop();
+      done();
+    });
+
+    it('should log out logged in user', done => {
+      api
+        .put('/api/logout')
+        .set('Accept', 'application/json')
+        .set('Authorization', `Bearer ${token}`)
+        .end((err, res) => {
+          expect(res.status).to.eq(204);
+          done();
+        });
+    });
+  });
 });

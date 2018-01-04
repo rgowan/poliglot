@@ -48,7 +48,7 @@ function logout(req, res, next) {
     })
     .then(user => {
       io.emit('logout', user); 
-      return res.status(204).end();
+      return res.status(204).json(user);
     })
     .catch(next);
 }

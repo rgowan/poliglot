@@ -21,9 +21,7 @@ const routes          = require('./config/routes');
 const customResponses = require('./lib/customResponses');
 const errorHandler    = require('./lib/errorHandler');
 
-mongoose.connect(db[environment], { useMongoClient: true }, (err, db) => {
-  if (err) console.log('Unable to connect to the server. Please start the server. Error:', err);
-});
+mongoose.connect(db[environment], { useMongoClient: true });
 
 app.use(morgan('dev'));
 app.use(express.static(`${__dirname}/public`));
