@@ -16,6 +16,10 @@ class ChatsShow extends React.Component {
       chat: {},
       message: {
         content: ''
+      },
+      language: {
+        writing: '',
+        sending: ''
       }
     }
 
@@ -111,13 +115,24 @@ class ChatsShow extends React.Component {
 
        <div className="container">
           <form className="language-selector">
-            <label>Language</label>
-            { this.state.chat.id && <select onChange={this.handleLanguageChange} value={this.state.chat.language.code}>
-              <option value=' ' disabled='true'>Please select a language</option>
-              { this.state.languages.map((language, i) => 
-                <option key={i} value={ language.code }>{ emoji.getUnicode(`${language.emoji}`) } { language.name }</option>
-              )}
-            </select> }
+            <div className="input-container">
+              <label>Writing</label>
+              { this.state.chat.id && <select onChange={this.handleLanguageChange} value={this.state.chat.language.code}>
+                <option value=' ' disabled='true'>Please select a language</option>
+                { this.state.languages.map((language, i) => 
+                  <option key={i} value={ language.code }>{ emoji.getUnicode(`${language.emoji}`) } { language.name }</option>
+                )}
+              </select> }
+            </div>
+            <div className="input-container">
+              <label>Sending</label>
+              { this.state.chat.id && <select onChange={this.handleLanguageChange} value={this.state.chat.language.code}>
+                <option value=' ' disabled='true'>Please select a language</option>
+                { this.state.languages.map((language, i) => 
+                  <option key={i} value={ language.code }>{ emoji.getUnicode(`${language.emoji}`) } { language.name }</option>
+                )}
+              </select> }
+            </div>
           </form>
           
           <section className="chat-container">
