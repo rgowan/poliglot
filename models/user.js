@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
   last: { type: String, required: true },
   image: { type: String },
   online: { type: Boolean },
+  language: { type: mongoose.Schema.ObjectId, ref: 'Language' },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true }
 },

@@ -30,7 +30,7 @@ if (env === 'development') {
         });
 
         globalUsers.push(user);
-        User.create(user);
+        return User.create(user);
       })
     })
     .then(() => {
