@@ -96,6 +96,7 @@ if (env === 'development') {
     {name: 'Chinese Traditional',	code: 'zh-TW', emoji: 'cn'},
     {name: 'Croatian', code: 'hr', emoji: 'croatia'},
     {name: 'Czech',	code: 'cs', emoji: 'czech_republic'},
+    {name: 'English', code: 'en', emoji: 'uk'},
     {name: 'Polish', code: 'pl', emoji: 'poland'},
     {name: 'Dutch',	code: 'nl', emoji: 'netherlands'},
     {name: 'Portuguese', code: 'pt', emoji: 'portugal'},
