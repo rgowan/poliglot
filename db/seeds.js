@@ -60,6 +60,7 @@ if (env === 'development') {
         {name: 'Croatian', code: 'hr', emoji: 'croatia'},
         {name: 'Czech',	code: 'cs', emoji: 'czech_republic'},
         {name: 'Polish', code: 'pl', emoji: 'poland'},
+        {name: 'English', code: 'en', emoji: 'uk'},
         {name: 'Dutch',	code: 'nl', emoji: 'netherlands'},
         {name: 'Portuguese', code: 'pt', emoji: 'portugal'},
         {name: 'Russian', code: 'ru', emoji: 'ru'},
