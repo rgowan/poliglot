@@ -18,8 +18,8 @@ const ActiveChat = ({ chat, users }) => {
           src={collocutor.image }
         />
         <div className="info">
-          <h2>{ collocutor.fullname } { emoji.getUnicode(`${collocutor.language.emoji}`) }</h2>
-          { lastMessage && <Truncate lines={1} ellipsis={<span>...</span>}>{lastMessage.content}</Truncate> }
+          <h2>{ emoji.getUnicode(`${collocutor.language.emoji}`) } { collocutor.fullname }</h2>
+          <p>{ lastMessage && <Truncate lines={1} ellipsis={<span>...</span>}>{lastMessage.content}</Truncate> }</p>
           <p>{ moment(chat.updatedAt).format('llll') }</p>
         </div>
       </Link>
