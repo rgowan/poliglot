@@ -6,7 +6,7 @@ const Homepage = () => {
     <div className="homepage">
       <div className="centered">
         <img src="/assets/images/logo.png" />
-        <h1 className="animated pulse">Polyglot</h1>
+        <h1 className="animated pulse">Poliglot</h1>
         <h2>Break the language barrier</h2>
 
         <Link className="button register" to="/register">Create an account</Link>

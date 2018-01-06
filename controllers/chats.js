@@ -1,9 +1,18 @@
-const Chat = require('../models/chat');
+const Chat             = require('../models/chat');
+const translateMessage = require('../lib/translate');
 
 function find(req, res, next) {
   Chat
     .find({ participants: req.currentUser.id })
-    .populate('participants messages.createdBy')
+    .populate([
+      {
+        path: 'participants',
+        populate: { path: 'language' }
+      }, {
+        path: 'messages.createdBy',
+        populate: { path: 'language' }
+      }
+    ])
     .then(chats => res.status(200).json(chats))
     .catch(next);
 }
@@ -11,8 +20,31 @@ function find(req, res, next) {
 function show(req, res, next) {
   Chat
     .findById(req.params.id)
-    .populate('participants messages.createdBy')
-    .then(chat => res.status(200).json(chat))
+    .populate([
+      {
+        path: 'participants',
+        populate: { path: 'language' }
+      }, {
+        path: 'messages.createdBy',
+        populate: { path: 'language' }
+      }
+    ])
+    .then(chat => {
+      chat.messages = chat.messages.map(message => {
+        if (message.createdBy.id == req.currentUser._id) {
+          return message;
+        } else {
+          translateMessage(message.content, message.createdBy.language.code, req.currentUser.language.code)
+            .then(translatedMessage => {
+              console.log(translatedMessage);
+            });
+        }
+
+        return message;
+      })
+
+      res.status(200).json(chat);
+    })
     .catch(next);
 }
 

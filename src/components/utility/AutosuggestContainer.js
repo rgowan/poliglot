@@ -1,6 +1,7 @@
 import React          from 'react';
 import Autosuggest    from 'react-autosuggest';
 import axios          from 'axios';
+import emoji          from 'emoji-dictionary';
 
 import Auth from '../../lib/Auth';
 
@@ -83,7 +84,7 @@ const Suggestion = user => {
   return(
     <div>
       <img className={ user.online ? 'online' : ''} src={ user.image }/>
-      <p>{ user.fullname }</p>
+      <p>{ user.fullname } { emoji.getUnicode(`${user.language.emoji}`) }</p>
     </div>
   );
 }

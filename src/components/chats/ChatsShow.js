@@ -112,10 +112,10 @@ class ChatsShow extends React.Component {
        <div className="container">
           <form className="language-selector">
             <label>Language</label>
-            { this.state.chat.id && <select onChange={this.handleLanguageChange} value={this.state.chat.language.code}>
+            { this.state.chat.id && <select onChange={this.handleLanguageChange} value={this.getCollocutor().language.code}>
               <option value=' ' disabled='true'>Please select a language</option>
               { this.state.languages.map((language, i) => 
-                <option key={i} value={ language.code }>{ emoji.getUnicode(`${language.emoji}`) } { language.name }</option>
+                <option key={i} value={ language.code } disabled='true'>{ emoji.getUnicode(`${language.emoji}`) } { language.name }</option>
               )}
             </select> }
           </form>

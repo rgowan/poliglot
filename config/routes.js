@@ -15,12 +15,12 @@ router.route('/logout')
   .put(secureRoute, auth.logout);
 
 router.route('/users')
-  .get(secureRoute, users.index);
+  .get(users.index);
 router.route('/users/:id')
   .get(secureRoute, users.show);
 
 router.route('/languages')
-  .get(secureRoute, languages.index);
+  .get(languages.index);
 
 router.route('/chats')
   .get(secureRoute, chats.find);

@@ -23,7 +23,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
   color: #3d5265;
-  overflow: hidden;
+  overflow: auto;
 
   ul {
     margin: 0;
@@ -75,6 +75,11 @@ i {
 
 // Forms
 
+.register {
+  text-align: center;
+  margin: 20px auto;
+}
+
 form {
   width: 80%;
   margin: 0 auto;
@@ -91,7 +96,7 @@ form {
     font-weight: 600;
   }
 
-  input {
+  input, select {
     -webkit-appearance: none;
     margin: 5px 0;
     padding: 0;

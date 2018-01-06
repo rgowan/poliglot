@@ -9,12 +9,7 @@ const messageSchema = new mongoose.Schema({
 
 const chatSchema = new mongoose.Schema({
   participants: [{ type: mongoose.Schema.ObjectId, ref: 'User', required: true }],
-  messages: [messageSchema],
-  language: {
-    name: { type: String, default: '' },
-    code: { type: String, default: '' },
-    emoji: { type: String, default: '' }
-  }
+  messages: [messageSchema]
 }, {
   timestamps: true
 });

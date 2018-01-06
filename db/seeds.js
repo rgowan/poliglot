@@ -76,7 +76,7 @@ if (env === 'development') {
       last: 'Gowan',
       image: 'https://avatars0.githubusercontent.com/u/11501555?s=460&v=4',
       email: 'rane@gowan.com',
-      langage: globalLanguages.find(language => language.name === 'English')._id,
+      language: globalLanguages.find(language => language.name === 'English')._id,
       password: 'password',
       passwordConfirmation: 'password',
       online: false
