@@ -31,52 +31,8 @@ function show(req, res, next) {
       }
     ])
     .then(chat => {
-      // chat.messages = chat.messages.map(message => {
-      //   if (message.createdBy.id == req.currentUser._id) {
-      //     return message;
-      //   } else {
-      //     const translatedMessage = translateMessage(message.content, message.createdBy.language.code, req.currentUser.language.code);
-      //     console.log(translatedMessage);
-      //   }
-
-      //   return message;
-      // })
-
-      // chat.messages = chat.messages.map(message => {
-      //   if (message.createdBy.id == req.currentUser._id) {
-      //     return message;
-      //   } else {
-      //     translateMessage(message.content, message.createdBy.language.code, req.currentUser.language.code)
-      //       .then(data => {
-      //         message.content = data;
-      //         console.log(message.content);
-      //         return message;
-      //       });
-      //     // console.log(message.conent);
-      //     return message;
-      //   }
-      // })
-
-      // res.status(200).json(chat);
-
-      const messages = chat.messages.map(message => {
-        if (message.createdBy.id == req.currentUser._id) {
-          return message.content;
-        } else {
-          return translateMessage(message.content, message.createdBy.language.code, req.currentUser.language.code);
-        }
-      });
-
-      Promise.all(messages)
-        .then(contents => {
-          chat.messages = chat.messages.map((message, i) => {
-            console.log(message);
-
-            message.content = contents[i];
-            return message;
-          });
-        })
-        .then(() => res.json(chat));
+      console.log(chat);
+      return res.status(200).json(chat);
     })
     .catch(next);
 }
@@ -111,3 +67,22 @@ module.exports = {
   put,
   remove
 }
+
+      // const messagesToTranslate = chat.messages.map(message => {
+      //   if (message.createdBy.id == req.currentUser._id) {
+      //     return message.content;
+      //   } else {
+      //     return translateMessage(message.content, message.createdBy.language.code, req.currentUser.language.code);
+      //   }
+      // });
+
+      // Promise.all(messagesToTranslate)
+      //   .then(translatedMessages => {
+      //     chat.messages = chat.messages.map((message, i) => {
+      //       console.log(message);
+
+      //       message.content = translatedMessages[i];
+      //       return message;
+      //     });
+      //   })
+      //   .then(() => res.json(chat));

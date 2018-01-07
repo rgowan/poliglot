@@ -29,10 +29,10 @@ const Message = ({ data, language }) => {
   }
 
   return (
-    <div className={ "message "  + (data.createdBy.id === Auth.getPayload() .id ? 'right': 'left') }>
+    <div className={ "message "  + (data.createdBy._id == Auth.getPayload().id ? 'right': 'left') }>
       <p>{ data.createdBy.first } <span>{ moment(data.updatedAt).format('LT') }</span></p>
       <p onClick={handleClick} data-message-id={data.id} id={0}>
-        { data.content }
+        { data[language] }
       </p>
     </div>
   )

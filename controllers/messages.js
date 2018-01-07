@@ -1,7 +1,7 @@
-const Chat      = require('../models/chat');
-const translate = require('google-translate-api');
-const sockets   = require('../lib/sockets');
-const io        = sockets.getConnection();
+const Chat             = require('../models/chat');
+const translateMessage = require('../lib/translate');
+const sockets          = require('../lib/sockets');
+const io               = sockets.getConnection();
 
 function create(req, res, next) {
   req.body.createdBy = req.currentUser;
@@ -18,26 +18,26 @@ function create(req, res, next) {
       }
     ])
     .then(chat => {
-      // timestamps?
+      const languageForTranslation = chat.participants.find(user => user.fullname !== req.currentUser.fullname).language.code;
 
-      // find language of the participant that is not the currentUser
-      // save a property of the message to be the current users language as the key and the req.body.content as the value
-      // save a property of the message to the participant's language with the translated version of req.body.content
-      // save createdBy to be the currentUser
-      // set createdAt to be new Date()
+      translateMessage(req.body.content, req.currentUser.language.code, languageForTranslation)
+        .then(data => {
+          const newMessage = {};
+          
+          newMessage[req.currentUser.language.code] = req.body.content;
+          newMessage[languageForTranslation] = data;
+          newMessage.createdBy = req.currentUser;
+          newMessage.createdAt = new Date();
 
-      // push new message object into array of messages for the chat and then save the chat.
+          chat.messages.push(newMessage);
+          return chat.save();
+        })
+        .then(chat => {
+          const message = chat.messages[chat.messages.length -1];
 
-      // BOOOOOOM
-
-
-      // chat.messages.push(req.body);
-      // return chat.save();
-    })
-    .then(chat => {
-      const message = chat.messages[chat.messages.length -1];
-      io.emit('newMessage', message);
-      return res.status(201).json(message);
+          io.emit('newMessage', message);
+          return res.status(201).json(message);
+        });
     })
     .catch(next);
 }

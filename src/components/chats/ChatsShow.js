@@ -16,7 +16,8 @@ class ChatsShow extends React.Component {
       chat: {},
       message: {
         content: ''
-      }
+      },
+      currentUser: {}
     }
 
     this.websocket = socketIOClient('/sockets');
@@ -29,9 +30,12 @@ class ChatsShow extends React.Component {
     axios
       .all([
         axios.get(`/api/chats/${this.props.match.params.id}`, { headers }),
-        axios.get('/api/languages', { headers })
+        axios.get('/api/languages', { headers }),
+        axios.get(`/api/users/${Auth.getPayload().id}`, { headers })
       ])
-      .then(axios.spread((chat, languages) => this.setState({ chat: chat.data, languages: languages.data })))
+      .then(axios.spread((chat, languages, user) => {
+        this.setState({ chat: chat.data, languages: languages.data, currentUser: user.data });
+      }))
       .catch(err => console.log(err));
     
     this.websocket.on('newMessage', newMessage => {
@@ -111,7 +115,7 @@ class ChatsShow extends React.Component {
 
        <div className="container">
           <form className="language-selector">
-            <label>Language</label>
+            <label>Sending</label>
             { this.state.chat.id && <select onChange={this.handleLanguageChange} value={this.getCollocutor().language.code}>
               <option value=' ' disabled='true'>Please select a language</option>
               { this.state.languages.map((language, i) => 
@@ -123,11 +127,11 @@ class ChatsShow extends React.Component {
           <section className="chat-container">
             <h2>Messages</h2>
             <div className="messages-box" ref={(messagesContainer => this.messagesContainer = messagesContainer)}>
-              { this.state.chat.id && this.state.chat.messages.map(message => 
+              { this.state.chat.id && this.state.chat.messages.map((message, i) => 
                 <Message
-                  key={message.id} 
+                  key={i} 
                   data={message}
-                  language={this.state.chat.language} 
+                  language={this.state.currentUser.language.code} 
                 />
               )}
             </div>
