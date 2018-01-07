@@ -1,19 +1,13 @@
 const User = require('../models/user');
 
-function index(req,res,next) {
-  User
-    .find()
-    .populate('language')
-    .then(users => res.status(200).json(users))
-    .catch(next);
+async function index(req, res, next) {
+  const users = await User.find().populate('language');
+  res.status(200).json(users);
 }
 
-function show(req,res,next) {
-  User
-    .findById(req.params.id)
-    .populate('language')
-    .then(user => res.status(200).json(user))
-    .catch(next);
+async function show(req,res,next) {
+  const user = await User.find(req.params.id).populate('language')
+  res.status(200).json(user);
 }
 
 module.exports = {

@@ -8,9 +8,31 @@ function create(req, res, next) {
 
   Chat
     .findById(req.params.id)
+    .populate([
+      {
+        path: 'participants',
+        populate: { path: 'language' }
+      }, {
+        path: 'messages.createdBy',
+        populate: { path: 'language' }
+      }
+    ])
     .then(chat => {
-      chat.messages.push(req.body);
-      return chat.save();
+      // timestamps?
+
+      // find language of the participant that is not the currentUser
+      // save a property of the message to be the current users language as the key and the req.body.content as the value
+      // save a property of the message to the participant's language with the translated version of req.body.content
+      // save createdBy to be the currentUser
+      // set createdAt to be new Date()
+
+      // push new message object into array of messages for the chat and then save the chat.
+
+      // BOOOOOOM
+
+
+      // chat.messages.push(req.body);
+      // return chat.save();
     })
     .then(chat => {
       const message = chat.messages[chat.messages.length -1];

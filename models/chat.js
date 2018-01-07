@@ -20,3 +20,9 @@ chatSchema.path('participants').validate(participants => {
 }, 'A chat must have two participants');
 
 module.exports = mongoose.model('Chat', chatSchema);
+
+// message = {
+//   createdBy: currentUser,
+//   en: 'Hello',
+//   sr: 'Doblordan'
+// }

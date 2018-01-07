@@ -1,10 +1,8 @@
 const Language = require('../models/language');
 
-function index(req, res, next) {
-  Language
-    .find({ $query: {}, $orderby: { name : 1 } })
-    .then(languages => res.status(200).json(languages))
-    .catch(next);
+async function index(req, res, next) {
+  const languages = await Language.find();
+  res.status(200).json(languages);
 }
 
 module.exports = {
