@@ -36,9 +36,6 @@ router.route('/chats/:id/messages')
 router.route('/chats/:chatId/messages/:messageId')
   .delete(secureRoute, messages.remove);
 
-router.route('/translate/:phrase/:to')
-  .get(secureRoute, messages.convert);
-
 router.all('/*', (req, res) => res.notFound());
 
 module.exports = router;

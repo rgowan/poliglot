@@ -1,7 +1,8 @@
+const Promise = require('bluebird');
+
 const Chat             = require('../models/chat');
 const translateMessage = require('../lib/translate');
 
-const Promise = require('bluebird');
 function find(req, res, next) {
   Chat
     .find({ participants: req.currentUser.id })
@@ -31,7 +32,6 @@ function show(req, res, next) {
       }
     ])
     .then(chat => {
-      console.log(chat);
       return res.status(200).json(chat);
     })
     .catch(next);
@@ -67,22 +67,3 @@ module.exports = {
   put,
   remove
 }
-
-      // const messagesToTranslate = chat.messages.map(message => {
-      //   if (message.createdBy.id == req.currentUser._id) {
-      //     return message.content;
-      //   } else {
-      //     return translateMessage(message.content, message.createdBy.language.code, req.currentUser.language.code);
-      //   }
-      // });
-
-      // Promise.all(messagesToTranslate)
-      //   .then(translatedMessages => {
-      //     chat.messages = chat.messages.map((message, i) => {
-      //       console.log(message);
-
-      //       message.content = translatedMessages[i];
-      //       return message;
-      //     });
-      //   })
-      //   .then(() => res.json(chat));

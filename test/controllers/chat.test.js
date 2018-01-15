@@ -88,7 +88,6 @@ describe('Chat Controller', () => {
               'id',
               'messages',
               'participants',
-              'language',
               'createdAt',
               'updatedAt'
             ]);
@@ -193,7 +192,6 @@ describe('Chat Controller', () => {
               'id',
               'messages',
               'participants',
-              'language',
               'createdAt',
               'updatedAt'
             ]);
@@ -270,7 +268,6 @@ describe('Chat Controller', () => {
             'id',
             'messages',
             'participants',
-            'language',
             'createdAt',
             'updatedAt'
           ]);

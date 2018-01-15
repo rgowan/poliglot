@@ -58,16 +58,7 @@ function remove(req, res, next) {
     .catch(next);
 }
 
-function convert(req, res, next) {
-  const phrase = decodeURIComponent(req.params.phrase);
-
-  translate(phrase, {from: 'en', to: req.params.to})
-    .then(data => res.status(200).json(data.text))
-    .catch(err => console.log(err));
-}
-
 module.exports = {
   create,
-  remove,
-  convert
+  remove
 }
