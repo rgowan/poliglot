@@ -26,15 +26,12 @@ router.route('/chats')
   .get(secureRoute, chats.find);
 router.route('/chats/:id')
   .get(secureRoute, chats.show)
-  .put(secureRoute, chats.put)
   .delete(secureRoute, chats.remove);
 router.route('/chats/create/:id')
   .post(secureRoute, chats.create);
 
 router.route('/chats/:id/messages')
   .post(secureRoute, messages.create);
-router.route('/chats/:chatId/messages/:messageId')
-  .delete(secureRoute, messages.remove);
 
 router.all('/*', (req, res) => res.notFound());
 

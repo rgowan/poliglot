@@ -46,13 +46,6 @@ function create(req, res, next) {
     .catch(next);
 }
 
-function put(req, res, next) {
-  Chat
-    .findByIdAndUpdate(req.params.id, { $set: { language: req.body.language } }, { new: true })
-    .then(chat => res.status(200).json(chat))
-    .catch(next);
-}
-
 function remove(req, res, next) {
   Chat
     .findByIdAndRemove(req.params.id)
@@ -64,6 +57,5 @@ module.exports = {
   find,
   show,
   create,
-  put,
   remove
 }
