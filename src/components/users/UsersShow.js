@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import emoji from 'emoji-dictionary';
 
 import Auth from '../../lib/Auth';
 import Navbar from '../utility/Navbar';
@@ -32,6 +33,7 @@ class UsersShow extends React.Component {
             <img className={ this.state.user.online ? 'online' : '' } src={ this.state.user.image } />
             <h2>{ this.state.user.fullname }</h2>
             <h3>{ this.state.user.email }</h3>
+            { this.state.user.language && <p>Language: { this.state.user.language.name } { emoji.getUnicode(`${this.state.user.language.emoji}`) }</p> }
             <p>Status: <span>{ this.state.user.online ? 'Online' : 'Offline' }</span></p>
           </div>
         </div>

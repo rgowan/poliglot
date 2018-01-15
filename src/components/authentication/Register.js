@@ -87,7 +87,7 @@ class Register extends React.Component {
             <div>
               <label htmlFor="email">Language *</label>
               { this.state.languages && <select onChange={this.handleChange} name="language" value={this.state.user.language}>
-              <option value='' disabled='true'>Please select a language</option>
+              <option value='' disabled="true">Please select a language</option>
               { this.state.languages.map((language, i) => 
                 <option key={i} value={ language.id }>{ emoji.getUnicode(`${language.emoji}`) } { language.name }</option>
               )}

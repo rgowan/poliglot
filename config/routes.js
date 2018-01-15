@@ -20,7 +20,7 @@ router.route('/users/:id')
   .get(secureRoute, users.show);
 
 router.route('/languages')
-  .get(secureRoute, languages.index);
+  .get(languages.index);
 
 router.route('/chats')
   .get(secureRoute, chats.find);
