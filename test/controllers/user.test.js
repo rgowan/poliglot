@@ -168,8 +168,7 @@ describe('User Controller', () => {
         .set('Accept', 'application/json')
         .set('Authorization', `Bearer ${token}`)
         .end((err, res) => {
-          expect(res.header['content-type'])
-            .to.be.eq('application/json; charset=utf-8');
+          expect(res.header['content-type']).to.be.eq('application/json; charset=utf-8');
           done();
         });
     });
