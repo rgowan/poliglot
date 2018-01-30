@@ -39,8 +39,6 @@ class ChatsShow extends React.Component {
       .catch(err => console.log(err));
     
     this.websocket.on('newMessage', newMessage => {
-      console.log(newMessage);
-
       const chat = Object.assign({}, this.state.chat, { messages: this.state.chat.messages.concat(newMessage)});
       this.setState({ chat });
     });
