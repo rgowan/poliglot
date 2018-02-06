@@ -30,7 +30,7 @@ describe('Chat Controller', () => {
             email: 'test1@test1.com',
             password: 'password',
             passwordConfirmation: 'password'
-          }, 
+          },
           {
             first: 'test2',
             last: 'test2',
@@ -53,7 +53,7 @@ describe('Chat Controller', () => {
               token = res.body.token;
               done();
             });
-        })
+        });
     });
 
     it('should return a 200 response', done => {
@@ -121,7 +121,7 @@ describe('Chat Controller', () => {
             email: 'test1@test1.com',
             password: 'password',
             passwordConfirmation: 'password'
-          }, 
+          },
           {
             first: 'test2',
             last: 'test2',
@@ -204,7 +204,7 @@ describe('Chat Controller', () => {
         .get(`/api/chats/testing123`)
         .set('Accept', 'application/json')
         .set('Authorization', `Bearer ${token}`)
-        .expect(500, done);        
+        .expect(500, done);
     });
   });
 
@@ -222,7 +222,7 @@ describe('Chat Controller', () => {
             email: 'test1@test1.com',
             password: 'password',
             passwordConfirmation: 'password'
-          }, 
+          },
           {
             first: 'test2',
             last: 'test2',
@@ -248,7 +248,7 @@ describe('Chat Controller', () => {
             });
         });
     });
-    
+
     it('should return a 201 response', done => {
       api
       .post(`/api/chats/create/${testUser.id}`)
@@ -290,7 +290,7 @@ describe('Chat Controller', () => {
             email: 'test1@test1.com',
             password: 'password',
             passwordConfirmation: 'password'
-          }, 
+          },
           {
             first: 'test2',
             last: 'test2',
