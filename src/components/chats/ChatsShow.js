@@ -48,7 +48,8 @@ export default class ChatsShow extends React.Component {
 
   componentWillUnmount() {
     this.websocket.disconnect(true);
-    if(this.state.chat.messages.length === 0) axios.delete(`/api/chats/${this.state.chat.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`} });
+    if(this.state.chat.messages.length === 0) 
+      axios.delete(`/api/chats/${this.state.chat.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`} });
   }
 
   updateUserOnAuth(boolean, user) {
