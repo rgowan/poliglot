@@ -2,16 +2,12 @@ import React from 'react';
 import axios from 'axios';
 import emoji from 'emoji-dictionary';
 
-import Auth from '../../lib/Auth';
+import Auth   from '../../lib/Auth';
 import Navbar from '../utility/Navbar';
 
-class UsersShow extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      user: {}
-    };
+export default class UsersShow extends React.Component {
+  state = {
+    user: {}
   }
 
   componentDidMount() {
@@ -41,5 +37,3 @@ class UsersShow extends React.Component {
     );
   }
 }
-
-export default UsersShow;

@@ -4,24 +4,20 @@ import axios          from 'axios';
 import socketIOClient from 'socket.io-client';
 import { Link }       from 'react-router-dom';
 
-import Navbar               from '../utility/Navbar';
 import Auth                 from '../../lib/Auth';
+import Navbar               from '../utility/Navbar';
 import ActiveChat           from '../utility/ActiveChat';
 import AutosuggestContainer from '../utility/AutosuggestContainer';
 
-class ChatsIndex extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      chats: [],
-      users: [],
-      filteredUsers: [],
-      inputValue: ''
-    };
-
-    this.websocket = socketIOClient('/sockets');
+export default class ChatsIndex extends React.Component {
+  state = {
+    chats: [],
+    users: [],
+    filteredUsers: [],
+    inputValue: ''
   }
+
+  websocket = socketIOClient('/sockets');
 
   componentDidMount() {
     const headers = { Authorization: `Bearer ${Auth.getToken()}`};
@@ -34,10 +30,10 @@ class ChatsIndex extends React.Component {
       .then(axios.spread((chats, users) => this.setState({ chats: chats.data, users: users.data })))
       .catch(err => console.log(err));
 
-    // this.websocket.on('connect', () => {
+    this.websocket.on('connect', () => {
       this.websocket.on('login',  user => this.updateUsersOnAuth(true, user));
       this.websocket.on('logout', user => this.updateUsersOnAuth(false, user));
-    // });
+    });
   }
 
   componentWillUnmount() {
@@ -65,7 +61,7 @@ class ChatsIndex extends React.Component {
       .then(res => this.props.history.push(`/chats/${res.data.id}`))
       .catch(err => console.log(err));
   }
-  
+
   render() {
     return(
       <React.Fragment>
@@ -96,5 +92,3 @@ class ChatsIndex extends React.Component {
     );
   } 
 }
-
-export default ChatsIndex;

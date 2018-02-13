@@ -7,24 +7,19 @@ import Auth    from '../../lib/Auth';
 import Navbar  from '../utility/Navbar';
 import Message from '../utility/Message';
 
-class ChatsShow extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      languages: [],
-      chat: {},
-      message: {
-        content: ''
-      },
-      currentUser: {}
-    }
-
-    this.websocket = socketIOClient('/sockets');
+export default class ChatsShow extends React.Component {
+  state = {
+    languages: [],
+    chat: {},
+    message: {
+      content: ''
+    },
+    currentUser: {}
   }
 
-  componentDidMount() {
+  websocket = socketIOClient('/sockets');
 
+  componentDidMount() {
     const headers = { Authorization: `Bearer ${Auth.getToken()}`};
 
     axios
@@ -108,7 +103,6 @@ class ChatsShow extends React.Component {
   }
 
   render() {
-
     return (
       <React.Fragment>
        { this.state.chat.id && <Navbar title={this.getCollocutor().first} colloctor={this.getCollocutor()} /> }
@@ -152,5 +146,3 @@ class ChatsShow extends React.Component {
     );
   }
 }
-
-export default ChatsShow;

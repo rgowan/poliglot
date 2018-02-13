@@ -5,14 +5,10 @@ import emoji          from 'emoji-dictionary';
 
 import Auth from '../../lib/Auth';
 
-class AutosuggestContainer extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      filteredUsers: [],
-      inputValue: ''
-    }
+export default class AutosuggestContainer extends React.Component {
+  state = {
+    filteredUsers: [],
+    inputValue: ''
   }
 
   handleChange = ( event, { newValue }) => {
@@ -88,5 +84,3 @@ const Suggestion = user => {
     </div>
   );
 }
-
-export default AutosuggestContainer;

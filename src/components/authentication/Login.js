@@ -3,16 +3,12 @@ import axios from 'axios';
 
 import Auth from '../../lib/Auth';
 
-class Login extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      user: {
-        email: '',
-        password: ''
-      }
-    };
+export default class Login extends React.Component {
+  state = {
+    user: {
+      email: '',
+      password: ''
+    }
   }
 
   handleChange = ({ target: { name, value } }) => {
@@ -65,5 +61,3 @@ class Login extends React.Component {
     );
   } 
 }
-
-export default Login;

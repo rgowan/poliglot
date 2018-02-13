@@ -4,23 +4,18 @@ import emoji from 'emoji-dictionary';
 
 import Auth from '../../lib/Auth';
 
-class Register extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      languages: [],
-
-      user: {
-        first: '',
-        last: '',
-        email: '',
-        language: '',
-        image: '',
-        password: '',
-        passwordConfirmation: ''
-      }
-    };
+export default class Register extends React.Component {
+  state = {
+    languages: [],
+    user: {
+      first: '',
+      last: '',
+      email: '',
+      language: '',
+      image: '',
+      password: '',
+      passwordConfirmation: ''
+    }
   }
 
   componentDidMount() {
@@ -129,5 +124,3 @@ class Register extends React.Component {
     );
   } 
 }
-
-export default Register;
