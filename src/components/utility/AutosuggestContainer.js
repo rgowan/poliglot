@@ -1,11 +1,20 @@
-import React          from 'react';
-import Autosuggest    from 'react-autosuggest';
-import axios          from 'axios';
-import emoji          from 'emoji-dictionary';
+import React, { Component, Fragment } from 'react';
+import Autosuggest from 'react-autosuggest';
+import axios       from 'axios';
+import emoji       from 'emoji-dictionary';
 
 import Auth from '../../lib/Auth';
 
-export default class AutosuggestContainer extends React.Component {
+const Suggestion = user => {
+  return(
+    <Fragment>
+      <img className={ user.online ? 'online' : ''} src={ user.image }/>
+      <p>{ user.fullname } { emoji.getUnicode(`${user.language.emoji}`) }</p>
+    </Fragment>
+  );
+}
+
+class AutosuggestContainer extends Component {
   state = {
     filteredUsers: [],
     inputValue: ''
@@ -76,11 +85,4 @@ export default class AutosuggestContainer extends React.Component {
   }
 }
 
-const Suggestion = user => {
-  return(
-    <div>
-      <img className={ user.online ? 'online' : ''} src={ user.image }/>
-      <p>{ user.fullname } { emoji.getUnicode(`${user.language.emoji}`) }</p>
-    </div>
-  );
-}
+export default AutosuggestContainer;

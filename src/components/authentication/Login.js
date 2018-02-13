@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 
 import Auth from '../../lib/Auth';
 
-export default class Login extends React.Component {
+class Login extends Component {
   state = {
     user: {
       email: '',
@@ -29,7 +29,7 @@ export default class Login extends React.Component {
   
   render() {
     return (
-      <React.Fragment>
+      <Fragment>
         <div className="centered">
           <form onSubmit={this.handleSubmit}>
             <h1>Login</h1>
@@ -57,7 +57,9 @@ export default class Login extends React.Component {
             </div>
           </form>
         </div>
-      </React.Fragment>
+      </Fragment>
     );
   } 
 }
+
+export default Login;

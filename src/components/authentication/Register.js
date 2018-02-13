@@ -1,11 +1,11 @@
-import React          from 'react';
+import React, { Component, Fragment } from 'react';
 import ReactFilestack from 'filestack-react';
 import axios          from 'axios';
 import emoji          from 'emoji-dictionary';
 
 import Auth from '../../lib/Auth';
 
-export default class Register extends React.Component {
+class Register extends Component {
   state = {
     languages: [],
     user: {
@@ -53,7 +53,7 @@ export default class Register extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <Fragment>
         <div className="register">
           <form onSubmit={this.handleSubmit}>
             <h1>Signup</h1>
@@ -126,7 +126,9 @@ export default class Register extends React.Component {
             </div>
           </form>
         </div>
-      </React.Fragment>
+      </Fragment>
     );
   } 
 }
+
+export default Register;

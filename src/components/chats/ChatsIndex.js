@@ -1,15 +1,15 @@
-import React          from 'react';
-import Autosuggest    from 'react-autosuggest';
+import React, { Component, Fragment } from 'react';
 import axios          from 'axios';
-import socketIOClient from 'socket.io-client';
 import { Link }       from 'react-router-dom';
+import Autosuggest    from 'react-autosuggest';
+import socketIOClient from 'socket.io-client';
 
 import Auth                 from '../../lib/Auth';
 import Navbar               from '../utility/Navbar';
 import ActiveChat           from '../utility/ActiveChat';
 import AutosuggestContainer from '../utility/AutosuggestContainer';
 
-export default class ChatsIndex extends React.Component {
+class ChatsIndex extends Component {
   state = {
     chats: [],
     users: [],
@@ -64,7 +64,7 @@ export default class ChatsIndex extends React.Component {
 
   render() {
     return(
-      <React.Fragment>
+      <Fragment>
         <Navbar title='Chats'/>
         <div className="container">
           <AutosuggestContainer 
@@ -88,7 +88,9 @@ export default class ChatsIndex extends React.Component {
             }
           </section> 
         </div>
-      </React.Fragment>
+      </Fragment>
     );
   } 
 }
+
+export default ChatsIndex;

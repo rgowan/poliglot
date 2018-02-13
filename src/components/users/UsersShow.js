@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import emoji from 'emoji-dictionary';
 
 import Auth   from '../../lib/Auth';
 import Navbar from '../utility/Navbar';
 
-export default class UsersShow extends React.Component {
+class UsersShow extends Component {
   state = {
     user: {}
   }
@@ -21,19 +21,21 @@ export default class UsersShow extends React.Component {
   
   render() {
     return(
-      <React.Fragment>
+      <Fragment>
         <Navbar title="Profile" /> 
         
         <div className="container">
           <div className="profile-container">
-            <img className={ this.state.user.online ? 'online' : '' } src={ this.state.user.image } />
+            <img className={ this.state.user.online ? "online" : "" } src={ this.state.user.image } />
             <h2>{ this.state.user.fullname }</h2>
             <h3>{ this.state.user.email }</h3>
             { this.state.user.language && <p>Language: { this.state.user.language.name } { emoji.getUnicode(`${this.state.user.language.emoji}`) }</p> }
             <p>Status: <span>{ this.state.user.online ? 'Online' : 'Offline' }</span></p>
           </div>
         </div>
-      </React.Fragment>
+      </Fragment>
     );
   }
 }
+
+export default UsersShow;

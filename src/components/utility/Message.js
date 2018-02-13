@@ -1,6 +1,6 @@
 import React  from 'react';
-import moment from 'moment';
 import axios  from 'axios';
+import moment from 'moment';
 
 import Auth from '../../lib/Auth';
 

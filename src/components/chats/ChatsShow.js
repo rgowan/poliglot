@@ -1,13 +1,13 @@
-import React          from 'react';
+import React, { Component, Fragment } from 'react';
 import axios          from 'axios';
-import socketIOClient from 'socket.io-client';
 import emoji          from 'emoji-dictionary';
+import socketIOClient from 'socket.io-client';
 
 import Auth    from '../../lib/Auth';
 import Navbar  from '../utility/Navbar';
 import Message from '../utility/Message';
 
-export default class ChatsShow extends React.Component {
+class ChatsShow extends Component {
   state = {
     languages: [],
     chat: {},
@@ -105,7 +105,7 @@ export default class ChatsShow extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <Fragment>
        { this.state.chat.id && <Navbar title={this.getCollocutor().first} colloctor={this.getCollocutor()} /> }
 
        <div className="container">
@@ -143,7 +143,9 @@ export default class ChatsShow extends React.Component {
             <button className={this.state.message.content ? 'sendable-message' : ''}><i className="fa fa-paper-plane" aria-hidden="true"></i></button>
           </form>
         </div>
-      </React.Fragment>
+      </Fragment>
     );
   }
 }
+
+export default ChatsShow;
