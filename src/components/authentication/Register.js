@@ -1,6 +1,7 @@
-import React from 'react';
-import axios from 'axios';
-import emoji from 'emoji-dictionary';
+import React          from 'react';
+import ReactFilestack from 'filestack-react';
+import axios          from 'axios';
+import emoji          from 'emoji-dictionary';
 
 import Auth from '../../lib/Auth';
 
@@ -27,6 +28,11 @@ export default class Register extends React.Component {
 
   handleChange = ({ target: { name, value } }) => {
     const user = Object.assign({}, this.state.user, { [name]: value });
+    this.setState({ user });
+  }
+
+  handleImageUpload = result => {
+    const user = Object.assign({}, this.state.user, { image: result.filesUploaded[0].url})
     this.setState({ user });
   }
 
@@ -90,11 +96,11 @@ export default class Register extends React.Component {
             </div>
             <div>
               <label htmlFor="image">Profile Picture</label>
-              <input 
-                onChange={this.handleChange}
-                type="text" 
-                name="image" 
-                id="image"
+              <ReactFilestack
+                apikey="AIuCIUuXNTxasxVkblVY6z"
+                buttonText="Choose a photo"
+                buttonClass="button file"
+                onSuccess={this.handleImageUpload}
               />
             </div>
             <div>

@@ -1,18 +1,7 @@
-// left message - rgba(222, 239, 253, 0.3)
-// right message - rgba(151, 203, 252, 0.3)
-// border - rgba(70, 136, 199, 0.3)
-
-
 .language-selector {
   width: 100%;
   margin-top: 15px;
   height: 80px;
-
-  // .input-container {
-  //   width: 50%;
-  //   float: left;
-  //   padding: 0 2.5px 0 2.5px;
-  // }
 
   label {
     font-size: 16px;
@@ -75,9 +64,6 @@
       float: left;
       background: rgba(222, 239, 253, 0.3);
       border: 2px solid rgba(70, 136, 199, 0.3);
-
-      // #deeffd
-      // #97cbfc
     }
     
     .right {
