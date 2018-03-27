@@ -6,7 +6,7 @@
   "author": "rgowan <ranegowan@gmail.com>",
   "license": "MIT",
   "engines": {
-    "node": "8.x.x"
+    "node": "9.x.x"
   },
   "scripts": {
     "start:client": "webpack-dev-server",
@@ -19,6 +19,7 @@
   "dependencies": {
     "animate.css": "^3.5.2",
     "axios": "^0.17.1",
+    "babel-preset-env": "^1.6.1",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.1",
     "emoji-dictionary": "^1.0.9",
@@ -54,7 +55,6 @@
     "css-loader": "^0.28.4",
     "file-loader": "^0.11.2",
     "html-webpack-plugin": "^2.29.0",
-    "istanbul": "^0.4.5",
     "mocha": "^4.0.1",
     "node-sass": "^4.5.3",
     "nyc": "^11.4.1",
