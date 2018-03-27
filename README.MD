@@ -1,4 +1,4 @@
-<img width="600" alt="screen shot 2018-03-27 at 19 16 13" src="https://user-images.githubusercontent.com/11501555/37986442-5c782a2e-31f3-11e8-886c-8f908d7cc1de.png">
+<img width="1048" alt="screen shot 2018-03-27 at 19 16 13" src="https://user-images.githubusercontent.com/11501555/37986442-5c782a2e-31f3-11e8-886c-8f908d7cc1de.png">
 
 # Poliglot
 
@@ -34,7 +34,7 @@ There are 56 unit tests covering majority of the API functionality. I'm using [I
 
 ### Screenshots
 
-<img width="1243" alt="screen shot 2018-03-27 at 19 07 36" src="https://user-images.githubusercontent.com/11501555/37985969-246e0aaa-31f2-11e8-81e9-70ecce32d41d.png">
+<img width="1200" alt="screen shot 2018-03-27 at 19 07 36" src="https://user-images.githubusercontent.com/11501555/37985969-246e0aaa-31f2-11e8-81e9-70ecce32d41d.png">
 
 <img width="1200" alt="screen shot 2018-03-27 at 19 06 58" src="https://user-images.githubusercontent.com/11501555/37985948-10b183b6-31f2-11e8-9030-ae4a95413cb6.png">
 
