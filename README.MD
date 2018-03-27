@@ -2,10 +2,10 @@
 
 # Poliglot
 
-Poliglot is a `MERN` stack application which allows users to instant message eachother in any language!
+> ####[Visit website here](https://poliglot-app.herokuapp.com/)
+> I'm using a free host on Heroku meaning it may take a couple of minutes to load initially.
 
-#####[Visit the site](https://poliglot-app.herokuapp.com/)
-I'm using a free host on Heroku meaning it may take a couple of minutes to load initially.
+Poliglot is a `MERN` stack application which allows users to instant message eachother in any language!
 
 It's able to translate messages in a chat to whatever language the user selects when creating an account. Meaning that one person can be writing English and the other writing French and both will be able to have a conversation with no hassle.
 
