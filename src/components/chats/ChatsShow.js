@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from 'react';
-import axios          from 'axios';
-import emoji          from 'emoji-dictionary';
+import axios from 'axios';
+import emoji from 'emoji-dictionary';
 import socketIOClient from 'socket.io-client';
 
-import Auth    from '../../lib/Auth';
-import Navbar  from '../utility/Navbar';
+import Auth from '../../lib/Auth';
+import Navbar from '../utility/Navbar';
 import Message from '../utility/Message';
 
 class ChatsShow extends Component {
@@ -29,7 +29,11 @@ class ChatsShow extends Component {
         axios.get(`/api/users/${Auth.getPayload().id}`, { headers })
       ])
       .then(axios.spread((chat, languages, user) => {
-        this.setState({ chat: chat.data, languages: languages.data, currentUser: user.data });
+        this.setState({ 
+          chat: chat.data, 
+          languages: languages.data, 
+          currentUser: user.data 
+        });
       }))
       .catch(err => console.log(err));
     

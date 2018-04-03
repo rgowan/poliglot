@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from 'react';
-import axios          from 'axios';
-import { Link }       from 'react-router-dom';
-import Autosuggest    from 'react-autosuggest';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import Autosuggest from 'react-autosuggest';
 import socketIOClient from 'socket.io-client';
 
-import Auth                 from '../../lib/Auth';
-import Navbar               from '../utility/Navbar';
-import ActiveChat           from '../utility/ActiveChat';
+import Auth from '../../lib/Auth';
+import Navbar from '../utility/Navbar';
+import ActiveChat from '../utility/ActiveChat';
 import AutosuggestContainer from '../utility/AutosuggestContainer';
 
 class ChatsIndex extends Component {
@@ -27,12 +27,19 @@ class ChatsIndex extends Component {
         axios.get('/api/chats', { headers }),
         axios.get('/api/users', { headers })
       ])
-      .then(axios.spread((chats, users) => this.setState({ chats: chats.data, users: users.data })))
+      .then(axios.spread((chats, users) => this.setState({ 
+        chats: chats.data, 
+        users: users.data }
+      )))
       .catch(err => console.log(err));
 
     this.websocket.on('connect', () => {
-      this.websocket.on('login',  user => this.updateUsersOnAuth(true, user));
-      this.websocket.on('logout', user => this.updateUsersOnAuth(false, user));
+      this.websocket.on('login',  user => 
+        this.updateUsersOnAuth(true, user)
+      );
+      this.websocket.on('logout', user => 
+        this.updateUsersOnAuth(false, user)
+      );
     });
   }
 
@@ -53,7 +60,7 @@ class ChatsIndex extends Component {
   }
 
   handleClick = (e, target) => {
-    const user   = this.state.users.filter(user => user.fullname === target.suggestionValue);
+    const user = this.state.users.filter(user => user.fullname === target.suggestionValue);
     const userId = user[0].id;
 
     axios

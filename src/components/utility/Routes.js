@@ -1,14 +1,13 @@
-import React             from 'react';
+import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import Homepage   from '../Homepage'
-import Login      from '../authentication/Login';
-import Register   from '../authentication/Register';
-import ChatsIndex from '../chats/ChatsIndex';
-import ChatsShow  from '../chats/ChatsShow';
-import UsersShow  from '../users/UsersShow';
-
 import ProtectedRoute from './ProtectedRoute';
+import Homepage from '../Homepage'
+import Login from '../authentication/Login';
+import Register from '../authentication/Register';
+import ChatsIndex from '../chats/ChatsIndex';
+import ChatsShow from '../chats/ChatsShow';
+import UsersShow from '../users/UsersShow';
 
 const Routes = () => {
   return (

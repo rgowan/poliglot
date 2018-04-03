@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import ReactFilestack from 'filestack-react';
-import axios          from 'axios';
-import emoji          from 'emoji-dictionary';
+import axios from 'axios';
+import emoji from 'emoji-dictionary';
 
 import Auth from '../../lib/Auth';
 

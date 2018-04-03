@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import emoji from 'emoji-dictionary';
 
-import Auth   from '../../lib/Auth';
+import Auth from '../../lib/Auth';
 import Navbar from '../utility/Navbar';
 
 class UsersShow extends Component {

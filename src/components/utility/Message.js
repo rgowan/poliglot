@@ -1,5 +1,5 @@
-import React  from 'react';
-import axios  from 'axios';
+import React from 'react';
+import axios from 'axios';
 import moment from 'moment';
 
 import Auth from '../../lib/Auth';
