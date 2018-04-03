@@ -1,10 +1,10 @@
 const router = require('express').Router();
 
-const auth        = require('../controllers/authentication');
-const users       = require('../controllers/users');
-const chats       = require('../controllers/chats');
-const languages   = require('../controllers/languages');
-const messages    = require('../controllers/messages');
+const auth = require('../controllers/authentication');
+const users = require('../controllers/users');
+const chats = require('../controllers/chats');
+const languages = require('../controllers/languages');
+const messages = require('../controllers/messages');
 const secureRoute = require('../lib/secureRoute');
 
 router.route('/register')

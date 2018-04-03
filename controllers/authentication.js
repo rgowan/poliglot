@@ -1,9 +1,9 @@
-const jwt        = require('jsonwebtoken');
-const { secret } = require('../config/environment');
-const User       = require('../models/user');
+const jwt = require('jsonwebtoken');
 
-const sockets    = require('../lib/sockets');
-const io         = sockets.getConnection();
+const { secret } = require('../config/environment');
+const User = require('../models/user');
+const sockets = require('../lib/sockets');
+const io = sockets.getConnection();
 
 function register(req, res, next) {
   req.body.online = false;

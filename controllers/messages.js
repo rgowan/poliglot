@@ -1,7 +1,7 @@
-const Chat             = require('../models/chat');
+const Chat = require('../models/chat');
 const translateMessage = require('../lib/translate');
-const sockets          = require('../lib/sockets');
-const io               = sockets.getConnection();
+const sockets = require('../lib/sockets');
+const io = sockets.getConnection();
 
 function create(req, res, next) {
   req.body.createdBy = req.currentUser;

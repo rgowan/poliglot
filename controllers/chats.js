@@ -1,6 +1,6 @@
 const Promise = require('bluebird');
 
-const Chat             = require('../models/chat');
+const Chat = require('../models/chat');
 const translateMessage = require('../lib/translate');
 
 function find(req, res, next) {
