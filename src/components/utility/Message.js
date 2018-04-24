@@ -5,8 +5,16 @@ import moment from 'moment';
 import Auth from '../../lib/Auth';
 
 const Message = ({ data, language }) => {
+  function messagePosition() {
+    if (data.createdBy._id === Auth.getPayload().id) {
+      return "right";
+    } else {
+      return "left";
+    }
+  }
+
   return (
-    <div className={ "message " + (data.createdBy._id == Auth.getPayload().id || data.createdBy.id == Auth.getPayload().id ? "right": "left") }>
+    <div className={ "message " + messagePosition() }>
       <p>{ data.createdBy.first } <span>{ moment(data.updatedAt).format('LT') }</span></p>
       <p>{ data[language] }</p>
     </div>

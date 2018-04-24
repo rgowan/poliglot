@@ -15,12 +15,18 @@ const ActiveChat = ({ chat, users }) => {
     <div className="chat">
       <Link to={`/chats/${chat.id}`} >
         <img 
-          className={ users.find(user => user.fullname === collocutor.fullname).online ? 'online' : '' } 
+          className={ collocutor.online ? 'online' : '' } 
           src={collocutor.image }
         />
         <div className="info">
           <h2>{ collocutor.fullname }</h2>
-          <p>{ lastMessage && <Truncate lines={1} ellipsis={<span>...</span>}>{ lastMessage[currentUser.language.code] }</Truncate> }</p>
+          <p>
+            { lastMessage && 
+              <Truncate lines={1} ellipsis={<span>...</span>}>
+                { lastMessage[currentUser.language.code] }
+              </Truncate> 
+            }
+          </p>
           <p>{ moment(chat.updatedAt).format('llll') }</p>
         </div>
       </Link>

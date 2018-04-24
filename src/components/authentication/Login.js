@@ -38,7 +38,7 @@ class Login extends Component {
               <label htmlFor="email">Email</label>
               <input 
                 onChange={ this.handleChange } 
-                type="email" 
+                type="email"
                 name="email" 
                 id="email" 
               />

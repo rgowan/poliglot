@@ -31,8 +31,8 @@ class Register extends Component {
     this.setState({ user });
   }
 
-  handleImageUpload = result => {
-    const user = Object.assign({}, this.state.user, { image: result.filesUploaded[0].url})
+  handleImageUpload = (result) => {
+    const user = Object.assign({}, this.state.user, { image: result.filesUploaded[0].url});
     this.setState({ user });
   }
 
@@ -87,12 +87,18 @@ class Register extends Component {
             </div>
             <div>
               <label htmlFor="email">Language *</label>
-              { this.state.languages && <select onChange={this.handleChange} name="language" value={this.state.user.language}>
-              <option value='' disabled="true">Please select a language</option>
-              { this.state.languages.map((language, i) => 
-                <option key={i} value={ language.id }>{ emoji.getUnicode(`${language.emoji}`) } { language.name }</option>
-              )}
-            </select> }
+              { this.state.languages && 
+                <select 
+                  onChange={this.handleChange} 
+                  name="language" 
+                  value={this.state.user.language}
+                >
+                  <option value='' disabled="true">Please select a language</option>
+                  { this.state.languages.map((language, i) => 
+                    <option key={i} value={ language.id }>{ emoji.getUnicode(`${language.emoji}`) } { language.name }</option>
+                  )}
+                </select> 
+              }
             </div>
             <div>
               <label htmlFor="image">Profile Picture</label>

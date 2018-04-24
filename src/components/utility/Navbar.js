@@ -29,13 +29,22 @@ const Navbar = ({ history, title, colloctor }) => {
         </ul>
       </nav>
       <div className="banner">
-        { history.location.pathname !== '/chats' && <div className="back" onClick={ () => history.goBack() }> 
-          <i className="fa fa-angle-left" aria-hidden="true"></i>
-        </div> }
-          <span>
-            <h1>{ title } { colloctor && <span className={colloctor.online ? 'online-dot' : ''}><i className="fa fa-circle" aria-hidden="true"></i></span> }</h1>
-            { colloctor && <Link to={`/users/${colloctor.id}`}>View profile</Link> }
-          </span>
+        { history.location.pathname !== '/chats' && 
+          <div className="back" onClick={ () => history.goBack() }> 
+            <i className="fa fa-angle-left" aria-hidden="true"></i>
+          </div> 
+        }
+        <span>
+          <h1>
+            { title } 
+            { colloctor && 
+              <span className={colloctor.online ? 'online-dot' : ''}>
+                <i className="fa fa-circle" aria-hidden="true"></i>
+              </span> 
+            }
+          </h1>
+          { colloctor && <Link to={`/users/${colloctor.id}`}>View profile</Link> }
+        </span>
         <hr />
       </div>
     </header>

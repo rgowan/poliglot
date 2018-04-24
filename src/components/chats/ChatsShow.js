@@ -78,7 +78,7 @@ class ChatsShow extends Component {
     this.setState({ message: { content: value } });
   }
 
-  handleLanguageChange = e => {
+  handleLanguageChange = (e) => {
     const language = this.state.languages.find(language => language.code === e.target.value);
     delete language.id;
 
@@ -91,7 +91,7 @@ class ChatsShow extends Component {
       .catch(err => console.log(err));
   }
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
 
     if (this.state.message.content !== '') {
@@ -110,22 +110,29 @@ class ChatsShow extends Component {
   render() {
     return (
       <Fragment>
-       { this.state.chat.id && <Navbar title={this.getCollocutor().first} colloctor={this.getCollocutor()} /> }
+        { this.state.chat.id && 
+          <Navbar title={this.getCollocutor().first} colloctor={this.getCollocutor()} /> 
+        }
 
-       <div className="container">
-          <form className="language-selector">
-            <label>Sending</label>
-            { this.state.chat.id && <select onChange={this.handleLanguageChange} value={this.getCollocutor().language.code}>
-              <option value=' ' disabled='true'>Please select a language</option>
-              { this.state.languages.map((language, i) => 
-                <option key={i} value={ language.code } disabled='true'>{ emoji.getUnicode(`${language.emoji}`) } { language.name }</option>
-              )}
-            </select> }
-          </form>
-          
+        <div className="container">
+          { this.state.chat.id && 
+            <form className="language-selector">
+              <label>{ this.getCollocutor().first} is reading</label>
+              <select onChange={this.handleLanguageChange} value={this.getCollocutor().language.code}>
+                { this.state.languages.map(language => 
+                  <option key={language.id} value={language.code} disabled>
+                    { emoji.getUnicode(`${language.emoji}`) } { language.name }
+                  </option>
+                )}
+              </select>
+            </form>
+          }
           <section className="chat-container">
             <h2>Messages</h2>
-            <div className="messages-box" ref={(messagesContainer => this.messagesContainer = messagesContainer)}>
+            <div 
+              className="messages-box" 
+              ref={(messagesContainer => this.messagesContainer = messagesContainer)}
+            >
               { this.state.chat.id && this.state.chat.messages.map((message, i) => 
                 <Message
                   key={i} 
@@ -143,7 +150,7 @@ class ChatsShow extends Component {
               onChange={this.handleChange}
               value={this.state.message.content}
               placeholder="Aa"
-             />
+            />
             <button className={this.state.message.content ? 'sendable-message' : ''}><i className="fa fa-paper-plane" aria-hidden="true"></i></button>
           </form>
         </div>

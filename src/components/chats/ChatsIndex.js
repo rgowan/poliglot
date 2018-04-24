@@ -29,8 +29,8 @@ class ChatsIndex extends Component {
       ])
       .then(axios.spread((chats, users) => this.setState({ 
         chats: chats.data, 
-        users: users.data }
-      )))
+        users: users.data })
+      ))
       .catch(err => console.log(err));
 
     this.websocket.on('connect', () => {
@@ -60,11 +60,12 @@ class ChatsIndex extends Component {
   }
 
   handleClick = (e, target) => {
-    const user = this.state.users.filter(user => user.fullname === target.suggestionValue);
-    const userId = user[0].id;
+    const userId = this.state.users.find(user => user.fullname === target.suggestionValue).id;
 
     axios
-      .post(`/api/chats/create/${userId}`, {}, { headers: { Authorization: `Bearer ${Auth.getToken()}`} })
+      .post(`/api/chats/create/${userId}`, {}, { 
+        headers: { Authorization: `Bearer ${Auth.getToken()}`} 
+      })
       .then(res => this.props.history.push(`/chats/${res.data.id}`))
       .catch(err => console.log(err));
   }
@@ -82,7 +83,7 @@ class ChatsIndex extends Component {
 
           <section className="chats-container">
             <h2>Active Chats</h2>
-            { this.state.chats.length !== 0 ?
+            { this.state.chats.length !== 0 ? 
               this.state.chats.map(chat => 
                 <ActiveChat 
                   key={chat.id} 
