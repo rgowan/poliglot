@@ -1,7 +1,6 @@
-/* globals api, expect, describe, it */
 require('../spec_helper');
 
-const secureRoute     = require('../../lib/secureRoute');
+const secureRoute     = require('../../../lib/secureRoute');
 
 describe('secureRoute', () => {
   it('should be function', done => {

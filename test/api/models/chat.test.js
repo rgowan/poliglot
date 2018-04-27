@@ -1,7 +1,6 @@
-/* globals expect, describe, it */
 require('../spec_helper');
 
-const Chat = require('../../models/chat');
+const Chat = require('../../../models/chat');
 
 
 describe('Chat model tests', () => {

@@ -1,8 +1,7 @@
-/* globals api, expect, describe, it */
 require('../spec_helper');
 
-const globalToJSON  = require('../../lib/globalToJSON');
-const User          = require('../../models/user');
+const globalToJSON  = require('../../../lib/globalToJSON');
+const User          = require('../../../models/user');
 
 describe('globalToJSON', () => {
   beforeEach(done => {

@@ -1,7 +1,6 @@
-/* globals api, expect, describe, it */
 require('../spec_helper');
 
-const customResponses = require('../../lib/customResponses');
+const customResponses = require('../../../lib/customResponses');
 
 describe('customResponses', () => {
   it('should be a function', done => {

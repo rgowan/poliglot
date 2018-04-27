@@ -1,8 +1,7 @@
-/* globals api, expect, describe, beforeEach, afterEach, it */
 require('../spec_helper');
 
-const User = require('../../models/user');
-const Chat = require('../../models/chat');
+const User = require('../../../models/user');
+const Chat = require('../../../models/chat');
 
 describe('Chat Controller', () => {
   beforeEach(done => {

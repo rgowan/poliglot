@@ -1,8 +1,7 @@
-/* globals api, expect, describe, beforeEach, afterEach, it */
 require('../spec_helper');
 
-const Language = require('../../models/language');
-const User     = require('../../models/user');
+const Language = require('../../../models/language');
+const User     = require('../../../models/user');
 
 describe('Language Controller', () => {
   beforeEach(done => {

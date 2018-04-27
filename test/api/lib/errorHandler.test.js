@@ -1,7 +1,6 @@
-/* globals api, expect, describe, it */
 require('../spec_helper');
 
-const errorHandler = require('../../lib/errorHandler');
+const errorHandler = require('../../../lib/errorHandler');
 
 describe('errorHandler', () => {
   it('should be a function', done => {

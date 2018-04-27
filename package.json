@@ -14,7 +14,8 @@
     "start": "yarn build && node index",
     "build": "webpack -p",
     "seed": "node db/seeds",
-    "test": "nyc --reporter=html --reporter=text mocha --exit"
+    "test:api": "nyc --reporter=html --reporter=text mocha ./test/api/* --exit",
+    "test:client": "nyc --reporter=html --reporter=text mocha ./test/client/* --exit"
   },
   "dependencies": {
     "animate.css": "^3.5.2",

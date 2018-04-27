@@ -1,7 +1,6 @@
-/* globals expect, describe, it */
 require('../spec_helper');
 
-const User = require('../../models/user');
+const User = require('../../../models/user');
 
 describe('User model tests', () => {
   it('should be invalid if first is empty', done => {
