@@ -11,7 +11,7 @@ It's able to translate messages in a chat to whatever language the user selects 
 
 <img width="1200" alt="screen shot 2018-03-27 at 18 22 34" src="https://user-images.githubusercontent.com/11501555/37983752-35c2b0fe-31ec-11e8-83a5-f4e7f9c2798b.png">
 
-I built this app in my spare time to get more familiar with React.js and API unit testing with Mocha and Chai.
+I built this app in my spare time over a week to get more familiar with React.js and API unit testing with Mocha and Chai.
 
 ### Overview
 
