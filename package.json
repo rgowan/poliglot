@@ -11,11 +11,12 @@
   "scripts": {
     "start:client": "webpack-dev-server",
     "start:server": "nodemon",
+    "test:api": "nyc --reporter=html --reporter=text mocha ./test/api/* --exit",
+    "test:client": "nyc --reporter=html --reporter=text mocha ./test/client/* --exit",
+    "test:all": "nyc --reporter=html --reporter=text mocha  --exit",
     "start": "yarn build && node index",
     "build": "webpack -p",
-    "seed": "node db/seeds",
-    "test:api": "nyc --reporter=html --reporter=text mocha ./test/api/* --exit",
-    "test:client": "nyc --reporter=html --reporter=text mocha ./test/client/* --exit"
+    "seed": "node db/seeds"
   },
   "dependencies": {
     "animate.css": "^3.5.2",
