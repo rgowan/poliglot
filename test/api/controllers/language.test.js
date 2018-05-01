@@ -91,6 +91,7 @@ describe('Language Controller', () => {
             .to.be.an('array')
             .and.have.property(0)
             .and.have.all.keys([
+              '_id',
               'id',
               'name',
               'code',

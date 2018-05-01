@@ -50,6 +50,7 @@ describe('globalToJSON', () => {
         .end((err, res) => {
           expect(res.body)
             .and.have.all.keys([
+              '_id',
               'id',
               'first',
               'last',

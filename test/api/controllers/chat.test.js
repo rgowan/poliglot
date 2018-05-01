@@ -84,6 +84,7 @@ describe('Chat Controller', () => {
             .to.be.an('array')
             .and.have.property(0)
             .and.have.all.keys([
+              '_id',
               'id',
               'messages',
               'participants',
@@ -188,6 +189,7 @@ describe('Chat Controller', () => {
         .end((err, res) => {
           expect(res.body)
             .and.have.all.keys([
+              '_id',
               'id',
               'messages',
               'participants',
@@ -264,6 +266,7 @@ describe('Chat Controller', () => {
       .end((err, res) => {
         expect(res.body)
           .and.have.all.keys([
+            '_id',
             'id',
             'messages',
             'participants',
