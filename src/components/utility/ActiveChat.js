@@ -6,7 +6,7 @@ import emoji from 'emoji-dictionary';
 
 import Auth from '../../lib/Auth';
 
-const ActiveChat = ({ chat, users }) => {
+const ActiveChat = ({ chat }) => {
   const collocutor  = chat.participants.find(user => user.id !== Auth.getPayload().id);
   const currentUser = chat.participants.find(user => user.id == Auth.getPayload().id);
   const lastMessage = chat.messages[chat.messages.length -1];

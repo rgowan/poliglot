@@ -38,7 +38,12 @@ class ChatsShow extends Component {
       .catch(err => console.log(err));
     
     this.websocket.on('newMessage', newMessage => {
-      const chat = Object.assign({}, this.state.chat, { messages: this.state.chat.messages.concat(newMessage)});
+      const chat = Object.assign(
+        {}, 
+        this.state.chat, 
+        { messages: this.state.chat.messages.concat(newMessage)}
+      );
+
       this.setState({ chat });
     });
   
@@ -52,8 +57,12 @@ class ChatsShow extends Component {
 
   componentWillUnmount() {
     this.websocket.disconnect(true);
-    if(this.state.chat.messages.length === 0) 
-      axios.delete(`/api/chats/${this.state.chat.id}`, { headers: { Authorization: `Bearer ${Auth.getToken()}`} });
+    if(this.state.chat.messages.length === 0) {
+      axios
+        .delete(`/api/chats/${this.state.chat.id}`, 
+        { headers: { Authorization: `Bearer ${Auth.getToken()}`} 
+      });
+    }
   }
 
   updateUserOnAuth(boolean, user) {
@@ -72,23 +81,6 @@ class ChatsShow extends Component {
       const chat = Object.assign({}, this.state.chat, { participants });
       this.setState({ chat });
     }
-  }
-
-  handleChange = ({ target: { value } }) => {
-    this.setState({ message: { content: value } });
-  }
-
-  handleLanguageChange = (e) => {
-    const language = this.state.languages.find(language => language.code === e.target.value);
-    delete language.id;
-
-    axios
-      .put(`/api/chats/${this.props.match.params.id}`, { language }, { headers: { Authorization: `Bearer ${Auth.getToken()}`} })
-      .then(res => {
-        const chat = Object.assign({}, this.state.chat, { language })
-        this.setState({ chat });
-      })
-      .catch(err => console.log(err));
   }
 
   handleSubmit = (e) => {
@@ -111,38 +103,34 @@ class ChatsShow extends Component {
     return (
       <Fragment>
         { this.state.chat.id && 
-          <Navbar title={this.getCollocutor().first} colloctor={this.getCollocutor()} /> 
-        }
+          <Fragment>
+            <Navbar title={this.getCollocutor().first} colloctor={this.getCollocutor()} /> 
 
-        <div className="container">
-          { this.state.chat.id && 
-            <form className="language-selector">
-              <label>{ this.getCollocutor().first } is reading</label>
-              <select onChange={this.handleLanguageChange} value={this.getCollocutor().language.code}>
-                { this.state.languages.map(language => 
-                  <option key={language.id} value={language.code} disabled>
-                    { emoji.getUnicode(`${language.emoji}`) } { language.name }
-                  </option>
-                )}
-              </select>
-            </form>
-          }
-          <section className="chat-container">
-            <h2>Messages</h2>
-            <div 
-              className="messages-box" 
-              ref={(messagesContainer => this.messagesContainer = messagesContainer)}
-            >
-              { this.state.chat.id && this.state.chat.messages.map((message, i) => 
-                <Message
-                  key={i} 
-                  data={message}
-                  language={this.state.currentUser.language.code} 
-                />
-              )}
+            <div className="container">
+              <div className="collocutor-language-display">
+                <span>{ this.getCollocutor().first } is reading</span>
+                <p>
+                  { emoji.getUnicode(`${this.getCollocutor().language.emoji}`) }
+                  {' '}
+                  { this.getCollocutor().language.name }
+                </p>
+              </div>
+
+              <div className="chat-container">
+                <h2>Messages</h2>
+                <div className="messages-box" ref={(node => this.messagesContainer = node)}>
+                  { this.state.chat.messages.map((message, i) => 
+                    <Message
+                      key={i} 
+                      data={message}
+                      language={this.state.currentUser.language.code} 
+                    />
+                  )}
+                </div>
+              </div>
             </div>
-          </section>
-        </div>
+          </Fragment>
+        }
 
         <div className="new-message-box">
           <form onSubmit={this.handleSubmit}>

@@ -37,6 +37,7 @@ class ChatsIndex extends Component {
       this.websocket.on('login',  user => 
         this.updateUsersOnAuth(true, user)
       );
+
       this.websocket.on('logout', user => 
         this.updateUsersOnAuth(false, user)
       );
@@ -87,9 +88,8 @@ class ChatsIndex extends Component {
               this.state.chats.map(chat => 
                 <ActiveChat 
                   key={chat.id} 
-                  chat={chat} 
-                  users={this.state.users}
-                  />
+                  chat={chat}
+                />
               )
             :
               <p>You have no active chats at this time.</p>
