@@ -1,13 +1,10 @@
 {
-  "name": "flip-chat",
+  "name": "poliglot",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "git@github.com:rgowan/flip-chat.git",
+  "repository": "git@github.com:rgowan/poliglot.git",
   "author": "rgowan <ranegowan@gmail.com>",
   "license": "MIT",
-  "engines": {
-    "node": "9.x.x"
-  },
   "scripts": {
     "start:client": "webpack-dev-server",
     "start:server": "nodemon",
