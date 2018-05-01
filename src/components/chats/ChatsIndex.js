@@ -12,13 +12,15 @@ import AutosuggestContainer from '../utility/AutosuggestContainer';
 class ChatsIndex extends Component {
   state = {
     chats: [],
-    filteredUsers: [],
-    inputValue: ''
+    users: []
   }
 
   websocket = socketIOClient('/sockets');
 
   componentDidMount() {
+    this.websocket.on('login',  user => this.updateUserOnAuth(true, user));
+    this.websocket.on('logout', user => this.updateUserOnAuth(false, user));
+    
     const headers = { Authorization: `Bearer ${Auth.getToken()}`};
 
     axios
@@ -31,9 +33,6 @@ class ChatsIndex extends Component {
         users: users.data })
       ))
       .catch(err => console.log(err));
-
-    this.websocket.on('login',  user => this.updateUserOnAuth(true, user));
-    this.websocket.on('logout', user => this.updateUserOnAuth(false, user));
   }
 
   componentWillUnmount() {
