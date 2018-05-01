@@ -95,6 +95,11 @@ class ChatsShow extends Component {
     }
   }
 
+  handleChange = ({ target: { value }}) => {
+    const message = Object.assign({}, this.state.message, { content: value });
+    this.setState({message});
+  }
+
   getCollocutor() {
     return this.state.chat.participants.find(chattingWith => chattingWith.id !== Auth.getPayload().id);
   }
