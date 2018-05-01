@@ -20,6 +20,9 @@ class ChatsIndex extends Component {
   websocket = socketIOClient('/sockets');
 
   componentDidMount() {
+    this.websocket.on('login',  user => this.updateUserOnAuth(true, user));
+    this.websocket.on('logout', user => this.updateUserOnAuth(false, user));
+
     const headers = { Authorization: `Bearer ${Auth.getToken()}`};
 
     axios
@@ -33,15 +36,6 @@ class ChatsIndex extends Component {
       ))
       .catch(err => console.log(err));
 
-    this.websocket.on('connect', () => {
-      this.websocket.on('login',  user => 
-        this.updateUsersOnAuth(true, user)
-      );
-
-      this.websocket.on('logout', user => 
-        this.updateUsersOnAuth(false, user)
-      );
-    });
   }
 
   componentWillUnmount() {
@@ -82,7 +76,7 @@ class ChatsIndex extends Component {
             history={this.props.history}
           />
 
-          <section className="chats-container">
+          <div className="chats-container">
             <h2>Active Chats</h2>
             { this.state.chats.length !== 0 ? 
               this.state.chats.map(chat => 
@@ -94,7 +88,7 @@ class ChatsIndex extends Component {
             :
               <p>You have no active chats at this time.</p>
             }
-          </section> 
+          </div> 
         </div>
       </Fragment>
     );
