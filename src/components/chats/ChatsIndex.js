@@ -12,7 +12,6 @@ import AutosuggestContainer from '../utility/AutosuggestContainer';
 class ChatsIndex extends Component {
   state = {
     chats: [],
-    users: [],
     filteredUsers: [],
     inputValue: ''
   }
@@ -20,9 +19,6 @@ class ChatsIndex extends Component {
   websocket = socketIOClient('/sockets');
 
   componentDidMount() {
-    this.websocket.on('login',  user => this.updateUserOnAuth(true, user));
-    this.websocket.on('logout', user => this.updateUserOnAuth(false, user));
-
     const headers = { Authorization: `Bearer ${Auth.getToken()}`};
 
     axios
@@ -36,22 +32,26 @@ class ChatsIndex extends Component {
       ))
       .catch(err => console.log(err));
 
+    this.websocket.on('login',  user => this.updateUserOnAuth(true, user));
+    this.websocket.on('logout', user => this.updateUserOnAuth(false, user));
   }
 
   componentWillUnmount() {
     this.websocket.disconnect(true);
   }
 
-  updateUsersOnAuth(boolean, user) {
-    const users = this.state.users.map(person => {
-      if(person.id === user.id) {
-        person.online = boolean;
-        return person;
-      } 
-      return person;
+  updateUserOnAuth(boolean, user) {
+    const chats = this.state.chats.map(chat => {
+      const participant = chat.participants.find(person => person.id === user.id);
+      if(participant) {
+        participant.online = boolean;
+        return chat;
+      }
+
+      return chat;
     });
 
-    return this.setState({ users });
+    this.setState({ chats });
   }
 
   handleClick = (e, target) => {

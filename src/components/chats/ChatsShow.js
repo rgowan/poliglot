@@ -20,17 +20,6 @@ class ChatsShow extends Component {
   websocket = socketIOClient('/sockets');
 
   componentDidMount() {
-    this.websocket.on('login',  user => this.updateUserOnAuth(true, user));
-    this.websocket.on('logout', user => this.updateUserOnAuth(false, user));
-
-    this.websocket.on('newMessage', newMessage => {
-      const chat = Object.assign({}, this.state.chat, 
-        { messages: this.state.chat.messages.concat(newMessage) }
-      );
-
-      this.setState({ chat });
-    });
-
     const headers = { Authorization: `Bearer ${Auth.getToken()}` };
 
     axios
@@ -47,6 +36,17 @@ class ChatsShow extends Component {
         });
       }))
       .catch(err => console.log(err));
+
+    this.websocket.on('login',  user => this.updateUserOnAuth(true, user));
+    this.websocket.on('logout', user => this.updateUserOnAuth(false, user));
+
+    this.websocket.on('newMessage', newMessage => {
+      const chat = Object.assign({}, this.state.chat, 
+        { messages: this.state.chat.messages.concat(newMessage) }
+      );
+
+      this.setState({ chat });
+    });
   }
 
   componentDidUpdate() {
