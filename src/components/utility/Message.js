@@ -5,6 +5,8 @@ import moment from 'moment';
 import Auth from '../../lib/Auth';
 
 const Message = ({ data, language }) => {
+  console.log(data);
+
   function messagePosition() {
     if (data.createdBy._id === Auth.getPayload().id) {
       return "right";

@@ -117,7 +117,7 @@ class ChatsShow extends Component {
         <div className="container">
           { this.state.chat.id && 
             <form className="language-selector">
-              <label>{ this.getCollocutor().first} is reading</label>
+              <label>{ this.getCollocutor().first } is reading</label>
               <select onChange={this.handleLanguageChange} value={this.getCollocutor().language.code}>
                 { this.state.languages.map(language => 
                   <option key={language.id} value={language.code} disabled>
