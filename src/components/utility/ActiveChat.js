@@ -11,6 +11,12 @@ const ActiveChat = ({ chat }) => {
   const currentUser = chat.participants.find(user => user.id == Auth.getPayload().id);
   const lastMessage = chat.messages[chat.messages.length -1];
 
+  console.log('Active Chat: current user id', Auth.getPayload().id);
+
+  const unreadMessages = chat.messages.filter(message => !message.read.includes(Auth.getPayload().id));
+
+  console.log('Acitve Chat: unread messages', unreadMessages.length);
+
   return (
     <div className="chat">
       <Link to={`/chats/${chat.id}`} >

@@ -32,14 +32,17 @@ function show(req, res, next) {
       }
     ])
     .then(chat => {
-      chat.messages.forEach(message => {
-        if(!message.read.includes(req.currentUser.id)) message.read.push(req.currentUser.id);
+      chat.messages.forEach((message) => {
+        if(!message.read.includes(req.currentUser.id)) {
+          message.read.push(req.currentUser.id);
+        }
       });
 
+      chat.markModified('messages');
       return chat.save();
     })
     .then(chat => {
-      return res.status(200).json(chat);
+      res.status(200).json(chat);
     })
     .catch(next);
 }
