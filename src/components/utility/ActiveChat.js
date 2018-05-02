@@ -13,6 +13,8 @@ const ActiveChat = ({ chat }) => {
   
   const unreadMessages = chat.messages.filter(message => !message.read.includes(Auth.getPayload().id));
 
+  console.log(lastMessage);
+
   return (
     <div className="chat">
       <Link to={`/chats/${chat.id}`} >
@@ -29,7 +31,7 @@ const ActiveChat = ({ chat }) => {
               </Truncate> 
             }
           </p>
-          <p>{ moment(chat.updatedAt).format('llll') }</p>
+          <p>{ moment(lastMessage.createdAt).format('llll') }</p>
         </div>
       </Link>
     </div>

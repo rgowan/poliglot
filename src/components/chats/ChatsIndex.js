@@ -91,7 +91,7 @@ class ChatsIndex extends Component {
 
   sortActiveChats = () => {
     return this.state.chats.sort((a, b) => {
-      return new Date(b.updatedAt) - new Date(a.updatedAt);
+      return new Date(b.messages[b.messages.length -1].createdAt) - new Date(a.messages[a.messages.length -1].createdAt);
     })
   }
 

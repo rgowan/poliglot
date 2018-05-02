@@ -29,8 +29,7 @@ function create(req, res, next) {
           newMessage.createdBy = req.currentUser;
           newMessage.createdAt = new Date();
           newMessage.read = [req.currentUser.id];
-
-          chat.updatedAt = newMessage.createdAt;
+          
           chat.messages.push(newMessage);
           return chat.save();
         })
