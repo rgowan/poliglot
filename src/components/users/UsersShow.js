@@ -39,6 +39,9 @@ class UsersShow extends Component {
 
             <p>Status: <span>{ this.state.user.online ? 'Online' : 'Offline' }</span></p>
           </div>
+
+           <h2>Archived Chats</h2>
+           <p>You do not have any archived chats at the moment.</p>
         </div>
       </Fragment>
     );
