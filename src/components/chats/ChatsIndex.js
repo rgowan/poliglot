@@ -20,6 +20,20 @@ class ChatsIndex extends Component {
   componentDidMount() {
     this.websocket.on('login',  user => this.updateUserOnAuth(true, user));
     this.websocket.on('logout', user => this.updateUserOnAuth(false, user));
+    this.websocket.on('updatedChat', updatedChat => {
+      if(this.state.chats.some(chat => chat._id === updatedChat._id)) {
+        const chats = this.state.chats.map((chat, i) => {
+          if(chat._id === updatedChat._id) {
+            chat = updatedChat;
+            return chat;
+          }
+
+          return chat;
+        });
+
+        this.setState({ chats });
+      }
+    });
     
     const headers = { Authorization: `Bearer ${Auth.getToken()}`};
 

@@ -37,6 +37,7 @@ function create(req, res, next) {
           const message = chat.messages[chat.messages.length -1];
 
           io.emit('newMessage', message);
+          io.emit('updatedChat', chat);
           return res.status(201).json(message);
         });
     })
