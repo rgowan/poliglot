@@ -20,11 +20,12 @@ class ChatsIndex extends Component {
   componentDidMount() {
     this.websocket.on('login',  user => this.updateUserOnAuth(true, user));
     this.websocket.on('logout', user => this.updateUserOnAuth(false, user));
+
     this.websocket.on('updatedChat', updatedChat => {
 
       // new chat including current user
       if(!this.state.chats.some(chat => chat.id === updatedChat.id) && updatedChat.participants.some(participant => participant.id === Auth.getPayload().id)) {
-        const chats = this.state.chats.concat(updatedChat);
+        const chats = [updatedChat, ...this.state.chats];
         this.setState({ chats });
       }
 
@@ -43,12 +44,14 @@ class ChatsIndex extends Component {
       }
     });
     
-    const headers = { Authorization: `Bearer ${Auth.getToken()}`};
-
     axios
       .all([
-        axios.get('/api/chats', { headers }),
-        axios.get('/api/users', { headers })
+        axios.get('/api/chats', { 
+          headers: { Authorization: `Bearer ${Auth.getToken()}`} 
+        }),
+        axios.get('/api/users', { 
+          headers: { Authorization: `Bearer ${Auth.getToken()}`} 
+        })
       ])
       .then(axios.spread((chats, users) => this.setState({ 
         chats: chats.data, 
@@ -86,6 +89,12 @@ class ChatsIndex extends Component {
       .catch(err => console.log(err));
   }
 
+  sortActiveChats = () => {
+    return this.state.chats.sort((a, b) => {
+      return new Date(b.updatedAt) - new Date(a.updatedAt);
+    })
+  }
+
   render() {
     return(
       <Fragment>
@@ -100,7 +109,7 @@ class ChatsIndex extends Component {
           <div className="chats-container">
             <h2>Active Chats</h2>
             { this.state.chats.length !== 0 ? 
-              this.state.chats.map(chat => 
+              this.sortActiveChats().map(chat => 
                 <ActiveChat 
                   key={chat.id} 
                   chat={chat}
