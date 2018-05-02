@@ -30,6 +30,21 @@
         font-size: 24px;
         font-weight: 600;
         margin: 0;
+
+        span {
+          position: relative;
+          top: -2px;
+          margin-left: 0px;
+          background:rgba(151, 203, 252, 1);
+          border: 2px solid rgba(70, 136, 199, 0.4);
+          font-family: "Avenir Next" !important;
+          font-weight: 600;
+          color: #fff;
+          font-weight: 600;
+          padding: 0 6px;
+          font-size: 16px;
+          border-radius: 100%;
+        }
       }
 
       p {
