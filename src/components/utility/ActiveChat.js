@@ -10,12 +10,8 @@ const ActiveChat = ({ chat }) => {
   const collocutor  = chat.participants.find(user => user.id !== Auth.getPayload().id);
   const currentUser = chat.participants.find(user => user.id == Auth.getPayload().id);
   const lastMessage = chat.messages[chat.messages.length -1];
-
-  console.log('Active Chat: current user id', Auth.getPayload().id);
-
+  
   const unreadMessages = chat.messages.filter(message => !message.read.includes(Auth.getPayload().id));
-
-  console.log('Acitve Chat: unread messages', unreadMessages.length);
 
   return (
     <div className="chat">
@@ -25,7 +21,7 @@ const ActiveChat = ({ chat }) => {
           src={collocutor.image }
         />
         <div className="info">
-          <h2>{ collocutor.fullname }</h2>
+          <h2>{ collocutor.fullname } { unreadMessages.length !== 0 && <span className="unread">{ unreadMessages.length }</span> }</h2>
           <p>
             { lastMessage && 
               <Truncate lines={1} ellipsis={<span>...</span>}>
