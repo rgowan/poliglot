@@ -33,7 +33,7 @@ class ChatsShow extends Component {
           chat: chat.data, 
           languages: languages.data, 
           currentUser: user.data 
-        });
+        }, () => console.log('current chat', this.state.chat));
       }))
       .catch(err => console.log(err));
 

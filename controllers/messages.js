@@ -28,6 +28,7 @@ function create(req, res, next) {
           newMessage[languageForTranslation] = data;
           newMessage.createdBy = req.currentUser;
           newMessage.createdAt = new Date();
+          newMessage.read = [req.currentUser.id];
 
           chat.messages.push(newMessage);
           return chat.save();

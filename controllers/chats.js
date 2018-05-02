@@ -32,6 +32,13 @@ function show(req, res, next) {
       }
     ])
     .then(chat => {
+      chat.messages.forEach(message => {
+        if(!message.read.includes(req.currentUser.id)) message.read.push(req.currentUser.id);
+      });
+
+      return chat.save();
+    })
+    .then(chat => {
       return res.status(200).json(chat);
     })
     .catch(next);
