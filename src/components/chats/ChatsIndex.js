@@ -22,11 +22,13 @@ class ChatsIndex extends Component {
     this.websocket.on('logout', user => this.updateUserOnAuth(false, user));
     this.websocket.on('updatedChat', updatedChat => {
 
+      // new chat including current user
       if(!this.state.chats.some(chat => chat.id === updatedChat.id) && updatedChat.participants.some(participant => participant.id === Auth.getPayload().id)) {
         const chats = this.state.chats.concat(updatedChat);
         this.setState({ chats });
       }
 
+      // new message in current user's active chat
       if(this.state.chats.some(chat => chat.id === updatedChat.id)) {
         const chats = this.state.chats.map((chat, i) => {
           if(chat._id === updatedChat._id) {
