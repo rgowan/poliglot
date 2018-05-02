@@ -70,16 +70,27 @@ Language.create([
   });
 })
 .then(() => {
-  return User.create({
-    first: 'Rane',
-    last: 'Gowan',
-    image: 'https://avatars0.githubusercontent.com/u/11501555?s=460&v=4',
-    email: 'rane@gowan.com',
-    language: globalLanguages.find(language => language.name === 'English')._id,
-    password: 'password',
-    passwordConfirmation: 'password',
-    online: false
-  });
+  return User.create([
+    {
+      first: 'Rane',
+      last: 'Gowan',
+      image: 'https://avatars0.githubusercontent.com/u/11501555?s=460&v=4',
+      email: 'rane@gowan.com',
+      language: globalLanguages.find(language => language.name === 'English')._id,
+      password: 'password',
+      passwordConfirmation: 'password',
+      online: false
+    }, {
+      first: 'Stan',
+      last: 'Marsh',
+      image: 'https://pbs.twimg.com/profile_images/976810787854483456/ESi7nA_R_400x400.jpg',
+      email: 'stan@marsh.com',
+      language: globalLanguages.find(language => language.name === 'English')._id,
+      password: 'password',
+      passwordConfirmation: 'password',
+      online: false
+    }
+  ]);
 })
 .then(user => {
   globalUsers.push(user);

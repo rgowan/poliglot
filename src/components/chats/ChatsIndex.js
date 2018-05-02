@@ -21,7 +21,13 @@ class ChatsIndex extends Component {
     this.websocket.on('login',  user => this.updateUserOnAuth(true, user));
     this.websocket.on('logout', user => this.updateUserOnAuth(false, user));
     this.websocket.on('updatedChat', updatedChat => {
-      if(this.state.chats.some(chat => chat._id === updatedChat._id)) {
+
+      if(!this.state.chats.some(chat => chat.id === updatedChat.id) && updatedChat.participants.some(participant => participant.id === Auth.getPayload().id)) {
+        const chats = this.state.chats.concat(updatedChat);
+        this.setState({ chats });
+      }
+
+      if(this.state.chats.some(chat => chat.id === updatedChat.id)) {
         const chats = this.state.chats.map((chat, i) => {
           if(chat._id === updatedChat._id) {
             chat = updatedChat;
