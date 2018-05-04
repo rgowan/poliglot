@@ -56,16 +56,23 @@ function create(req, res, next) {
     .catch(next);
 }
 
-function remove(req, res, next) {
+function archive(req, res, next) {
   Chat
-    .findByIdAndRemove(req.params.id)
-    .then(() => res.status(204).end())
-    .catch(next);
-}
+    .findById(req.params.id)
+    .then(chat => {
+      if(!chat.archive.includes(req.currentUser.id)) {
+        chat.archive.push(req.currentUser.id);
+      }
+
+      return chat.save();
+    })
+    .then(chat => res.json(chat))
+    .catch(err => console.log(err));
+  }
 
 module.exports = {
   find,
   show,
   create,
-  remove
+  archive
 }

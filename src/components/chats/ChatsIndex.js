@@ -78,6 +78,26 @@ class ChatsIndex extends Component {
     this.setState({ chats });
   }
 
+  archiveChat = (chatId) => {
+    console.log(chatId);
+
+    axios
+      .get(`/api/chats/${chatId}/archive`, { 
+        headers: { Authorization: `Bearer ${Auth.getToken()}`} 
+      })
+      .then(res => {
+        const chats = this.state.chats.map(chat => {
+          if (chat.id === res.data.id) {
+            chat = res.data;
+            return chat;
+          }
+          return chat;
+        });
+
+        this.setState({ chats });
+      });
+  }
+
   handleClick = (e, target) => {
     const userId = this.state.users.find(user => user.fullname === target.suggestionValue).id;
 
@@ -90,7 +110,9 @@ class ChatsIndex extends Component {
   }
 
   sortActiveChats = () => {
-    return this.state.chats.sort((a, b) => {
+    const filteredChats = this.state.chats.filter(chat => !chat.archive.includes(Auth.getPayload().id));
+
+    return filteredChats.sort((a, b) => {
       return new Date(b.messages[b.messages.length -1].createdAt) - new Date(a.messages[a.messages.length -1].createdAt);
     })
   }
@@ -108,11 +130,12 @@ class ChatsIndex extends Component {
 
           <div className="chats-container">
             <h2>Active Chats</h2>
-            { this.state.chats.length !== 0 ? 
+            { this.sortActiveChats().length !== 0 ? 
               this.sortActiveChats().map(chat => 
                 <ActiveChat 
                   key={chat.id} 
                   chat={chat}
+                  archiveChat={this.archiveChat}
                 />
               )
             :
