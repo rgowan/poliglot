@@ -79,8 +79,6 @@ class ChatsIndex extends Component {
   }
 
   archiveChat = (chatId) => {
-    console.log(chatId);
-
     axios
       .get(`/api/chats/${chatId}/archive`, { 
         headers: { Authorization: `Bearer ${Auth.getToken()}`} 

@@ -4,19 +4,33 @@ import emoji from 'emoji-dictionary';
 
 import Auth from '../../lib/Auth';
 import Navbar from '../utility/Navbar';
+import ActiveChat from '../utility/ActiveChat';
 
 class UsersShow extends Component {
   state = {
-    user: {}
+    user: {},
+    chats: []
   }
 
   componentDidMount() {
     axios
-      .get(`/api/users/${this.props.match.params.id}`, {
-        headers: { Authorization: `Bearer ${Auth.getToken()}`}
-      })
-      .then(res => this.setState({ user: res.data }))
+      .all([
+        axios.get(`/api/users/${this.props.match.params.id}`, { 
+          headers: { Authorization: `Bearer ${Auth.getToken()}`} 
+        }),
+        axios.get('/api/chats', { 
+          headers: { Authorization: `Bearer ${Auth.getToken()}`} 
+        })
+      ])
+      .then(axios.spread((user, chats) => this.setState({ 
+        user: user.data, 
+        chats: chats.data })
+      ))
       .catch(err => console.log(err));
+  }
+
+  filterChats() {
+    return this.state.chats.filter(chat => chat.archive.includes(this.props.match.params.id));
   }
   
   render() {
@@ -40,8 +54,18 @@ class UsersShow extends Component {
             <p>Status: <span>{ this.state.user.online ? 'Online' : 'Offline' }</span></p>
           </div>
 
-           <h2>Archived Chats</h2>
-           <p>You do not have any archived chats at the moment.</p>
+          <h2>Archived Chats</h2>
+          { this.filterChats().length !== 0 ?
+            this.filterChats().map(chat => 
+              <ActiveChat 
+                key={chat.id} 
+                chat={chat}
+                archiveChat={this.archiveChat}
+              />
+            )
+          :
+            <p>You do not have any archived chats at the moment.</p>
+          }
         </div>
       </Fragment>
     );

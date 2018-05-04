@@ -32,7 +32,8 @@ const ActiveChat = ({ chat, archiveChat }) => {
           <p>{ moment(lastMessage.createdAt).format('llll') }</p>
         </div>
       </Link>
-      <button onClick={ () => archiveChat(chat.id) }>Archive</button>
+
+      { !chat.archive.includes(Auth.getPayload().id) && <button onClick={ () => archiveChat(chat.id) }>Archive</button> }
     </div>
   );
 }
