@@ -108,11 +108,14 @@ class ChatsIndex extends Component {
   }
 
   sortActiveChats = () => {
+    console.log(this.state.chats);
+
+
     const filteredChats = this.state.chats.filter(chat => !chat.archive.includes(Auth.getPayload().id));
 
     return filteredChats.sort((a, b) => {
       return new Date(b.messages[b.messages.length -1].createdAt) - new Date(a.messages[a.messages.length -1].createdAt);
-    })
+    });
   }
 
   render() {
