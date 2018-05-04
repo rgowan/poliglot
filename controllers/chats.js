@@ -68,11 +68,19 @@ function archive(req, res, next) {
     })
     .then(chat => res.json(chat))
     .catch(err => console.log(err));
-  }
+}
+
+function remove(req, res, next) {
+  Chat
+    .findByIdAndRemove(req.params.id)
+    .then(() => res.status(204).end())
+    .catch(next);
+}
 
 module.exports = {
   find,
   show,
   create,
-  archive
+  archive,
+  remove
 }

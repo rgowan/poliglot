@@ -108,9 +108,6 @@ class ChatsIndex extends Component {
   }
 
   sortActiveChats = () => {
-    console.log(this.state.chats);
-
-
     const filteredChats = this.state.chats.filter(chat => !chat.archive.includes(Auth.getPayload().id));
 
     return filteredChats.sort((a, b) => {

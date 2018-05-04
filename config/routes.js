@@ -26,6 +26,7 @@ router.route('/chats')
   .get(secureRoute, chats.find);
 router.route('/chats/:id')
   .get(secureRoute, chats.show)
+  .delete(secureRoute, chats.remove);
 router.route('/chats/create/:id')
   .post(secureRoute, chats.create);
 router.route('/chats/:id/archive')
