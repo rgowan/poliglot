@@ -25,7 +25,7 @@ form {
   }
 
   input, select {
-    -webkit-appearance: none;
+    --webkit-appearance: none;
     margin: 5px 0;
     padding: 0;
     width: 98%;
@@ -39,7 +39,7 @@ form {
   }
 
   .submit {
-    -webkit-appearance: none;
+    --webkit-appearance: none;
     background: rgba(155, 202, 115, 0.8);
     margin-top: 20px;
     padding: 0;
@@ -55,7 +55,7 @@ form {
 }
 
 .file {
-  -webkit-appearance: none;
+  --webkit-appearance: none;
   background: #97cbfc;
   margin-top: 20px;
   padding: 0;

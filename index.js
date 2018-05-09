@@ -1,25 +1,25 @@
-const express     = require('express');
-const http        = require('http');
-const morgan      = require('morgan');
-const bodyParser  = require('body-parser');
-const mongoose    = require('mongoose');
-const bluebird    = require('bluebird');
-const sockets     = require('./lib/sockets');
+const express = require('express');
+const http = require('http');
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const bluebird = require('bluebird');
+const sockets = require('./lib/sockets');
 
-const app         = express();
+const app = express();
 const environment = app.get('env');
 
-const server      = http.createServer(app);
-const io          = sockets.connect(server);
+const server = http.createServer(app);
+const io = sockets.connect(server);
 
-mongoose.Promise  = bluebird;
+mongoose.Promise = bluebird;
 mongoose.plugin(require('./lib/globalToJSON'));
 mongoose.plugin(require('mongoose-unique-validator'));
 
-const { port, db }    = require('./config/environment');
-const routes          = require('./config/routes');
+const { port, db } = require('./config/environment');
+const routes = require('./config/routes');
 const customResponses = require('./lib/customResponses');
-const errorHandler    = require('./lib/errorHandler');
+const errorHandler = require('./lib/errorHandler');
 
 mongoose.connect(db[environment], { useMongoClient: true });
 
