@@ -35,7 +35,6 @@ router.route('/chats/:id/archive')
 router.route('/chats/:id/messages')
   .post(secureRoute, messages.create);
 
-
 router.all('/*', (req, res) => res.notFound());
 
 module.exports = router;
