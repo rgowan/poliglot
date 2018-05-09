@@ -1,0 +1,16 @@
+.centered {
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.online { border: 3px solid rgba(155, 202, 115, 0.9) !important; }
+.online-dot { color: rgba(155, 202, 115, 0.9) !important; }

@@ -37,7 +37,6 @@ const ActiveChat = ({ chat, archiveChat, manageChats }) => {
           <i className="fa fa-archive"></i>
           <span>Archive</span>
         </p>
-
       </div>
     </div>
   );
