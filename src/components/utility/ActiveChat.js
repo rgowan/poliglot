@@ -13,9 +13,6 @@ const ActiveChat = ({ chat, archiveChat, manageChats }) => {
   
   const unreadMessages = chat.messages.filter(message => !message.read.includes(Auth.getPayload().id));
 
-  console.log(manageChats);
-  
-
   return (
     <div className="chat">
       <Link to={`/chats/${chat.id}`} >
@@ -37,7 +34,7 @@ const ActiveChat = ({ chat, archiveChat, manageChats }) => {
       </Link>
       <div className={ manageChats ? "archive-container" : "archive-container hide"}>
         <p onClick={ () => archiveChat(chat.id) }>
-          <i class="fa fa-archive"></i>
+          <i className="fa fa-archive"></i>
           <span>Archive</span>
         </p>
 

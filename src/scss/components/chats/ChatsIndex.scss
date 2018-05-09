@@ -77,10 +77,10 @@
   position: absolute;
   top: 5px;
   right: 0;
+  cursor: pointer;
   --webkit-user-select: none;
   --moz-user-select: none;
   user-select: none;
-  cursor: pointer;
 }
 
 .archive-container {
