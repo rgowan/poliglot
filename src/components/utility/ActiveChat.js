@@ -6,12 +6,15 @@ import emoji from 'emoji-dictionary';
 
 import Auth from '../../lib/Auth';
 
-const ActiveChat = ({ chat, archiveChat }) => {
+const ActiveChat = ({ chat, archiveChat, manageChats }) => {
   const collocutor  = chat.participants.find(user => user.id !== Auth.getPayload().id);
   const currentUser = chat.participants.find(user => user.id == Auth.getPayload().id);
   const lastMessage = chat.messages[chat.messages.length -1];
   
   const unreadMessages = chat.messages.filter(message => !message.read.includes(Auth.getPayload().id));
+
+  console.log(manageChats);
+  
 
   return (
     <div className="chat">
@@ -32,8 +35,13 @@ const ActiveChat = ({ chat, archiveChat }) => {
           <p>{ moment(lastMessage.createdAt).format('llll') }</p>
         </div>
       </Link>
+      <div className={ manageChats ? "archive-container" : "archive-container hide"}>
+        <p onClick={ () => archiveChat(chat.id) }>
+          <i class="fa fa-archive"></i>
+          <span>Archive</span>
+        </p>
 
-      { !chat.archive.includes(Auth.getPayload().id) && <button onClick={ () => archiveChat(chat.id) }>Archive</button> }
+      </div>
     </div>
   );
 }

@@ -12,7 +12,8 @@ import AutosuggestContainer from '../utility/AutosuggestContainer';
 class ChatsIndex extends Component {
   state = {
     chats: [],
-    users: []
+    users: [],
+    manageChats: false
   }
 
   websocket = socketIOClient('/sockets');
@@ -115,6 +116,10 @@ class ChatsIndex extends Component {
     });
   }
 
+  toggleManage = () => {
+    this.setState({ manageChats: !this.state.manageChats });
+  }
+
   render() {
     return(
       <Fragment>
@@ -128,12 +133,18 @@ class ChatsIndex extends Component {
 
           <div className="chats-container">
             <h2>Active Chats</h2>
+
+            <p className="manage-chats" onClick={this.toggleManage}>
+              { this.state.manageChats ? 'Done' : 'Manage' }
+            </p>
+
             { this.sortActiveChats().length !== 0 ? 
               this.sortActiveChats().map(chat => 
                 <ActiveChat 
                   key={chat.id} 
                   chat={chat}
                   archiveChat={this.archiveChat}
+                  manageChats={this.state.manageChats}
                 />
               )
             :
