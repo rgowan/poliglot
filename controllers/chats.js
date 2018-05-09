@@ -59,6 +59,15 @@ function create(req, res, next) {
 function archive(req, res, next) {
   Chat
     .findById(req.params.id)
+    .populate([
+      {
+        path: 'participants',
+        populate: { path: 'language' }
+      }, {
+        path: 'messages.createdBy',
+        populate: { path: 'language' }
+      }
+    ])
     .then(chat => {
       if(!chat.archive.includes(req.currentUser.id)) {
         chat.archive.push(req.currentUser.id);
