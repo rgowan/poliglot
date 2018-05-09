@@ -28,10 +28,18 @@ class AutosuggestContainer extends Component {
     const user   = this.props.users.filter(user => user.fullname === target.suggestionValue);
     const userId = user[0].id;
 
-    axios
-      .post(`/api/chats/create/${userId}`, {}, { headers: { Authorization: `Bearer ${Auth.getToken()}`} })
-      .then(res => this.props.history.push(`/chats/${res.data.id}`))
-      .catch(err => console.log(err));
+    const prevChat = this.props.chats.find(chat => {
+      if(chat.participants.find(participant => participant.id === userId)) return chat;
+    });
+
+    if(prevChat) {
+      this.props.history.push(`/chats/${prevChat.id}`);
+    } else {
+      axios
+        .post(`/api/chats/create/${userId}`, {}, { headers: { Authorization: `Bearer ${Auth.getToken()}`} })
+        .then(res => this.props.history.push(`/chats/${res.data.id}`))
+        .catch(err => console.log(err));
+    }
   }
 
   onSuggestionsClearRequested = () => {
@@ -54,7 +62,7 @@ class AutosuggestContainer extends Component {
     if(value === '') return this.setState({ filteredUsers: []});
 
     this.props.users.map(user => {
-      if (user.fullname.toLowerCase().indexOf(inputValue) !== -1 && user.id !== Auth.getPayload().id && usersInChats.indexOf(user.id) === -1) filteredUsers.push(user);
+      if (user.fullname.toLowerCase().indexOf(inputValue) !== -1) filteredUsers.push(user);
     });
 
     return filteredUsers;
