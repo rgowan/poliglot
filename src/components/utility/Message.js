@@ -15,7 +15,7 @@ const Message = ({ data, language }) => {
 
   return (
     <div className={ "message " + messagePosition() }>
-      <p>{ data.createdBy.first } <span>{ moment(data.updatedAt).format('LT') }</span></p>
+      <p>{ data.createdBy.first } <span>{ moment(data.createdAt).format('LT') }</span></p>
       <p>{ data[language] }</p>
     </div>
   )
