@@ -5,10 +5,10 @@ import { withRouter, Link } from 'react-router-dom';
 import Auth from '../../lib/Auth';
 
 const Navbar = ({ history, title, colloctor }) => {
-  function logout(e) {
+  function logout() {
     axios
       .put('/api/logout', {}, { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
-      .then(res => {
+      .then(() => {
         Auth.removeToken();
         history.push('/');
       });
@@ -33,18 +33,18 @@ const Navbar = ({ history, title, colloctor }) => {
         </ul>
       </nav>
       <div className="banner">
-        { history.location.pathname !== '/chats' && 
-          <div className="back" onClick={ () => history.goBack() }> 
+        { history.location.pathname !== '/chats' &&
+          <div className="back" onClick={ () => history.goBack() }>
             <i className="fa fa-angle-left" aria-hidden="true"></i>
-          </div> 
+          </div>
         }
         <span>
           <h1>
-            { title } 
-            { colloctor && 
+            { title }
+            { colloctor &&
               <span className={colloctor.online ? 'online-dot' : ''}>
                 <i className="fa fa-circle" aria-hidden="true"></i>
-              </span> 
+              </span>
             }
           </h1>
           { colloctor && <Link to={`/users/${colloctor.id}`}>View profile</Link> }

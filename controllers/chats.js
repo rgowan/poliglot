@@ -1,7 +1,4 @@
-const Promise = require('bluebird');
-
 const Chat = require('../models/chat');
-const translateMessage = require('../lib/translate');
 
 function find(req, res, next) {
   Chat
@@ -76,7 +73,7 @@ function archive(req, res, next) {
       return chat.save();
     })
     .then(chat => res.json(chat))
-    .catch(err => console.log(err));
+    .catch(next);
 }
 
 function remove(req, res, next) {
@@ -92,4 +89,4 @@ module.exports = {
   create,
   archive,
   remove
-}
+};

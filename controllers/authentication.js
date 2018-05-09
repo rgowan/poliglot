@@ -12,12 +12,12 @@ function register(req, res, next) {
     .create(req.body)
     .then(user => {
       user.online = true;
-      return user.save()
+      return user.save();
     })
     .then(user => {
       io.emit('login', user);
       const token = jwt.sign({ id: user.id }, secret, { expiresIn: '24hrs' });
-      return res.json({ message: `Welcome`, token, user });
+      return res.json({ message: 'Welcome', token, user });
     })
     .catch(next);
 }
@@ -34,7 +34,7 @@ function login(req, res, next) {
     .then(user => {
       io.emit('login', user);
       const token = jwt.sign({ id: user.id }, secret, { expiresIn: '24hrs' });
-      return res.json({ message: `Welcome back`, token, user });
+      return res.json({ message: 'Welcome back', token, user });
     })
     .catch(next);
 }
@@ -47,7 +47,7 @@ function logout(req, res, next) {
       return user.save();
     })
     .then(user => {
-      io.emit('logout', user); 
+      io.emit('logout', user);
       return res.status(204).json(user);
     })
     .catch(next);

@@ -1,7 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import Autosuggest from 'react-autosuggest';
 import socketIOClient from 'socket.io-client';
 
 import Auth from '../../lib/Auth';
@@ -32,7 +30,7 @@ class ChatsIndex extends Component {
 
       // new message in current user's active chat
       if(this.state.chats.some(chat => chat.id === updatedChat.id)) {
-        const chats = this.state.chats.map((chat, i) => {
+        const chats = this.state.chats.map(chat => {
           if(chat._id === updatedChat._id) {
             chat = updatedChat;
             return chat;
@@ -44,18 +42,18 @@ class ChatsIndex extends Component {
         this.setState({ chats });
       }
     });
-    
+
     axios
       .all([
-        axios.get('/api/chats', { 
-          headers: { Authorization: `Bearer ${Auth.getToken()}`} 
+        axios.get('/api/chats', {
+          headers: { Authorization: `Bearer ${Auth.getToken()}`}
         }),
-        axios.get('/api/users', { 
-          headers: { Authorization: `Bearer ${Auth.getToken()}`} 
+        axios.get('/api/users', {
+          headers: { Authorization: `Bearer ${Auth.getToken()}`}
         })
       ])
-      .then(axios.spread((chats, users) => this.setState({ 
-        chats: chats.data, 
+      .then(axios.spread((chats, users) => this.setState({
+        chats: chats.data,
         users: users.data })
       ))
       .catch(err => console.log(err));
@@ -81,8 +79,8 @@ class ChatsIndex extends Component {
 
   archiveChat = (chatId) => {
     axios
-      .get(`/api/chats/${chatId}/archive`, { 
-        headers: { Authorization: `Bearer ${Auth.getToken()}`} 
+      .get(`/api/chats/${chatId}/archive`, {
+        headers: { Authorization: `Bearer ${Auth.getToken()}`}
       })
       .then(res => {
         const chats = this.state.chats.map(chat => {
@@ -101,8 +99,8 @@ class ChatsIndex extends Component {
     const userId = this.state.users.find(user => user.fullname === target.suggestionValue).id;
 
     axios
-      .post(`/api/chats/create/${userId}`, {}, { 
-        headers: { Authorization: `Bearer ${Auth.getToken()}`} 
+      .post(`/api/chats/create/${userId}`, {}, {
+        headers: { Authorization: `Bearer ${Auth.getToken()}`}
       })
       .then(res => this.props.history.push(`/chats/${res.data.id}`))
       .catch(err => console.log(err));
@@ -125,7 +123,7 @@ class ChatsIndex extends Component {
       <Fragment>
         <Navbar title='Chats'/>
         <div className="container">
-          <AutosuggestContainer 
+          <AutosuggestContainer
             chats={this.state.chats}
             users={this.state.users}
             history={this.props.history}
@@ -138,23 +136,23 @@ class ChatsIndex extends Component {
               { this.state.manageChats ? 'Done' : 'Manage' }
             </p>
 
-            { this.sortActiveChats().length !== 0 ? 
-              this.sortActiveChats().map(chat => 
-                <ActiveChat 
-                  key={chat.id} 
+            { this.sortActiveChats().length !== 0 ?
+              this.sortActiveChats().map(chat =>
+                <ActiveChat
+                  key={chat.id}
                   chat={chat}
                   archiveChat={this.archiveChat}
                   manageChats={this.state.manageChats}
                 />
               )
-            :
+              :
               <p>You have no active chats at this time.</p>
             }
-          </div> 
+          </div>
         </div>
       </Fragment>
     );
-  } 
+  }
 }
 
 export default ChatsIndex;

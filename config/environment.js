@@ -7,4 +7,4 @@ module.exports = {
     development: 'mongodb://localhost/flip-chat-development',
     test: 'mongodb://localhost/flip-chat-test'
   }
-}
+};

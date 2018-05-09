@@ -8,15 +8,15 @@ function index(req, res, next) {
     .catch(next);
 }
 
-function show(req,res,next) {
+function show(req, res, next) {
   User
     .findById(req.params.id)
     .populate('language')
     .then(user => res.status(200).json(user))
-    .catch(next)
+    .catch(next);
 }
 
 module.exports = {
   index,
   show
-}
+};

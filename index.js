@@ -4,13 +4,11 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const bluebird = require('bluebird');
-const sockets = require('./lib/sockets');
 
 const app = express();
 const environment = app.get('env');
 
 const server = http.createServer(app);
-const io = sockets.connect(server);
 
 mongoose.Promise = bluebird;
 mongoose.plugin(require('./lib/globalToJSON'));

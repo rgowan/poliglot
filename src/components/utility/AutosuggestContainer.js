@@ -12,7 +12,7 @@ const Suggestion = user => {
       <p>{ user.fullname } { emoji.getUnicode(`${user.language.emoji}`) }</p>
     </Fragment>
   );
-}
+};
 
 class AutosuggestContainer extends Component {
   state = {
@@ -54,10 +54,9 @@ class AutosuggestContainer extends Component {
     return value.fullname;
   }
 
-  getSuggestions = value => { 
+  getSuggestions = value => {
     const inputValue    = value.trim().toLowerCase();
     const filteredUsers = [];
-    const usersInChats  = this.props.chats.map(chat => chat.participants.find(user => user.id !== Auth.getPayload().id).id);
 
     if(value === '') return this.setState({ filteredUsers: []});
 
@@ -70,7 +69,7 @@ class AutosuggestContainer extends Component {
 
   render() {
     const inputProps = {
-      placeholder: "💬 Who do you want to chat to?",
+      placeholder: '💬 Who do you want to chat to?',
       value: this.state.inputValue,
       onChange: this.handleChange
     };
@@ -79,7 +78,7 @@ class AutosuggestContainer extends Component {
     return (
       <form className="auto-suggest-container">
         <label>New Chat</label>
-        <Autosuggest 
+        <Autosuggest
           suggestions={this.state.filteredUsers}
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
           onSuggestionsClearRequested={this.onSuggestionsClearRequested}

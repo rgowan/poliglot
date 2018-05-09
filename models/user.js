@@ -18,7 +18,7 @@ userSchema
   .virtual('fullname')
   .get(function() {
     return `${this.first} ${this.last}`;
-  })
+  });
 
 userSchema
   .virtual('passwordConfirmation')

@@ -29,10 +29,10 @@ class ChatsShow extends Component {
         axios.get(`/api/users/${Auth.getPayload().id}`, { headers })
       ])
       .then(axios.spread((chat, languages, user) => {
-        this.setState({ 
-          chat: chat.data, 
-          languages: languages.data, 
-          currentUser: user.data 
+        this.setState({
+          chat: chat.data,
+          languages: languages.data,
+          currentUser: user.data
         });
       }))
       .catch(err => console.log(err));
@@ -41,7 +41,7 @@ class ChatsShow extends Component {
     this.websocket.on('logout', user => this.updateUserOnAuth(false, user));
 
     this.websocket.on('newMessage', newMessage => {
-      const chat = Object.assign({}, this.state.chat, 
+      const chat = Object.assign({}, this.state.chat,
         { messages: this.state.chat.messages.concat(newMessage) }
       );
 
@@ -57,9 +57,9 @@ class ChatsShow extends Component {
     this.websocket.disconnect(true);
     if(this.state.chat.messages.length === 0) {
       axios
-        .delete(`/api/chats/${this.state.chat.id}`, 
-        { headers: { Authorization: `Bearer ${Auth.getToken()}`} 
-      });
+        .delete(`/api/chats/${this.state.chat.id}`,
+          { headers: { Authorization: `Bearer ${Auth.getToken()}`}
+        });
     }
   }
 
@@ -93,8 +93,8 @@ class ChatsShow extends Component {
       axios
         .post(`/api/chats/${this.state.chat.id}/messages`, this.state.message, { headers: { Authorization: `Bearer ${Auth.getToken()}`} })
         .then(() => {
-          this.setState({ message: { content: '' }})
-        })
+          this.setState({ message: { content: '' }});
+        });
     }
   }
 
@@ -105,9 +105,9 @@ class ChatsShow extends Component {
   render() {
     return (
       <Fragment>
-        { this.state.chat.id && 
+        { this.state.chat.id &&
           <Fragment>
-            <Navbar title={this.getCollocutor().first} colloctor={this.getCollocutor()} /> 
+            <Navbar title={this.getCollocutor().first} colloctor={this.getCollocutor()} />
 
             <div className="container">
               <div className="collocutor-language-display">
@@ -122,11 +122,11 @@ class ChatsShow extends Component {
               <div className="chat-container">
                 <h2>Messages</h2>
                 <div className="messages-box" ref={(node => this.messagesContainer = node)}>
-                  { this.state.chat.messages.map((message, i) => 
+                  { this.state.chat.messages.map((message, i) =>
                     <Message
-                      key={i} 
+                      key={i}
                       data={message}
-                      language={this.state.currentUser.language.code} 
+                      language={this.state.currentUser.language.code}
                     />
                   )}
                 </div>
@@ -137,7 +137,7 @@ class ChatsShow extends Component {
 
         <div className="new-message-box">
           <form onSubmit={this.handleSubmit}>
-            <textarea 
+            <textarea
               onChange={this.handleChange}
               value={this.state.message.content}
               placeholder="Aa"
