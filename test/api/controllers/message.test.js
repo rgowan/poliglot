@@ -100,7 +100,8 @@ describe('Message Controller', () => {
             'createdBy',
             'createdAt',
             'en',
-            'fr'
+            'fr',
+            'read'
           ]);
         done();
         });

@@ -86,6 +86,7 @@ describe('Chat Controller', () => {
             .and.have.all.keys([
               '_id',
               'id',
+              'archive',
               'messages',
               'participants',
               'createdAt',
@@ -191,6 +192,7 @@ describe('Chat Controller', () => {
             .and.have.all.keys([
               '_id',
               'id',
+              'archive',
               'messages',
               'participants',
               'createdAt',
@@ -268,6 +270,7 @@ describe('Chat Controller', () => {
           .and.have.all.keys([
             '_id',
             'id',
+            'archive',
             'messages',
             'participants',
             'createdAt',
