@@ -21,9 +21,13 @@ const Navbar = ({ history, title, colloctor }) => {
           <li>
             <Link to={`/users/${Auth.getPayload().id}`}>
               <i className="fa fa-user-circle" aria-hidden="true"></i>
+              {' '}
+              <span>Profile</span>
             </Link>
           </li>
           <li onClick={ logout }>
+            <span>Logout</span>
+            {' '}
             <i className="fa fa-sign-out" aria-hidden="true"></i>
           </li>
         </ul>

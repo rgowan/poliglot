@@ -59,3 +59,32 @@
     }
   }
 }
+
+.archive-container {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  z-index: 2;
+  width: 100px;
+  height: 100px;
+  background: rgba(151, 203, 252, 0.8);
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+
+  p {
+    i {
+      font-size: 35px;
+    }
+
+    span {
+      display: block;
+      font-size: 20px;
+      font-weight: 700;
+    }
+  }
+}
+
+.hide {
+  display: none;
+}

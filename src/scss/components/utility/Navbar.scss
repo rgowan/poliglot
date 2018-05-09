@@ -8,13 +8,21 @@ header {
       padding: 0;
 
       li {
-        width: 60px;
+        width: 150px;
         height: 60px;
         line-height: 60px;
         list-style-type: none;
         text-align: center;
         font-size: 30px;
         color: #3d5265;
+
+        span {
+          cursor: pointer;
+          font-weight: 600;
+          position: relative;
+          top: -5px;
+          font-size: 18px;
+        }
   
        &:first-child { float: left; } 
        &:last-child { float: right; }
