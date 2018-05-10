@@ -1,4 +1,4 @@
-require('../spec_helper');
+require('../helper');
 
 const globalToJSON  = require('../../../lib/globalToJSON');
 const User          = require('../../../models/user');

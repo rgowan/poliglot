@@ -1,4 +1,4 @@
-require('../spec_helper');
+require('../helper');
 
 const secureRoute     = require('../../../lib/secureRoute');
 

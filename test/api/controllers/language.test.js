@@ -1,4 +1,4 @@
-require('../spec_helper');
+require('../helper');
 
 const Language = require('../../../models/language');
 const User     = require('../../../models/user');

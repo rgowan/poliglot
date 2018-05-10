@@ -1,4 +1,4 @@
-require('../spec_helper');
+require('../helper');
 
 const Chat = require('../../../models/chat');
 
