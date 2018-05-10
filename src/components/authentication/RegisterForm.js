@@ -55,10 +55,10 @@ const RegisterForm = ({
             </select> 
         </div>
         <div>
-          <label htmlFor="image">Profile Picture</label>
+          <label htmlFor="image">Profile Picture { user.image && <i class="fa fa-check"></i> }</label>
           <ReactFilestack
             apikey="AIuCIUuXNTxasxVkblVY6z"
-            buttonText="Choose a photo"
+            buttonText={ user.image ? "Change Photo" : "Choose Photo"}
             buttonClass="button file"
             onSuccess={handleImageUpload}
           />
