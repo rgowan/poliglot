@@ -10,7 +10,7 @@
     "start:server": "nodemon",
     "test:api": "nyc --reporter=html --reporter=text mocha ./test/api/* --exit",
     "test:client": "nyc --reporter=html --reporter=text mocha ./test/client/* --exit",
-    "test:all": "nyc --reporter=html --reporter=text mocha  --exit",
+    "test:all": "nyc --reporter=html --reporter=text mocha --exit",
     "start": "yarn build && node index",
     "build": "webpack -p",
     "seed": "node db/seeds"
