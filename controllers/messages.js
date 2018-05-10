@@ -2,6 +2,9 @@ const Chat = require('../models/chat');
 const translateMessage = require('../lib/translate');
 const sockets = require('../lib/sockets');
 const io = sockets.getConnection();
+const notifier = require('node-notifier');
+const path = require('path');
+
 
 function create(req, res, next) {
   req.body.createdBy = req.currentUser;
@@ -39,6 +42,13 @@ function create(req, res, next) {
         })
         .then(chat => {
           const message = chat.messages[chat.messages.length -1];
+
+          notifier.notify({
+            'title': `${message.createdBy.first} ${message.createdBy.last}`,
+            'subtitle': 'New Message',
+            'message': `${message[req.currentUser.language.code]}`,
+            'icon': path.join(__dirname, '../src/assets/images/logo.png')
+          });
 
           io.emit('newMessage', message);
           io.emit('updatedChat', chat);
