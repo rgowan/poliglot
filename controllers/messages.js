@@ -18,8 +18,8 @@ function create(req, res, next) {
       }
     ])
     .then(chat => {
-      if(chat.archive.includes(req.currentUser.id)) {
-        chat.archive.splice(chat.archive.indexOf(req.currentUser.id));
+      if(chat.archive.length !== 0) {
+        chat.archive = [];
       }
 
       const languageForTranslation = chat.participants.find(user => user.fullname !== req.currentUser.fullname).language.code;

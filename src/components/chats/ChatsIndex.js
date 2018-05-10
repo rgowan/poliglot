@@ -119,6 +119,8 @@ class ChatsIndex extends Component {
   }
 
   render() {
+    const sortedChats = this.sortActiveChats();
+
     return(
       <Fragment>
         <Navbar title='Chats'/>
@@ -136,8 +138,8 @@ class ChatsIndex extends Component {
               { this.state.manageChats ? 'Done' : 'Manage' }
             </p>
 
-            { this.sortActiveChats().length !== 0 ?
-              this.sortActiveChats().map(chat =>
+            { sortedChats.length !== 0 ?
+              sortedChats.map(chat =>
                 <ActiveChat
                   key={chat.id}
                   chat={chat}

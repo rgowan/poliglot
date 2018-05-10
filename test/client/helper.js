@@ -1,3 +1,5 @@
+require('babel-register')();
+
 process.env.NODE_ENV = 'test';
 
 const Enzyme = require('enzyme');
@@ -11,8 +13,6 @@ global.expect = chai.expect;
 
 global.shallow = require('enzyme').shallow;
 global.mount = require('enzyme').mount;
-
-
 
 // require('babel-register')();
 
